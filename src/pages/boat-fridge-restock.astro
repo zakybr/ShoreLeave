@@ -1,0 +1,43 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { BEFORE_TRIP } from '../config';
+import { restock } from '../data/qa';
+import photo from '../assets/photos/iced-drink.jpg';
+---
+
+<ServicePage
+  title="Boat Provisioning Auckland | Fridge restock | Shore Leave"
+  description="Boat provisioning in Auckland. Send a list and we stock your boat fridge and pantry with drinks, ice, snacks and groceries, ready for the next trip."
+  crumb="Boat fridge restock"
+  h1="Stock my boat fridge. Consider it done."
+  lede="Send us a list. We shop it, carry it aboard and put it away. You arrive with your bag to a cold fridge and a made bed."
+  photo={photo}
+  photoAlt="Close up of a cold drink packed with ice"
+  faqs={restock}
+  serviceName="Boat provisioning and fridge restock"
+  og="restock"
+  links={[
+    { href: '/book', label: 'Book a restock' },
+    { href: '/pricing', label: 'How quotes work' },
+    { href: '/pine-harbour-boat-cleaning', label: 'Pine Harbour berths' },
+    { href: '/boat-valet-auckland', label: 'Post-trip valet' },
+  ]}
+  ctaHeading="Send the list. We'll do the shop."
+>
+  <section class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-5">
+      <h2>Boat cleaning and restocking, in one booking</h2>
+      <p class="mt-4">Most services stop at the clean. We finish the job, so you're not stopping at the supermarket on the way to the boat.</p>
+    </div>
+    <ul class="crosses lg:col-span-6 lg:col-start-7 mt-6 lg:mt-2 text-lg">{BEFORE_TRIP.map((t) => <li>{t}</li>)}</ul>
+  </section>
+  <section class="bg-sand-2">
+    <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
+      <h2 class="lg:col-span-5">What a good list looks like</h2>
+      <div class="lg:col-span-6 lg:col-start-7 mt-4 lg:mt-2 grid gap-4">
+        <p>Tell us how many people, how many nights, and what you like. "Four adults, two kids, two nights, the usual" is a fine place to start. Add brands if they matter. Add allergies always.</p>
+        <p>The groceries show up on your quote as their own line, separate from our time, so you can see what went where.</p>
+      </div>
+    </div>
+  </section>
+</ServicePage>

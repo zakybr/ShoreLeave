@@ -1,0 +1,36 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { pricing } from '../data/qa';
+---
+
+<ServicePage
+  title="Boat Valet Pricing Auckland | Shore Leave"
+  description="How Shore Leave prices a boat reset or fridge restock in Auckland. We quote each boat by length, layout and location. Use the form for a straight price."
+  crumb="Pricing"
+  h1="A straight quote, for your boat."
+  lede="We don't publish a rate card, because no two boats come back the same. Tell us what you've got and we'll give you a price before anything starts."
+  faqs={pricing}
+  serviceName="Boat valet quotes"
+  links={[
+    { href: '/book', label: 'Get a quote' },
+    { href: '/boat-valet-auckland', label: 'Boat valet' },
+    { href: '/boat-fridge-restock', label: 'Fridge restock' },
+    { href: '/pine-harbour-boat-cleaning', label: 'Pine Harbour' },
+  ]}
+  ctaHeading="Tell us about the boat."
+>
+  <section class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
+    <h2 class="lg:col-span-5">What goes into a quote</h2>
+    <table class="lg:col-span-6 lg:col-start-7 mt-6 lg:mt-2 w-full text-left border-collapse">
+      <thead class="sr-only"><tr><th>Factor</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr class="border-t border-navy/30"><th scope="row" class="py-3 pr-6 font-semibold align-top">Boat length</th><td class="py-3">More deck, more time.</td></tr>
+        <tr class="border-t border-navy/30"><th scope="row" class="py-3 pr-6 font-semibold align-top">Layout</th><td class="py-3">Cabins, berths and galley.</td></tr>
+        <tr class="border-t border-navy/30"><th scope="row" class="py-3 pr-6 font-semibold align-top">Where it is</th><td class="py-3">Berth or driveway, and which suburb.</td></tr>
+        <tr class="border-t border-navy/30"><th scope="row" class="py-3 pr-6 font-semibold align-top">What you'd like done</th><td class="py-3">Reset, beds, restock, or all three.</td></tr>
+        <tr class="border-t border-navy/30"><th scope="row" class="py-3 pr-6 font-semibold align-top">Groceries</th><td class="py-3">Listed separately from our time.</td></tr>
+        <tr class="border-y border-navy/30"><th scope="row" class="py-3 pr-6 font-semibold align-top">How often</th><td class="py-3">One-off, or a regular arrangement.</td></tr>
+      </tbody>
+    </table>
+  </section>
+</ServicePage>

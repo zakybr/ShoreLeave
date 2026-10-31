@@ -1,0 +1,36 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import Faq from '../components/Faq.astro';
+import { SITE } from '../config';
+import { faqPage } from '../lib/schema';
+import { beachlands, eastAuckland, general, pineHarbour, pricing, restock, trailer, valet } from '../data/qa';
+
+const groups = [
+  { heading: 'About Shore Leave', items: general },
+  { heading: 'The post-trip reset', items: valet },
+  { heading: 'Fridge restock', items: restock },
+  { heading: 'Trailer boats', items: trailer },
+  { heading: 'Pine Harbour and Beachlands', items: [...pineHarbour, ...beachlands] },
+  { heading: 'East Auckland', items: eastAuckland },
+  { heading: 'Pricing', items: pricing },
+];
+---
+
+<ServicePage
+  title="Boat Cleaning FAQ, Auckland | Shore Leave"
+  description="Answers on boat valets, fridge restocks, trailer boat cleaning, Pine Harbour access, pricing and what happens if the weather turns. From Shore Leave."
+  crumb="FAQ"
+  h1="Questions, answered straight."
+  lede={`Can't find yours? Call or text ${SITE.phoneDisplay}.`}
+  faqs={[]}
+  links={[
+    { href: '/book', label: 'Book a reset' },
+    { href: '/how-it-works', label: 'How it works' },
+    { href: '/pricing', label: 'How quotes work' },
+  ]}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqPage(groups.flatMap((g) => g.items)))} />
+  <div class="wrap pb-16 grid gap-14 lg:gap-20">
+    {groups.map((g) => <section><Faq items={g.items} heading={g.heading} open /></section>)}
+  </div>
+</ServicePage>

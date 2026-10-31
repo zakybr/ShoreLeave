@@ -1,0 +1,36 @@
+---
+import { NAV, SITE } from '../config';
+import Mark from './Mark.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="on-navy">
+  <div class="wrap py-14 lg:py-20 grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <div class="flex items-center gap-3">
+        <Mark size={24} class="text-brass" />
+        <span class="font-display text-2xl">{SITE.name}</span>
+      </div>
+      <p class="mt-4 text-mist">{SITE.area}.</p>
+      <p class="mt-4">
+        <a class="link" href={`tel:${SITE.phoneTel}`} data-track="click_call">{SITE.phoneDisplay}</a>
+      </p>
+    </div>
+    <nav class="lg:col-span-3" aria-label="Services">
+      <ul class="grid gap-2">
+        {NAV.map((n) => <li><a class="no-underline hover:underline" href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <nav class="lg:col-span-4" aria-label="More">
+      <ul class="grid gap-2">
+        <li><a class="no-underline hover:underline" href="/boat-cleaning-beachlands">Boat cleaning Beachlands</a></li>
+        <li><a class="no-underline hover:underline" href="/boat-cleaning-east-auckland">Boat cleaning East Auckland</a></li>
+        <li><a class="no-underline hover:underline" href="/faq">FAQ</a></li>
+        <li><a class="no-underline hover:underline" href="/about">About</a></li>
+        <li><a class="no-underline hover:underline" href="/privacy">Privacy</a></li>
+        <li><a class="no-underline hover:underline" href="/terms">Terms</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap pb-8 text-mist text-sm">© {year} {SITE.name}. Run by {SITE.owners}, Auckland.</div>
+</footer>

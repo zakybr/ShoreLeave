@@ -1,0 +1,86 @@
+---
+// Tracta-style reveal, with the R flag cross as the window. Decorative only, so it is hidden from
+// assistive tech. It only exists while html.loading is set, which needs JavaScript, so crawlers and
+// no-JS visitors never see it. The hero sits fully painted underneath the whole time.
+const words = ['Wash down', 'Wipe down', 'Beds made', 'Fridge stocked', 'Ready'];
+---
+
+<div id="loader" aria-hidden="true">
+  <i class="s st"></i><i class="s sb"></i><i class="s sl"></i><i class="s sr"></i>
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+  <div class="win">
+    {[1, 2, 3, 4, 5].map((n) => <img src={`/loader/${n}.webp`} alt="" width="520" height="520" decoding="async" />)}
+  </div>
+  <div class="hud">
+    <div class="row"><span id="lw">{words[0]}</span><span id="lp">0</span></div>
+    <div class="track"><div id="lb"></div></div>
+  </div>
+</div>
+
+<style is:inline>
+  #loader { display: none; }
+  html.loading #loader {
+    --a: clamp(92px, 15vmin, 150px);
+    --s: calc(var(--a) * 3);
+    display: block; position: fixed; inset: 0; z-index: 100; overflow: hidden; cursor: default;
+    animation: sl-failsafe 0.01s linear 6s forwards;
+  }
+  @keyframes sl-failsafe { to { visibility: hidden; } }
+  /* ?loader forces a preview even with reduced motion switched on */
+  html.loader-forced #loader i { transition-duration: 1s !important; }
+  #loader i { position: absolute; display: block; background: #0e2233; transition: transform 1s cubic-bezier(.76,0,.24,1); }
+  #loader .st { left: 0; right: 0; top: 0; height: calc(50% - var(--s) / 2); }
+  #loader .sb { left: 0; right: 0; bottom: 0; height: calc(50% - var(--s) / 2); }
+  #loader .sl { top: 0; bottom: 0; left: 0; width: calc(50% - var(--s) / 2); }
+  #loader .sr { top: 0; bottom: 0; right: 0; width: calc(50% - var(--s) / 2); }
+  #loader .c { width: calc(50% - var(--a) / 2); height: calc(50% - var(--a) / 2); }
+  #loader .tl { left: 0; top: 0; } #loader .tr { right: 0; top: 0; }
+  #loader .bl { left: 0; bottom: 0; } #loader .br { right: 0; bottom: 0; }
+  #loader .win { position: absolute; left: 50%; top: 50%; width: var(--s); height: var(--s); transform: translate(-50%, -50%); transition: opacity .35s linear; background: #0e2233; clip-path: polygon(33.34% 0, 66.66% 0, 66.66% 33.34%, 100% 33.34%, 100% 66.66%, 66.66% 66.66%, 66.66% 100%, 33.34% 100%, 33.34% 66.66%, 0 66.66%, 0 33.34%, 33.34% 33.34%); }
+  #loader .win img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+  #loader .win img.on { opacity: 1; }
+  #loader .hud { position: absolute; left: 50%; bottom: max(7vh, 3.25rem); width: min(calc(100% - 3rem), 26rem); transform: translateX(-50%); color: #f2ebdd; font: 500 .95rem/1.2 'Inter Tight Variable', system-ui, sans-serif; transition: opacity .25s linear; }
+  #loader .row { display: flex; justify-content: space-between; margin-bottom: .6rem; font-variant-numeric: tabular-nums; }
+  #loader .track { height: 3px; background: rgba(242,235,221,.2); }
+  #loader #lb { height: 100%; width: 100%; background: #c8963e; transform: scaleX(0); transform-origin: left; }
+  #loader.out { pointer-events: none; }
+  #loader.out .win, #loader.out .hud { opacity: 0; }
+  #loader.out .st { transform: translateY(-180vmax); } #loader.out .sb { transform: translateY(180vmax); }
+  #loader.out .sl { transform: translateX(-180vmax); } #loader.out .sr { transform: translateX(180vmax); }
+  #loader.out .tl { transform: translate(-60vmax, -60vmax); } #loader.out .tr { transform: translate(60vmax, -60vmax); }
+  #loader.out .bl { transform: translate(-60vmax, 60vmax); } #loader.out .br { transform: translate(60vmax, 60vmax); }
+</style>
+
+<script is:inline define:vars={{ words }}>
+  (function () {
+    var d = document.documentElement;
+    var el = document.getElementById('loader');
+    if (!d.classList.contains('loading')) { el.remove(); return; }
+    var imgs = el.querySelectorAll('img');
+    var lw = document.getElementById('lw'), lp = document.getElementById('lp'), lb = document.getElementById('lb');
+    var DURATION = 1500, start = performance.now(), done = false, shown = -1;
+    function finish() {
+      if (done) return;
+      done = true;
+      lp.textContent = '100'; lb.style.transform = 'scaleX(1)';
+      el.classList.add('out');
+      setTimeout(function () { d.classList.remove('hold'); }, 260);
+      setTimeout(function () { d.classList.remove('loading'); el.remove(); }, 1100);
+    }
+    function frame(now) {
+      if (done) return;
+      var p = Math.min((now - start) / DURATION, 1);
+      var i = Math.min(Math.floor(p * imgs.length), imgs.length - 1);
+      if (i !== shown) {
+        if (shown >= 0) imgs[shown].classList.remove('on');
+        imgs[i].classList.add('on'); lw.textContent = words[i]; shown = i;
+      }
+      lp.textContent = Math.round(p * 100);
+      lb.style.transform = 'scaleX(' + p + ')';
+      if (p < 1) requestAnimationFrame(frame); else setTimeout(finish, 120);
+    }
+    requestAnimationFrame(frame);
+    el.addEventListener('pointerdown', finish);
+    addEventListener('keydown', finish, { once: true });
+  })();
+</script>

@@ -1,0 +1,166 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { AFTER_TRIP, BEFORE_TRIP, SITE } from '../config';
+import { general, restock, valet, pricing } from '../data/qa';
+import { business, faqPage, organization, service, website } from '../lib/schema';
+import deck from '../assets/photos/deck-sunpad.jpg';
+import cockpit from '../assets/photos/cockpit.jpg';
+import cabin from '../assets/photos/cabin.jpg';
+import drink from '../assets/photos/iced-drink.jpg';
+
+const faqs = [valet[0], restock[0], pricing[1], valet[1], general[1]];
+const schema = [
+  business(),
+  website(),
+  organization(),
+  service('Post-trip boat reset', 'Deck wash-down, rubbish removed, surfaces wiped, interior vacuumed, beds remade and fridge cleared.', '/boat-valet-auckland'),
+  service('Boat fridge and pantry restock', 'Fridge and pantry stocked to your list, with drinks, ice, snacks and groceries delivered aboard.', '/boat-fridge-restock'),
+  faqPage(faqs),
+];
+---
+
+<Base
+  title="Shore Leave | Boat valet and fridge restock, Auckland"
+  description="Get off the boat. We'll reset it. Boat cleaning, made beds and a stocked fridge in Auckland, from Pine Harbour Marina to your driveway."
+  schema={schema}
+  loader
+>
+  <section class="wrap lg:grid lg:grid-cols-12 lg:gap-10 lg:min-h-[calc(100svh-5rem)]">
+    <div class="lg:col-span-7 flex flex-col justify-center pt-10 pb-10 lg:py-16">
+      <h1 class="rise">Get off the boat.<br />We'll reset it.</h1>
+      <p class="rise rise-2 mt-6 text-xl lg:text-[1.4rem] leading-snug max-w-[34ch]">
+        You come back to a clean boat, made beds and a stocked fridge. Ready for the next trip.
+      </p>
+      <div class="rise rise-3 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <a href="/book" class="btn btn-navy" data-track="click_book_cta">Book a reset</a>
+        <a href={`tel:${SITE.phoneTel}`} class="link" data-track="click_call">Call {SITE.phoneDisplay}</a>
+      </div>
+    </div>
+    <div class="lg:col-span-5 -mx-5 md:mx-0 lg:mr-[calc((100vw-min(100vw,88rem))/-2-var(--gutter))] relative">
+      <!-- REPLACE WITH OWN PHOTO: a real reset, made up and ready -->
+      <Picture
+        src={deck}
+        formats={['avif', 'webp']}
+        widths={[480, 800, 1200, 1500]}
+        sizes="(min-width: 64rem) 44vw, 100vw"
+        alt="Deck lounge on a modern boat with tan cushions laid out neatly, moored at a marina"
+        class="w-full h-[62svh] md:h-[70svh] lg:absolute lg:inset-0 lg:h-full [&>img]:w-full [&>img]:h-full [&>img]:object-cover"
+        pictureAttributes={{ class: 'block h-full' }}
+        loading="eager"
+        fetchpriority="high"
+        data-replace="own-photo"
+      />
+    </div>
+  </section>
+
+  <section class="on-navy">
+    <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+      <div class="lg:col-span-7">
+        <h2 class="!text-[clamp(2rem,4.6vw,3.25rem)] !leading-[1.12]">
+          Sunday, five o'clock. Everyone's wrecked. The deck's a mess and the fridge is warm.
+        </h2>
+        <p class="mt-6 text-mist text-lg">
+          The last thing you want is to scrub, haul rubbish and strip beds. So the boat sits like that until next time. We take that part off your hands.
+        </p>
+      </div>
+      <div class="lg:col-span-5 mt-10 lg:mt-0">
+        <!-- REPLACE WITH OWN PHOTO: a boat straight after a trip -->
+        <Picture src={cockpit} formats={['avif', 'webp']} widths={[480, 800, 1100]} sizes="(min-width: 64rem) 36vw, 100vw" alt="View down into the cockpit of a motor boat on its berth at a marina" class="w-full aspect-[4/5] object-cover" data-replace="own-photo" />
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap band on-sand">
+    <h2 class="max-w-[18ch]">Two moments. We look after both.</h2>
+    <div class="mt-12 lg:mt-16 grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+      <div class="lg:col-span-5">
+        <Picture src={cabin} formats={['avif', 'webp']} widths={[480, 800, 1100]} sizes="(min-width: 64rem) 36vw, 100vw" alt="Inside a sailboat cabin, with daylight coming down the companionway" class="w-full aspect-[4/5] object-cover" data-replace="own-photo" />
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <h3 class="!text-[clamp(1.75rem,3.4vw,2.5rem)]">After the trip</h3>
+        <p class="mt-3">You walk off. We reset the boat.</p>
+        <ul class="crosses mt-6">{AFTER_TRIP.map((t) => <li>{t}</li>)}</ul>
+        <a href="/boat-valet-auckland" class="link inline-block mt-7">The post-trip valet</a>
+      </div>
+    </div>
+    <div class="mt-16 lg:mt-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+      <div class="lg:col-span-5 order-2 lg:order-1">
+        <h3 class="!text-[clamp(1.75rem,3.4vw,2.5rem)]">Before the trip</h3>
+        <p class="mt-3">Send us a list. Turn up with your bag.</p>
+        <ul class="crosses mt-6">{BEFORE_TRIP.map((t) => <li>{t}</li>)}</ul>
+        <a href="/boat-fridge-restock" class="link inline-block mt-7">The fridge restock</a>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8 order-1 lg:order-2">
+        <Picture src={drink} formats={['avif', 'webp']} widths={[480, 800, 1000]} sizes="(min-width: 64rem) 36vw, 100vw" alt="Close up of a cold drink packed with ice" class="w-full aspect-square object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-sand-2">
+    <div class="wrap band">
+      <h2>How it works</h2>
+      <ol class="mt-12 grid md:grid-cols-3 gap-10 md:gap-8 list-none">
+        <li class="border-t border-navy pt-5">
+          <span class="font-display text-6xl">1</span>
+          <h3 class="mt-4">Book</h3>
+          <p class="mt-2">Tell us about the boat, where it is and what you'd like done. We'll send a quote.</p>
+        </li>
+        <li class="border-t border-navy pt-5">
+          <span class="font-display text-6xl">2</span>
+          <h3 class="mt-4">We reset</h3>
+          <p class="mt-2">We get aboard the way we agreed with you and work through the list. You don't need to be there.</p>
+        </li>
+        <li class="border-t border-navy pt-5">
+          <span class="font-display text-6xl">3</span>
+          <h3 class="mt-4">You come back to a ready boat</h3>
+          <p class="mt-2">Clean decks. Made beds. A cold, stocked fridge if you asked for one.</p>
+        </li>
+      </ol>
+      <a href="/how-it-works" class="link inline-block mt-10">Keys, access and what we need from you</a>
+    </div>
+  </section>
+
+  <section class="wrap band on-sand lg:grid lg:grid-cols-12 lg:gap-12">
+    <h2 class="lg:col-span-6">Every boat's different, so every quote is too.</h2>
+    <div class="lg:col-span-5 lg:col-start-8 mt-6 lg:mt-1">
+      <p class="text-lg">A trailer boat after a day trip and a launch after a week away aren't the same job. Tell us what you've got and we'll give you a straight price before anything starts.</p>
+      <a href="/pricing" class="link inline-block mt-5">How quotes work</a>
+    </div>
+  </section>
+
+  <section class="on-brass">
+    <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
+      <h2 class="lg:col-span-5">Founding boats</h2>
+      <div class="lg:col-span-6 lg:col-start-7 mt-5 lg:mt-1 text-lg">
+        <p>We're new. No reviews, no logos, no made-up numbers. Our first boats get Zak or Bozzy on the job, a straight quote and a direct line if anything isn't right.</p>
+        <p class="mt-4">We'd rather earn the first review than fake it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap band on-sand">
+    <h2 class="max-w-[16ch]">Where we work</h2>
+    <dl class="mt-10 grid md:grid-cols-2 gap-10">
+      <div class="border-t border-navy pt-4">
+        <dt class="font-display text-2xl">On the berth</dt>
+        <dd class="mt-2 text-lg"><a class="link" href="/pine-harbour-boat-cleaning">Pine Harbour Marina</a>, Beachlands</dd>
+      </div>
+      <div class="border-t border-navy pt-4">
+        <dt class="font-display text-2xl">On the trailer, at your place</dt>
+        <dd class="mt-2 text-lg">
+          <a class="link" href="/boat-cleaning-beachlands">Beachlands</a>, <a class="link" href="/boat-cleaning-east-auckland">Maraetai</a>, the North Shore and Whangaparāoa
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="wrap pb-20 lg:pb-28 on-sand">
+    <Faq items={faqs} heading="Good questions" />
+    <a href="/faq" class="link inline-block mt-7">All the questions</a>
+  </section>
+
+  <Cta />
+</Base>

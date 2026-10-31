@@ -1,0 +1,51 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { trailer } from '../data/qa';
+import photo from '../assets/photos/trailer-home.jpg';
+---
+
+<ServicePage
+  title="Trailer Boat Cleaning at Home, Auckland | Shore Leave"
+  description="Trailer boat cleaning at your home in Auckland. Tow back from the ramp and we come to you. Beachlands, Maraetai, North Shore and Whangaparāoa."
+  crumb="Trailer boat cleaning"
+  h1="Back from the ramp? Leave it in the driveway."
+  lede="We come to your place and reset the boat on the trailer. Callouts cover Beachlands, Maraetai, the North Shore and Whangaparāoa."
+  photo={photo}
+  photoAlt="Fishing boat with a large outboard, parked on its trailer beside a house"
+  faqs={trailer}
+  serviceName="Trailer boat cleaning at home"
+  og="trailer"
+  links={[
+    { href: '/book', label: 'Book a callout' },
+    { href: '/pricing', label: 'How quotes work' },
+    { href: '/boat-cleaning-beachlands', label: 'Beachlands' },
+    { href: '/boat-cleaning-east-auckland', label: 'East Auckland and Maraetai' },
+  ]}
+>
+  <section class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
+    <h2 class="lg:col-span-5">Where the callouts run</h2>
+    <dl class="lg:col-span-6 lg:col-start-7 mt-6 lg:mt-2 grid gap-6">
+      <div>
+        <dt class="font-display text-2xl">Beachlands and Maraetai</dt>
+        <dd class="mt-1">Home from Sunkist Bay, the Maraetai Park ramp or Omana Esplanade after a run out to Waiheke or Ponui.</dd>
+      </div>
+      <div>
+        <dt class="font-display text-2xl">Whangaparāoa</dt>
+        <dd class="mt-1">Back from the Gulf Harbour ramp on Laurie Southwick Parade after a day around Tiritiri Matangi or Kawau.</dd>
+      </div>
+      <div>
+        <dt class="font-display text-2xl">North Shore</dt>
+        <dd class="mt-1">Your driveway, after a trip across to Rangitoto or Motutapu.</dd>
+      </div>
+    </dl>
+  </section>
+  <section class="bg-sand-2">
+    <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
+      <h2 class="lg:col-span-5">Someone to clean my boat, without towing it anywhere</h2>
+      <div class="lg:col-span-6 lg:col-start-7 mt-4 lg:mt-2 grid gap-4">
+        <p>You've already done the drive, the ramp and the retrieve. Nobody wants to tow the boat back out to get it washed. We bring everything to you and leave the driveway the way we found it.</p>
+        <p>A trailer boat reset covers the deck, the rubbish, surfaces, and any cabin or cuddy. The fridge or chilly bins too, if you want them sorted.</p>
+      </div>
+    </div>
+  </section>
+</ServicePage>
