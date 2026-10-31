@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-31T23:49:09Z",
+  "title": "Design System: Shore Leave",
+  "extensions": {
+    "colorMeta": {
+      "navy": {
+        "role": "primary",
+        "displayName": "Harbour Navy",
+        "canonical": "#0e2233",
+        "tonalRamp": [
+          "#000c1b",
+          "#132738",
+          "#2f4457",
+          "#4e6478",
+          "#6e859a",
+          "#90a8be",
+          "#b4cce3",
+          "#e1f1ff"
+        ]
+      },
+      "brass": {
+        "role": "secondary",
+        "displayName": "Deck Brass",
+        "canonical": "#c8963e",
+        "tonalRamp": [
+          "#120900",
+          "#332100",
+          "#583c00",
+          "#805900",
+          "#a97817",
+          "#cd9b44",
+          "#f3c06a",
+          "#ffecce"
+        ]
+      },
+      "navy-2": {
+        "role": "neutral",
+        "displayName": "Deep Water",
+        "canonical": "#16324a",
+        "tonalRamp": [
+          "#000c1b",
+          "#0a273e",
+          "#28455e",
+          "#47647f",
+          "#6786a2",
+          "#89a9c6",
+          "#adcdec",
+          "#e1f1ff"
+        ]
+      },
+      "sand": {
+        "role": "neutral",
+        "displayName": "Dry Sand",
+        "canonical": "#f2ebdd",
+        "tonalRamp": [
+          "#0f0a03",
+          "#2a241a",
+          "#474136",
+          "#676155",
+          "#888275",
+          "#aba497",
+          "#cfc8bb",
+          "#f5eee0"
+        ]
+      },
+      "sand-2": {
+        "role": "neutral",
+        "displayName": "Wet Sand",
+        "canonical": "#e6dac4",
+        "tonalRamp": [
+          "#120a00",
+          "#2d2412",
+          "#4a412e",
+          "#6a604d",
+          "#8c816d",
+          "#afa48f",
+          "#d4c8b2",
+          "#f9edd7"
+        ]
+      },
+      "slate": {
+        "role": "neutral",
+        "displayName": "Weathered Slate",
+        "canonical": "#44555f",
+        "tonalRamp": [
+          "#010d15",
+          "#182730",
+          "#34454e",
+          "#53646e",
+          "#738590",
+          "#95a8b4",
+          "#b9cdd8",
+          "#def2fe"
+        ]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Sea Mist",
+        "canonical": "#b9c6cf",
+        "tonalRamp": [
+          "#040c12",
+          "#1c272d",
+          "#39444b",
+          "#58636b",
+          "#78848d",
+          "#9aa7b0",
+          "#becbd4",
+          "#e3f1fa"
+        ]
+      },
+      "field-paper": {
+        "role": "neutral",
+        "displayName": "Field Paper",
+        "canonical": "#fbf7ef",
+        "tonalRamp": [
+          "#0d0b06",
+          "#28251f",
+          "#45423b",
+          "#64615a",
+          "#85827b",
+          "#a8a59d",
+          "#ccc9c1",
+          "#f2eee6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The home page h1, and the thanks and 404 pages."
+      },
+      "display-service": {
+        "displayName": "Display Service",
+        "purpose": "The h1 on every service page, a step down so longer place and service names still fit."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "headline-question": {
+        "displayName": "Headline Question",
+        "purpose": "Sentence-length headings, used for the question rows in the navy band on service pages."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Step names and sub-headings, at Fraunces' automatic optical size. Feature pairs step this up to clamp(1.75rem, 3.4vw, 2.5rem), and accordion questions set it at 1.3rem."
+      },
+      "title-compact": {
+        "displayName": "Title Compact",
+        "purpose": "Fraunces at small scale without tracking: definition terms, the footer wordmark, mobile menu items."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Fraunces step numbers on an ordered sequence."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The sentence under an h1, held to 34 to 46ch. The home hero opens it up to 1.4rem at the large breakpoint."
+      },
+      "body-large": {
+        "displayName": "Body Large",
+        "purpose": "Standalone paragraphs and cross lists beside a large heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text, capped at 68ch, wrapped with `text-wrap: pretty`."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, text links, field labels, table row heads."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-tide",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "The single easing for every state change and reveal."
+      },
+      {
+        "name": "duration-state",
+        "value": "0.25s",
+        "purpose": "Button colour and press."
+      },
+      {
+        "name": "duration-disclosure",
+        "value": "0.3s",
+        "purpose": "Accordion and menu plus rotation."
+      },
+      {
+        "name": "duration-bar",
+        "value": "0.35s",
+        "purpose": "Mobile action bar sliding in and out."
+      },
+      {
+        "name": "duration-rise",
+        "value": "0.9s",
+        "purpose": "Hero copy rising 1.5rem into place as the loader clears, staggered 0.1s and 0.2s."
+      },
+      {
+        "name": "ease-loader-sweep",
+        "value": "cubic-bezier(0.76, 0, 0.24, 1)",
+        "purpose": "Cross loader panels leaving the screen over 1s. Loader only."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "40rem"
+      },
+      {
+        "name": "md",
+        "value": "48rem"
+      },
+      {
+        "name": "lg",
+        "value": "64rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Navy Button",
+      "kind": "button",
+      "refersTo": "button-navy",
+      "description": "The primary action on sand grounds.",
+      "html": "<a href=\"#\" class=\"ds-btn-navy\">Book a reset</a>",
+      "css": ".ds-btn-navy { display: inline-flex; align-items: center; justify-content: center; min-height: 3.25rem; padding: 0.75rem 1.6rem; font-family: var(--font-sans); font-weight: 600; text-decoration: none; border: none; border-radius: 0; cursor: pointer; transition: background-color 0.25s var(--ease-tide), color 0.25s var(--ease-tide), transform 0.25s var(--ease-tide); background: var(--color-navy); color: var(--color-sand); } .ds-btn-navy:hover { background: var(--color-navy-2); } .ds-btn-navy:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 3px; } .ds-btn-navy:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Brass Button",
+      "kind": "button",
+      "refersTo": "button-brass",
+      "description": "The primary action on navy grounds. Shown here on its navy ground.",
+      "html": "<div class=\"ds-brass-ground\"><a href=\"#\" class=\"ds-btn-brass\">Book a reset</a></div>",
+      "css": ".ds-brass-ground { background: var(--color-navy); padding: 1.5rem; } .ds-btn-brass { display: inline-flex; align-items: center; justify-content: center; min-height: 3.25rem; padding: 0.75rem 1.6rem; font-family: var(--font-sans); font-weight: 600; text-decoration: none; border: none; border-radius: 0; cursor: pointer; transition: background-color 0.25s var(--ease-tide), color 0.25s var(--ease-tide), transform 0.25s var(--ease-tide); background: var(--color-brass); color: var(--color-navy); } .ds-btn-brass:hover { background: var(--color-sand); } .ds-btn-brass:focus-visible { outline: 2px solid var(--color-brass); outline-offset: 3px; } .ds-btn-brass:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "description": "The secondary action, usually the phone number beside a primary button.",
+      "html": "<a href=\"#\" class=\"ds-link\">Call 022 305 3853</a>",
+      "css": ".ds-link { color: var(--color-navy); font-family: var(--font-sans); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; } .ds-link:hover { text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 3px; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Labelled text input from the booking form.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-boat\">Boat length (ft)</label><input id=\"ds-boat\" type=\"text\" /></div>",
+      "css": ".ds-field { display: grid; gap: 0.35rem; font-family: var(--font-sans); color: var(--color-navy); } .ds-field label { font-weight: 600; } .ds-field input { width: 100%; min-height: 3.1rem; padding: 0.7rem 0.85rem; background: #fbf7ef; border: 1px solid var(--color-slate); border-radius: 0; color: var(--color-navy); font-size: 1.05rem; } .ds-field input:focus { outline: 2px solid var(--color-navy); outline-offset: 1px; }"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "description": "Sticky sand header with mark, wordmark, links and a compact navy button.",
+      "html": "<header class=\"ds-header\"><a href=\"#\" class=\"ds-brand\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 32 32\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M0 0h13v13H0zM19 0h13v13H19zM0 19h13v13H0zM19 19h13v13H19z\"></path></svg><span>Shore Leave</span></a><nav class=\"ds-nav\" aria-label=\"Main\"><a href=\"#\" aria-current=\"page\">Boat valet</a><a href=\"#\">Pricing</a><a href=\"#\" class=\"ds-nav-btn\">Book a reset</a></nav></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 5rem; padding-inline: var(--gutter); background: var(--color-sand); border-bottom: 1px solid color-mix(in srgb, var(--color-navy) 10%, transparent); color: var(--color-navy); font-family: var(--font-sans); } .ds-brand { display: flex; align-items: center; gap: 0.625rem; color: inherit; text-decoration: none; } .ds-brand span { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.025em; } .ds-nav { display: flex; align-items: center; gap: 1.75rem; } .ds-nav a { color: inherit; text-decoration: none; text-underline-offset: 0.2em; text-decoration-thickness: 1px; } .ds-nav a:hover, .ds-nav a[aria-current] { text-decoration: underline; } .ds-nav a:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 3px; } .ds-nav .ds-nav-btn { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.5rem 1.6rem; background: var(--color-navy); color: var(--color-sand); font-weight: 600; text-decoration: none; transition: background-color 0.25s var(--ease-tide); } .ds-nav .ds-nav-btn:hover { background: var(--color-navy-2); text-decoration: none; }"
+    },
+    {
+      "name": "Cross List",
+      "kind": "custom",
+      "description": "The everyday list, bulleted with the solid flag cross in currentColor.",
+      "html": "<ul class=\"ds-crosses\"><li>Deck washed down and brushed</li><li>Beds stripped and remade</li><li>Fridge cleared</li></ul>",
+      "css": ".ds-crosses { display: grid; gap: 0.7rem; list-style: none; padding: 0; margin: 0; color: var(--color-navy); font-family: var(--font-sans); } .ds-crosses li { display: grid; grid-template-columns: 0.8rem 1fr; gap: 0.85rem; align-items: baseline; } .ds-crosses li::before { content: ''; width: 0.8rem; height: 0.8rem; transform: translateY(0.05rem); background: linear-gradient(currentColor, currentColor) center / 100% 28% no-repeat, linear-gradient(currentColor, currentColor) center / 28% 100% no-repeat; }"
+    },
+    {
+      "name": "Ruled Step",
+      "kind": "card",
+      "description": "One step of an ordered sequence: full navy rule, Fraunces numeral, title, body. A ruled column, not a boxed card.",
+      "html": "<div class=\"ds-step\"><span class=\"ds-step-n\">1</span><h3>Book</h3><p>Tell us about the boat, where it is and what you’d like done.</p></div>",
+      "css": ".ds-step { border-top: 1px solid var(--color-navy); padding-top: 1.25rem; color: var(--color-navy); font-family: var(--font-sans); } .ds-step-n { font-family: var(--font-display); font-size: 3.75rem; line-height: 1; } .ds-step h3 { margin: 1rem 0 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.35rem, 2.6vw, 1.75rem); letter-spacing: -0.02em; line-height: 1.15; } .ds-step p { margin: 0.5rem 0 0; }"
+    },
+    {
+      "name": "Accordion Row",
+      "kind": "custom",
+      "description": "Native disclosure row with a drawn plus that rotates to a close mark.",
+      "html": "<details class=\"ds-acc\"><summary><h3>What areas do you cover?</h3><span class=\"ds-acc-mark\"></span></summary><p>Pine Harbour Marina berths, plus trailer-boat callouts around East Auckland.</p></details>",
+      "css": ".ds-acc { padding-block: 1.25rem; border-bottom: 1px solid color-mix(in srgb, var(--color-navy) 20%, transparent); color: var(--color-navy); font-family: var(--font-sans); } .ds-acc summary { display: flex; justify-content: space-between; gap: 1.5rem; cursor: pointer; list-style: none; } .ds-acc summary::-webkit-details-marker { display: none; } .ds-acc summary:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 3px; } .ds-acc h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.15; } .ds-acc-mark { display: block; flex: none; width: 1rem; height: 1rem; margin-top: 0.35rem; transition: transform 0.3s var(--ease-tide); background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat; } .ds-acc[open] .ds-acc-mark { transform: rotate(45deg); } .ds-acc p { margin: 0.75rem 0 0; }"
+    },
+    {
+      "name": "Closing Field",
+      "kind": "custom",
+      "description": "The navy call to action that ends most pages, with the ghost mark in Deep Water.",
+      "html": "<section class=\"ds-close\"><svg width=\"160\" height=\"160\" viewBox=\"0 0 32 32\" aria-hidden=\"true\" fill=\"currentColor\" class=\"ds-close-mark\"><path d=\"M0 0h13v13H0zM19 0h13v13H19zM0 19h13v13H0zM19 19h13v13H19z\"></path></svg><h2>Leave the boat. We’ve got it from here.</h2><p>Tell us about the boat. We’ll come back with a quote before anything starts.</p><a href=\"#\" class=\"ds-close-btn\">Book a reset</a></section>",
+      "css": ".ds-close { position: relative; overflow: hidden; padding: 3rem var(--gutter); background: var(--color-navy); color: var(--color-sand); font-family: var(--font-sans); } .ds-close-mark { position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%); color: var(--color-navy-2); } .ds-close h2 { position: relative; max-width: 16ch; margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.02em; line-height: 1.04; } .ds-close p { position: relative; margin: 1.25rem 0 0; color: var(--color-mist); } .ds-close-btn { position: relative; display: inline-flex; align-items: center; min-height: 3.25rem; margin-top: 2rem; padding: 0.75rem 1.6rem; background: var(--color-brass); color: var(--color-navy); font-weight: 600; text-decoration: none; transition: background-color 0.25s var(--ease-tide); } .ds-close-btn:hover { background: var(--color-sand); } .ds-close-btn:focus-visible { outline: 2px solid var(--color-brass); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Boat Hotel Turndown",
+    "overview": "Shore Leave looks the way a boat feels when someone has already been through it: squared away, calm, nothing left out. The page is a sequence of full-width colour fields in sand and navy, set with large, quiet Fraunces headlines and plain Inter Tight text. Hospitality comes from restraint and generous space, not from decoration. The direction rejects the blue-gradient trades template outright: this is a turndown service, not a cleaning company.\n\nThe density is low and the pacing is slow. A section usually carries one heading, one short block of copy and sometimes one photograph, with deep vertical bands between them. Structure comes from hairline rules and an offset twelve-column grid, so repeated items read like a ruled ledger rather than a row of cards. Everything is flat and square-cornered, and the only ornament is one borrowed from the water: the R signal flag, reduced to its cross and standing for Reset.\n\nMotion is a slow settle, not a performance. Everything eases on the same long tide curve (`cubic-bezier(0.22, 1, 0.36, 1)`), hero copy rises 1.5rem into place as the loader clears, and reduced-motion preferences flatten all of it.",
+    "keyCharacteristics": [
+      "Full-width sand and navy fields, with brass held back for a single field and for actions on navy",
+      "Fraunces at its display optical cut for headings, Inter Tight for everything read or tapped",
+      "Zero radius, zero shadow, depth by colour change alone",
+      "Hairline rules in place of cards",
+      "The R flag cross as mark, list bullet and loader window",
+      "Large, full-bleed, unframed photography"
+    ],
+    "rules": [
+      {
+        "name": "The Ground Decides Rule",
+        "body": "The action colour follows the ground: navy buttons on sand, brass buttons on navy. There is no brass button on sand, and the first viewport stays brass-free.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Brass Field Rule",
+        "body": "A brass field appears once at most on a page, and today once on the whole site: the founding-boats statement on the home page. Its rarity is what makes it land.",
+        "section": "colors"
+      },
+      {
+        "name": "The Brass Off Sand Rule",
+        "body": "Brass never serves as text, a hairline, a small mark or a focus ring on sand or wet sand, where it falls to 2.24:1 and 1.93:1. Filled areas of brass carrying navy content are fine, which is why a full field and a selection highlight both work.",
+        "section": "colors"
+      },
+      {
+        "name": "The Display Cut Rule",
+        "body": "h1 and h2 always set `'opsz' 144` with -0.02em tracking. Headings are balanced with `text-wrap: balance`.",
+        "section": "typography"
+      },
+      {
+        "name": "The Long Line Steps Down Rule",
+        "body": "When a heading runs to a full sentence, drop its size and open its leading to 1.12. Keep 1.04 for short promises.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "All type is sentence case. There is no uppercase and no tracked-out label anywhere in the build, and headings stand alone without a small line above them.",
+        "section": "typography"
+      },
+      {
+        "name": "The Full-Width Field Rule",
+        "body": "Colour fields run edge to edge; content sits in the container inside them. Sections change ground rather than sit in boxes.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Fields Rule",
+        "body": "Nothing lifts. Surfaces do not gain shadows on hover, focus or scroll; state is shown by a colour change, a thicker underline or a 1px press.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Cross Rule",
+        "body": "The R flag cross is the system's only ornament and appears in a fixed set of forms: the mark (four squares with the cross left as the gap), the solid list bullet, the accordion plus, the loader window. Nothing else is drawn, and no icon set is used.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do build pages as a sequence of full-width fields on sand, navy and wet sand, each with `clamp(4rem, 10vw, 8.5rem)` block padding.",
+      "Do match the button to the ground: navy on sand, brass on navy.",
+      "Do carry navy text on every brass surface.",
+      "Do set h1 and h2 in Fraunces 400 at optical size 144 with -0.02em tracking.",
+      "Do split repeated items with 1px rules, using full navy for primary structure and 10% to 30% navy for quiet division.",
+      "Do place copy off-centre on the twelve-column grid and leave columns empty.",
+      "Do pair the booking button with a phone link in the home hero and the closing field.",
+      "Do ease all transitions on the tide curve and honour reduced motion.",
+      "Do set a visible focus ring with at least 3:1 against its ground: navy on sand and brass, brass on navy.",
+      "Do run photographs large and unframed, showing boats, decks, cabins and water at a calm moment."
+    ],
+    "donts": [
+      "Don't use blue gradients or any visible gradient surface. The `linear-gradient(currentColor, currentColor)` that draws the cross is a solid-bar technique, and it stays.",
+      "Don't put more than one brass field on a page.",
+      "Don't set brass text, hairlines, small marks or focus rings on sand or wet sand.",
+      "Don't put a brass button on sand or a sand-text button on brass.",
+      "Don't add shadows, hover lifts or rounded corners.",
+      "Don't add uppercase labels or a small line above a heading.",
+      "Don't add icon sets, emoji or drawn ornament beyond the R flag cross.",
+      "Don't box repeated content in card grids.",
+      "Don't use step numerals where the order doesn't matter.",
+      "Don't use Deep Water on navy for anything that must be read.",
+      "Don't bold Fraunces for emphasis; size carries the hierarchy."
+    ]
+  }
+}

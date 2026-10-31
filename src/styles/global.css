@@ -80,6 +80,7 @@
     outline-offset: 3px;
   }
   .on-sand :focus-visible,
+  header :focus-visible,
   main :focus-visible {
     outline-color: var(--color-navy);
   }

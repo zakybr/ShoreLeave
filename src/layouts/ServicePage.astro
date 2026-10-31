@@ -49,7 +49,7 @@ const schema = [
     </div>
     {
       photo && (
-        <div class="lg:col-span-5 -mx-5 md:mx-0">
+        <div class="lg:col-span-5 -mx-[var(--gutter)] md:mx-0">
           <Picture src={photo} formats={['avif', 'webp']} widths={[480, 800, 1200]} sizes="(min-width: 64rem) 40vw, 100vw" alt={photoAlt} class="w-full aspect-[5/4] lg:aspect-[4/5] object-cover" quality={58} loading="eager" fetchpriority="high" data-replace="own-photo" />
         </div>
       )
