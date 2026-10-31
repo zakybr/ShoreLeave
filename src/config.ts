@@ -6,7 +6,7 @@ export const SITE = {
   phoneDisplay: '022 305 3853',
   phoneTel: '+64223053853',
   email: 'zak@tallynz.co',
-  tagline: "Get off the boat. We'll reset it.",
+  tagline: "Get off the boat. We’ll reset it.",
   summary:
     'Shore Leave is a post-trip reset and restock service for boat owners in Auckland. We clean the boat, make the beds and stock the fridge, so it is ready for the next trip.',
   area: 'Pine Harbour Marina berths, plus trailer-boat callouts in Beachlands, Maraetai, the North Shore and Whangaparāoa',

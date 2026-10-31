@@ -1,14 +1,14 @@
 ---
 import { SITE } from '../config';
 import Mark from './Mark.astro';
-const { heading = "Leave the boat. We've got it from here." } = Astro.props;
+const { heading = "Leave the boat. We’ve got it from here." } = Astro.props;
 ---
 
 <section class="on-navy relative overflow-hidden">
-  <Mark size={620} class="absolute -right-40 -bottom-44 text-navy-2 hidden md:block" />
+  <Mark size={340} class="absolute right-[var(--gutter)] top-1/2 -translate-y-1/2 text-navy-2 hidden lg:block" />
   <div class="wrap band relative">
     <h2 class="max-w-[16ch]">{heading}</h2>
-    <p class="mt-5 text-mist">Tell us about the boat. We'll come back with a quote before anything starts.</p>
+    <p class="mt-5 text-mist">Tell us about the boat. We’ll come back with a quote before anything starts.</p>
     <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
       <a href="/book" class="btn btn-brass" data-track="click_book_cta">Book a reset</a>
       <a href={`tel:${SITE.phoneTel}`} class="link" data-track="click_call">Call {SITE.phoneDisplay}</a>

@@ -15,6 +15,10 @@ Every photo on the live site marked `data-replace="own-photo"` is a stand-in. Sw
 | `pontoon.jpg` | Beachlands | Adam Edwards | https://unsplash.com/photos/yFJ0NIn_ZnU |
 | `ropes.jpg` | East Auckland, About | Haberdoedas | https://unsplash.com/photos/6LvLIqlsQe0 |
 
+`cockpit.jpg`, `marina-walkway.jpg` and `deck-sunpad.jpg` are cropped to remove third-party signs, a boat name and a promenade.
+
+Still needed from real jobs: a boat straight after a trip, a made berth, and a stocked boat fridge.
+
 None of these photos show Pine Harbour, Beachlands or Auckland. The pages don't claim they do. Real local photos will help both trust and local search.
 
 ## Loading screen frames

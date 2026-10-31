@@ -56,9 +56,9 @@ export function leadEmail(l: Lead) {
 export function confirmationEmail(l: Lead) {
   const first = esc(l.name.split(' ')[0]);
   return {
-    subject: "Got it. Here's what happens next.",
+    subject: "Got it. Here’s what happens next.",
     html: shell(
-      "Got it. Here's what happens next.",
+      "Got it. Here’s what happens next.",
       `<p style="font-size:16px;line-height:1.5">Thanks ${first}. Your request is with us.</p>
 <ol style="font-size:16px;line-height:1.6;padding-left:20px"><li>Zak or Bozzy reads it.</li><li>We reply with a quote and any questions.</li><li>We agree on access, and the boat gets reset.</li></ol>
 <p style="font-size:16px;line-height:1.5">In a hurry? Call or text 022 305 3853.</p>`,

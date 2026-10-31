@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "helvetica",
+        "createdAt": "2026-10-31T23:36:02.351Z",
+        "reason": "Claude triage: src/lib/email.ts is an HTML email, where clients only render system fonts, so Helvetica is the required safe stack, not a design choice"
+      }
+    ]
+  }
+}

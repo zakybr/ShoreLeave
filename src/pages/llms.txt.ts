@@ -17,8 +17,8 @@ ${SITE.name} is a post-trip reset and restock service: hospitality for boat owne
 ## Services
 
 - [Boat valet Auckland](${u('/boat-valet-auckland')}): post-trip reset. Deck wash-down and brush, rubbish removed, surfaces wiped, interior vacuumed, beds remade, fridge cleared.
-- [Boat fridge restock](${u('/boat-fridge-restock')}): boat provisioning. Fridge and pantry stocked to the owner's list with drinks, ice, snacks and groceries.
-- [Trailer boat cleaning](${u('/trailer-boat-cleaning')}): callout to the owner's home.
+- [Boat fridge restock](${u('/boat-fridge-restock')}): boat provisioning. Fridge and pantry stocked to the owner’s list with drinks, ice, snacks and groceries.
+- [Trailer boat cleaning](${u('/trailer-boat-cleaning')}): callout to the owner’s home.
 - [Pine Harbour boat cleaning](${u('/pine-harbour-boat-cleaning')}): service on the berth at Pine Harbour Marina, Beachlands.
 
 ## Areas

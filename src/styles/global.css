@@ -33,7 +33,7 @@
   }
   body {
     min-height: 100dvh;
-    padding-bottom: 4rem;
+    padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
   }
   @media (min-width: 64rem) {
     body {
@@ -46,6 +46,7 @@
     font-family: var(--font-display);
     font-weight: 400;
     font-optical-sizing: auto;
+    font-variation-settings: 'opsz' 144;
     letter-spacing: -0.02em;
     line-height: 1.04;
     text-wrap: balance;
@@ -198,6 +199,12 @@
   }
   .rise-3 {
     transition-delay: 0.2s;
+  }
+  #mbar {
+    transition: transform 0.35s var(--ease-tide);
+  }
+  html.bar-hold #mbar {
+    transform: translateY(100%);
   }
   html.hold .rise {
     opacity: 0;

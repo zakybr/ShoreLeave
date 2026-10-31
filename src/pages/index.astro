@@ -7,9 +7,9 @@ import { AFTER_TRIP, BEFORE_TRIP, SITE } from '../config';
 import { general, restock, valet, pricing } from '../data/qa';
 import { business, faqPage, organization, service, website } from '../lib/schema';
 import deck from '../assets/photos/deck-sunpad.jpg';
-import cockpit from '../assets/photos/cockpit.jpg';
+import ropes from '../assets/photos/ropes.jpg';
 import cabin from '../assets/photos/cabin.jpg';
-import drink from '../assets/photos/iced-drink.jpg';
+import pontoon from '../assets/photos/pontoon.jpg';
 
 const faqs = [valet[0], restock[0], pricing[1], valet[1], general[1]];
 const schema = [
@@ -24,18 +24,18 @@ const schema = [
 
 <Base
   title="Shore Leave | Boat valet and fridge restock, Auckland"
-  description="Get off the boat. We'll reset it. Boat cleaning, made beds and a stocked fridge in Auckland, from Pine Harbour Marina to your driveway."
+  description="Get off the boat. We’ll reset it. Boat cleaning, made beds and a stocked fridge in Auckland, from Pine Harbour Marina to your driveway."
   schema={schema}
   loader
 >
   <section class="wrap lg:grid lg:grid-cols-12 lg:gap-10 lg:min-h-[calc(100svh-5rem)]">
     <div class="lg:col-span-7 flex flex-col justify-center pt-10 pb-10 lg:py-16">
-      <h1 class="rise">Get off the boat.<br />We'll reset it.</h1>
+      <h1 class="rise">Get off the boat.<br />We’ll reset it.</h1>
       <p class="rise rise-2 mt-6 text-xl lg:text-[1.4rem] leading-snug max-w-[34ch]">
         You come back to a clean boat, made beds and a stocked fridge. Ready for the next trip.
       </p>
       <div class="rise rise-3 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <a href="/book" class="btn btn-navy" data-track="click_book_cta">Book a reset</a>
+        <a href="/book" class="btn btn-navy" data-hero-cta data-track="click_book_cta">Book a reset</a>
         <a href={`tel:${SITE.phoneTel}`} class="link" data-track="click_call">Call {SITE.phoneDisplay}</a>
       </div>
     </div>
@@ -60,7 +60,7 @@ const schema = [
     <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12 items-center">
       <div class="lg:col-span-7">
         <h2 class="!text-[clamp(2rem,4.6vw,3.25rem)] !leading-[1.12]">
-          Sunday, five o'clock. Everyone's wrecked. The deck's a mess and the fridge is warm.
+          Sunday, five o'clock. Everyone’s wrecked. The deck’s a mess and the fridge is warm.
         </h2>
         <p class="mt-6 text-mist text-lg">
           The last thing you want is to scrub, haul rubbish and strip beds. So the boat sits like that until next time. We take that part off your hands.
@@ -68,7 +68,7 @@ const schema = [
       </div>
       <div class="lg:col-span-5 mt-10 lg:mt-0">
         <!-- REPLACE WITH OWN PHOTO: a boat straight after a trip -->
-        <Picture src={cockpit} formats={['avif', 'webp']} widths={[480, 800, 1100]} sizes="(min-width: 64rem) 36vw, 100vw" alt="View down into the cockpit of a motor boat on its berth at a marina" class="w-full aspect-[4/5] object-cover" data-replace="own-photo" />
+        <Picture src={ropes} formats={['avif', 'webp']} widths={[480, 800, 1100]} sizes="(min-width: 64rem) 36vw, 100vw" alt="Heavy rope coiled around a pair of bollards on a boat’s deck" class="w-full aspect-[4/5] object-cover" data-replace="own-photo" />
       </div>
     </div>
   </section>
@@ -94,7 +94,7 @@ const schema = [
         <a href="/boat-fridge-restock" class="link inline-block mt-7">The fridge restock</a>
       </div>
       <div class="lg:col-span-5 lg:col-start-8 order-1 lg:order-2">
-        <Picture src={drink} formats={['avif', 'webp']} widths={[480, 800, 1000]} sizes="(min-width: 64rem) 36vw, 100vw" alt="Close up of a cold drink packed with ice" class="w-full aspect-square object-cover" />
+        <Picture src={pontoon} formats={['avif', 'webp']} widths={[480, 800, 1000]} sizes="(min-width: 64rem) 36vw, 100vw" alt="Calm water and a floating pontoon, with moored yachts and a green hillside behind" class="w-full aspect-square object-cover" data-replace="own-photo" />
       </div>
     </div>
   </section>
@@ -106,12 +106,12 @@ const schema = [
         <li class="border-t border-navy pt-5">
           <span class="font-display text-6xl">1</span>
           <h3 class="mt-4">Book</h3>
-          <p class="mt-2">Tell us about the boat, where it is and what you'd like done. We'll send a quote.</p>
+          <p class="mt-2">Tell us about the boat, where it is and what you’d like done. We’ll send a quote.</p>
         </li>
         <li class="border-t border-navy pt-5">
           <span class="font-display text-6xl">2</span>
           <h3 class="mt-4">We reset</h3>
-          <p class="mt-2">We get aboard the way we agreed with you and work through the list. You don't need to be there.</p>
+          <p class="mt-2">We get aboard the way we agreed with you and work through the list. You don’t need to be there.</p>
         </li>
         <li class="border-t border-navy pt-5">
           <span class="font-display text-6xl">3</span>
@@ -124,20 +124,17 @@ const schema = [
   </section>
 
   <section class="wrap band on-sand lg:grid lg:grid-cols-12 lg:gap-12">
-    <h2 class="lg:col-span-6">Every boat's different, so every quote is too.</h2>
+    <h2 class="lg:col-span-6">Every boat’s different, so every quote is too.</h2>
     <div class="lg:col-span-5 lg:col-start-8 mt-6 lg:mt-1">
-      <p class="text-lg">A trailer boat after a day trip and a launch after a week away aren't the same job. Tell us what you've got and we'll give you a straight price before anything starts.</p>
+      <p class="text-lg">A trailer boat after a day trip and a launch after a week away aren’t the same job. Tell us what you’ve got and we’ll give you a straight price before anything starts.</p>
       <a href="/pricing" class="link inline-block mt-5">How quotes work</a>
     </div>
   </section>
 
   <section class="on-brass">
     <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
-      <h2 class="lg:col-span-5">Founding boats</h2>
-      <div class="lg:col-span-6 lg:col-start-7 mt-5 lg:mt-1 text-lg">
-        <p>We're new. No reviews, no logos, no made-up numbers. Our first boats get Zak or Bozzy on the job, a straight quote and a direct line if anything isn't right.</p>
-        <p class="mt-4">We'd rather earn the first review than fake it.</p>
-      </div>
+      <h2 class="lg:col-span-7">We’d rather earn the first review than fake it.</h2>
+      <p class="lg:col-span-4 lg:col-start-9 mt-5 lg:mt-1 text-lg">Founding boats: we’re new. No reviews, no logos, no made-up numbers. Our first boats get Zak or Bozzy on the job, a straight quote and a direct line if anything isn’t right.</p>
     </div>
   </section>
 

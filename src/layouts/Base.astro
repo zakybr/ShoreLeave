@@ -57,6 +57,7 @@ const bVerify = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
       loader && (
         <script is:inline>
           (function () {
+            document.documentElement.classList.add('bar-hold');
             try {
               var c = navigator.connection;
               var force = /[?&]loader\b/.test(location.search);
@@ -77,7 +78,7 @@ THESIS: A boat hotel turndown, not a cleaning company. Refuses the blue-gradient
 OWN-WORLD: Sand and navy fields, one brass field, the R signal-flag cross as mark, bullet and loader window. Fraunces at display cut, Inter Tight for text.
 STORY: Owners see their worst Sunday named, believe the boat can be left as it is, and book from the pontoon.
 FIRST VIEWPORT: Huge navy two-line promise left on sand, portrait deck-lounge photo bleeding right, brass-free navy primary button under the copy, call link beside it.
-FORM: Brief-pinned direction; concept roll skipped because the owner pinned the aesthetic and asked not to be interviewed. Seed key: brief-pinned.
+FORM: Direction taken from the owner brief. The concept roll was not run, because the owner pinned the aesthetic and asked not to be interviewed. No seed key exists.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 -->`} />
     {loader && <Loader />}
