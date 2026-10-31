@@ -58,6 +58,7 @@
     font-size: clamp(2rem, 5vw, 3.5rem);
   }
   h3 {
+    font-variation-settings: normal;
     font-size: clamp(1.35rem, 2.6vw, 1.75rem);
     line-height: 1.15;
   }
