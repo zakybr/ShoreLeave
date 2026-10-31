@@ -8,6 +8,69 @@
         "value": "helvetica",
         "createdAt": "2026-10-31T23:36:02.351Z",
         "reason": "Claude triage: src/lib/email.ts is an HTML email, where clients only render system fonts, so Helvetica is the required safe stack, not a design choice"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "helvetica",
+        "files": [
+          "src/lib/email.ts"
+        ],
+        "createdAt": "2026-10-31T23:58:24.267Z",
+        "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#d9cfba",
+        "files": [
+          "src/lib/email.ts"
+        ],
+        "createdAt": "2026-10-31T23:58:24.318Z",
+        "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "14px",
+        "files": [
+          "src/lib/email.ts"
+        ],
+        "createdAt": "2026-10-31T23:58:24.367Z",
+        "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "15px",
+        "files": [
+          "src/lib/email.ts"
+        ],
+        "createdAt": "2026-10-31T23:58:24.417Z",
+        "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "16px",
+        "files": [
+          "src/lib/email.ts"
+        ],
+        "createdAt": "2026-10-31T23:58:24.466Z",
+        "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "20px",
+        "files": [
+          "src/lib/email.ts"
+        ],
+        "createdAt": "2026-10-31T23:58:24.515Z",
+        "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "26px",
+        "files": [
+          "src/lib/email.ts"
+        ],
+        "createdAt": "2026-10-31T23:58:24.565Z",
+        "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
       }
     ]
   }
