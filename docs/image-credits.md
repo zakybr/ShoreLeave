@@ -7,13 +7,13 @@ Every photo on the live site marked `data-replace="own-photo"` is a stand-in. Sw
 | File | Used on | Photographer | Source |
 |---|---|---|---|
 | `deck-sunpad.jpg` | Home hero | Maximilian Brol | https://unsplash.com/photos/nWYU63-kR8k |
-| `cockpit.jpg` | Home, Boat valet | Alexander Van Steenberge | https://unsplash.com/photos/i0iE-KlJmjA |
+| `cockpit.jpg` | Boat valet | Alexander Van Steenberge | https://unsplash.com/photos/i0iE-KlJmjA |
 | `cabin.jpg` | Home, How it works | ryu _ | https://unsplash.com/photos/iiBxBFwC6bk |
-| `iced-drink.jpg` | Home, Fridge restock | Faris Mohammed | https://unsplash.com/photos/uCtJy7YavP8 |
+| `iced-drink.jpg` | Fridge restock | Faris Mohammed | https://unsplash.com/photos/uCtJy7YavP8 |
 | `trailer-home.jpg` | Trailer boats | porter vest | https://unsplash.com/photos/S_RGLg2w8wY |
 | `marina-walkway.jpg` | Pine Harbour | Sam Clarke | https://unsplash.com/photos/HvrFPhh2AYM |
-| `pontoon.jpg` | Beachlands | Adam Edwards | https://unsplash.com/photos/yFJ0NIn_ZnU |
-| `ropes.jpg` | East Auckland, About | Haberdoedas | https://unsplash.com/photos/6LvLIqlsQe0 |
+| `pontoon.jpg` | Home, Beachlands | Adam Edwards | https://unsplash.com/photos/yFJ0NIn_ZnU |
+| `ropes.jpg` | Home, East Auckland, About | Haberdoedas | https://unsplash.com/photos/6LvLIqlsQe0 |
 
 `cockpit.jpg`, `marina-walkway.jpg` and `deck-sunpad.jpg` are cropped to remove third-party signs, a boat name and a promenade.
 

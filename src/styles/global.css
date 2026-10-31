@@ -55,6 +55,7 @@
     font-size: clamp(2.75rem, 8.4vw, 6rem);
   }
   h2 {
+    letter-spacing: -0.005em;
     font-size: clamp(2rem, 5vw, 3.5rem);
   }
   h3 {
