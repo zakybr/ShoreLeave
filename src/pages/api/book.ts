@@ -8,7 +8,7 @@ const MAX_PER_WINDOW = 5;
 const MIN_FILL_MS = 2500;
 const hits = new Map<string, number[]>();
 
-// Best effort: per function instance. The Vercel Firewall rule on /api/book is the hard limit.
+// Best effort: counts per function instance. Add a Vercel Firewall rate limit for a hard cap.
 function limited(ip: string) {
   const now = Date.now();
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);

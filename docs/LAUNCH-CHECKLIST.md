@@ -36,6 +36,10 @@ These commitments are in the copy, inferred from the brief. Change any you won't
 
 Have `/terms` and `/privacy` read by someone qualified before you take on customers. They're solid drafts, not legal advice. Add your legal entity name if you form a company.
 
+### 6. Add a hard rate limit
+
+The form already blocks repeat tries in code, but that count is per server instance. In Vercel, open **Project > Firewall > Add Rule**: path equals `/api/book`, method POST, rate limit 10 requests per 10 minutes by IP. I couldn't set this from here.
+
 ## Connecting the domain
 
 1. Buy the domain.
