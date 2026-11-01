@@ -1,7 +1,7 @@
 ---
-const ga = import.meta.env.PUBLIC_GA4_ID || 'G-4ZPN9NLNF0';
+import { GA4_ID } from '../config';
 const clarity = import.meta.env.PUBLIC_CLARITY_ID ?? '';
-const needed = Boolean(ga || clarity);
+const needed = Boolean(GA4_ID || clarity);
 ---
 
 {
@@ -18,18 +18,13 @@ const needed = Boolean(ga || clarity);
   )
 }
 
-<script is:inline define:vars={{ ga, clarity }}>
+<script is:inline define:vars={{ clarity }}>
   (function () {
     var KEY = 'sl-consent';
     function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
     function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
     function add(src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
     function load() {
-      if (ga) {
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function () { dataLayer.push(arguments); };
-        gtag('js', new Date()); gtag('config', ga); add('https://www.googletagmanager.com/gtag/js?id=' + ga);
-      }
       if (clarity) {
         window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
         add('https://www.clarity.ms/tag/' + clarity);
@@ -46,7 +41,10 @@ const needed = Boolean(ga || clarity);
       if (t.dataset.consent) {
         write(t.dataset.consent);
         document.getElementById('consent').hidden = true;
-        if (t.dataset.consent === 'yes') load();
+        if (t.dataset.consent === 'yes') {
+          if (window.gtag) gtag('consent', 'update', { analytics_storage: 'granted' });
+          load();
+        }
       }
     });
     var state = read();

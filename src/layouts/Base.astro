@@ -3,7 +3,7 @@ import '@fontsource/anton/400.css';
 import '@fontsource-variable/hanken-grotesk/wght.css';
 import '../styles/global.css';
 import antonUrl from '@fontsource/anton/files/anton-latin-400-normal.woff2?url';
-import { SITE } from '../config';
+import { GA4_ID, SITE } from '../config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
@@ -30,6 +30,22 @@ const bVerify = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag, in Consent Mode: no analytics cookies until the visitor says yes -->
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+    <script is:inline define:vars={{ id: GA4_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      var yes = false;
+      try { yes = localStorage.getItem('sl-consent') === 'yes'; } catch (e) {}
+      gtag('consent', 'default', {
+        analytics_storage: yes ? 'granted' : 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      });
+      gtag('js', new Date());
+      gtag('config', id);
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

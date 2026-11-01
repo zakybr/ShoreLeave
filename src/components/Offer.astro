@@ -136,7 +136,7 @@ import Arrow from './Arrow.astro';
 <script is:inline>
   (function () {
     var box = document.getElementById('offer');
-    var KEY = 'sl-offer', WEEK = 7 * 864e5;
+    var KEY = 'sl-offer-2', WEEK = 7 * 864e5;
     var store = {
       get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
       set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -192,6 +192,13 @@ import Arrow from './Arrow.astro';
       });
     });
 
+    function afterLoader(fn) {
+      if (document.documentElement.classList.contains('loading')) addEventListener('sl-loaded', fn, { once: true });
+      else fn();
+    }
+    // Any page with ?offer opens it straight away, ignoring what the browser remembers. For testing.
+    if (/[?&]offer\b/.test(location.search)) return afterLoader(open);
+
     // Automatic opening: once per visit, never on the pages where it would get in the way
     var seen = store.get(KEY);
     var quiet = /^\/(book|privacy|terms)/.test(location.pathname);
@@ -215,7 +222,6 @@ import Arrow from './Arrow.astro';
       }, { passive: true });
       document.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY <= 0) fire(); });
     }
-    if (document.documentElement.classList.contains('loading')) addEventListener('sl-loaded', arm, { once: true });
-    else arm();
+    afterLoader(arm);
   })();
 </script>

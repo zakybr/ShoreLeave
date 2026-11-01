@@ -14,6 +14,8 @@ export const SITE = {
   INSURED: false,
 };
 
+export const GA4_ID = import.meta.env.PUBLIC_GA4_ID || 'G-4ZPN9NLNF0';
+
 export const AREAS = [
   { '@type': 'Place', name: 'Pine Harbour Marina, Beachlands' },
   { '@type': 'City', name: 'Beachlands, Auckland' },
