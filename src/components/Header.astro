@@ -3,12 +3,11 @@ import { NAV, SITE } from '../config';
 import Mark from './Mark.astro';
 import Arrow from './Arrow.astro';
 const here = Astro.url.pathname;
-const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label: 'FAQ' }];
 ---
 
 <header id="top" class="text-white">
   <div class="wrap flex items-center justify-between h-[var(--header)]">
-    <a href="/" class="relative z-10 flex items-center gap-2.5 no-underline" aria-label={`${SITE.name} home`}>
+    <a href="/" id="brand" class="relative z-10 flex items-center gap-2.5 no-underline" aria-label={`${SITE.name} home`}>
       <Mark />
       <span class="font-display text-[1.45rem] uppercase tracking-[0.02em]">{SITE.name}</span>
     </a>
@@ -23,7 +22,7 @@ const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label
       <nav aria-label="Main">
         <ul>
           {
-            links.map((n, i) => (
+            NAV.map((n, i) => (
               <li style={`--i:${i}`}>
                 <a href={n.href} aria-current={here === n.href ? 'page' : undefined}>{n.label}</a>
               </li>
@@ -31,11 +30,19 @@ const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label
           }
         </ul>
       </nav>
-      <div class="menu-side" style={`--i:${links.length}`}>
+      <div class="menu-side" style={`--i:${NAV.length}`}>
+        <div class="menu-brand">
+          <Mark size={52} />
+          <span class="font-display text-[2.1rem] uppercase tracking-[0.02em]">{SITE.name}</span>
+        </div>
+        <p class="lede">Clean decks, made beds and a cold fridge. On the berth or the trailer, from the North Shore to Pine Harbour.</p>
         <a href="/book" class="go text-beige" data-track="click_book_cta">Enquire now <Arrow /></a>
-        <a href={`tel:${SITE.phoneTel}`} class="block" data-track="click_call">Call {SITE.phoneDisplay}</a>
-        <a href={`sms:${SITE.phoneTel}`} class="block" data-track="click_sms">Text us</a>
-        <p class="text-beige/80 text-[0.9rem]">{SITE.area}.</p>
+        <ul class="menu-more">
+          <li><a href={`tel:${SITE.phoneTel}`} data-track="click_call">{SITE.phoneDisplay}</a></li>
+          <li><a href={`sms:${SITE.phoneTel}`} data-track="click_sms">Text us</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -99,32 +106,51 @@ const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label
     min-height: 100%;
     padding-block: calc(var(--header) + 1rem) 2.5rem;
   }
+  .menu-brand {
+    display: none;
+    align-items: center;
+    gap: 0.9rem;
+    color: #fff;
+  }
+  /* Two even columns, both centred on the same line, so the sides balance */
   @media (min-width: 48rem) {
     .menu-grid {
-      grid-template-columns: 1fr 18rem;
-      align-items: end;
-      padding-left: calc(var(--gutter) + var(--indent));
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      column-gap: clamp(2rem, 5vw, 5rem);
+      padding-inline-start: calc(var(--gutter) + var(--indent));
+    }
+    .menu-brand {
+      display: flex;
+    }
+    /* The logo moves into the right column while the menu is open */
+    #brand {
+      transition: opacity 0.25s linear;
+    }
+    html.menu-open #brand {
+      opacity: 0;
+      pointer-events: none;
     }
   }
-  #menu li a {
+  #menu nav li a {
     display: block;
-    padding-block: 0.22rem;
+    padding-block: clamp(0.2rem, 1.2svh, 0.6rem);
     font-weight: 300;
-    font-size: clamp(1.5rem, min(6vw, 4.4svh), 2.75rem);
+    font-size: clamp(1.75rem, min(3.8vw, 6svh), 2.75rem);
     line-height: 1.16;
     text-decoration: none;
     transition: color 0.2s linear;
   }
-  #menu li a:hover,
-  #menu li a[aria-current='page'] {
+  #menu nav li a:hover,
+  #menu nav li a[aria-current='page'] {
     color: var(--color-beige);
   }
-  #menu li,
+  #menu nav li,
   .menu-side {
     opacity: 0;
     transform: translateY(1rem);
   }
-  html.menu-open #menu li,
+  html.menu-open #menu nav li,
   html.menu-open .menu-side {
     opacity: 1;
     transform: none;
@@ -135,14 +161,25 @@ const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label
   }
   .menu-side {
     display: grid;
-    gap: 0.5rem;
+    gap: 1.25rem;
     justify-items: start;
   }
-  .menu-side a.block {
-    min-height: 2.25rem;
+  @media (max-width: 47.99rem) and (max-height: 44rem) {
+    .menu-side .lede {
+      display: none;
+    }
+  }
+  .menu-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+  }
+  .menu-more a {
+    display: inline-block;
+    padding-block: 0.3rem;
     text-decoration: none;
   }
-  .menu-side a.block:hover {
+  .menu-more a:hover {
     text-decoration: underline;
   }
 </style>

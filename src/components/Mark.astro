@@ -1,7 +1,8 @@
 ---
-// The Shore Leave logo. A CSS mask over /logo.svg, so it takes the text colour and loads once.
+// The Shore Leave logo, inline so it paints with the page and takes the text colour.
+import logo from '../assets/logo.svg?raw';
 const { size = 36, class: cls = '' } = Astro.props;
-const shape = 'url(/logo.svg) center / contain no-repeat';
+const shape = logo.match(/ d="([^"]+)"/)?.[1];
 ---
 
-<span class={cls} style={`display:inline-block;flex:none;height:${size}px;aspect-ratio:1234/704;background:currentColor;mask:${shape};-webkit-mask:${shape}`} aria-hidden="true"></span>
+<svg class={cls} height={size} width={(size * 1234) / 704} viewBox="0 0 1234 704" fill="currentColor" style="flex:none" aria-hidden="true"><path d={shape}></path></svg>
