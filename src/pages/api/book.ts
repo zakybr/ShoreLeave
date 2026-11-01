@@ -69,12 +69,16 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     timeWindow: text(body.time_window, 30),
     notes: text(body.notes, 3000),
     heard: text(body.heard, 60),
+    offer: text(body.offer, 60),
   };
 
-  if (!lead.name || !lead.mobile || !lead.boatType || !lead.location || !lead.date) return fail(400, 'Please fill in the required fields.');
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return fail(400, 'That email address does not look right.');
+  // The popup is a short form: name, mobile and where the boat is. The rest comes from the follow-up text.
+  const full = !lead.offer;
+  if (!lead.name || !lead.mobile || !lead.boatType) return fail(400, 'Please fill in the required fields.');
+  if (full && (!lead.location || !lead.date)) return fail(400, 'Please fill in the required fields.');
+  if (full && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return fail(400, 'That email address does not look right.');
   if (!/^[+\d][\d\s()-]{6,}$/.test(lead.mobile)) return fail(400, 'That mobile number does not look right.');
-  if (!lead.services.length) return fail(400, 'Tick at least one service, so we know what to quote.');
+  if (full && !lead.services.length) return fail(400, 'Tick at least one service, so we know what to quote.');
   if (body.consent !== 'yes') return fail(400, 'Please tick the box so we can reply to you.');
 
   const to = process.env.LEAD_TO_EMAIL;
@@ -85,14 +89,14 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   const from = process.env.FROM_EMAIL || 'Shore Leave <onboarding@resend.dev>';
 
   try {
-    await send({ from, to, reply_to: lead.email, ...leadEmail(lead) });
+    await send({ from, to, ...(lead.email && { reply_to: lead.email }), ...leadEmail(lead) });
   } catch (e) {
     console.error('Lead email failed', e);
     return fail(502, 'That did not send. Call or text 022 305 3853 and we will sort it out.');
   }
 
   // Off until the domain is verified in Resend. The test sender can only reach the account owner.
-  if (process.env.CUSTOMER_CONFIRMATION === 'on') {
+  if (process.env.CUSTOMER_CONFIRMATION === 'on' && lead.email) {
     await send({ from, to: lead.email, reply_to: to, ...confirmationEmail(lead) }).catch((e) => console.error('Confirmation failed', e));
   }
 

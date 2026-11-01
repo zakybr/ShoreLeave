@@ -104,6 +104,10 @@ export const pricing: QA[] = [
     q: 'How do I get a quote for my boat?',
     a: "Fill in the booking form with your boat type, length, location and what you’d like done. It takes under two minutes. We’ll reply with a price and the next steps. There’s no obligation, and you can also call or text 022 305 3853 if you’d rather talk.",
   },
+  {
+    q: 'Is there a deal for first-timers?',
+    a: "Yes. Your first post-trip reset is 50% off our time, one per boat. Groceries aren’t discounted. We take it off your quote, so you’ll see it before you say yes.",
+  },
 ];
 
 export const general: QA[] = [

@@ -15,16 +15,16 @@ const CARDS = [
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/'/g, '&#39;');
 const panel = (lines) => `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
-  <rect width="760" height="630" fill="#0e2233"/>
-  <path fill="#c8963e" d="M64 64h22v22H64zM96 64h22v22H96zM64 96h22v22H64zM96 96h22v22H96z"/>
-  <text x="134" y="104" font-family="Georgia, serif" font-size="34" fill="#f2ebdd">Shore Leave</text>
-  ${lines.map((l, i) => `<text x="64" y="${370 + i * 92}" font-family="Georgia, serif" font-size="78" letter-spacing="-1.5" fill="#f2ebdd">${esc(l)}</text>`).join('')}
+  <rect width="760" height="630" fill="#2b2a28"/>
+  <path fill="#d6c8b0" d="M64 64h22v22H64zM96 64h22v22H96zM64 96h22v22H64zM96 96h22v22H96z"/>
+  <text x="134" y="106" font-family="Impact, sans-serif" font-size="34" letter-spacing="1" fill="#faf8f3">SHORE LEAVE</text>
+  ${lines.map((l, i) => `<text x="64" y="${370 + i * 92}" font-family="Impact, sans-serif" font-size="80" fill="${i ? '#d6c8b0' : '#faf8f3'}">${esc(l.toUpperCase())}</text>`).join('')}
 </svg>`;
 
 mkdirSync('public/og', { recursive: true });
 for (const [name, photo, lines] of CARDS) {
   const img = await sharp(`src/assets/photos/${photo}.jpg`).resize(440, 630, { fit: 'cover' }).toBuffer();
-  await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#0e2233' } })
+  await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#2b2a28' } })
     .composite([
       { input: Buffer.from(panel(lines)), left: 0, top: 0 },
       { input: img, left: 760, top: 0 },
@@ -33,7 +33,7 @@ for (const [name, photo, lines] of CARDS) {
     .toFile(`public/og/${name}.jpg`);
 }
 
-await sharp(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="512" height="512"><rect width="32" height="32" fill="#c8963e"/><path fill="#0e2233" d="M0 0h13v13H0zM19 0h13v13H19zM0 19h13v13H0zM19 19h13v13H19z"/></svg>'))
+await sharp(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="512" height="512"><rect width="32" height="32" fill="#d6c8b0"/><path fill="#2b2a28" d="M0 0h13v13H0zM19 0h13v13H19zM0 19h13v13H0zM19 19h13v13H19z"/></svg>'))
   .png()
   .toFile('public/og/logo.png');
 console.log('OG images written');

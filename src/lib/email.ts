@@ -10,46 +10,51 @@ export type Lead = {
   timeWindow: string;
   notes: string;
   heard: string;
+  offer: string;
 };
 
-const NAVY = '#0e2233';
-const SAND = '#f2ebdd';
-const BRASS = '#c8963e';
+const INK = '#2b2a28';
+const BEIGE = '#d6c8b0';
+const PAPER = '#faf8f3';
 
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 const oneLine = (s: string) => s.replace(/[\r\n]+/g, ' ');
 
-const shell = (heading: string, inner: string) => `<!doctype html><html lang="en-NZ"><body style="margin:0;background:${SAND};padding:24px 12px;font-family:Helvetica,Arial,sans-serif;color:${NAVY}">
-<table role="presentation" width="100%" style="max-width:600px;margin:0 auto;background:#fbf7ef;border-collapse:collapse">
-<tr><td style="background:${NAVY};color:${SAND};padding:20px 24px;font-family:Georgia,serif;font-size:20px">Shore Leave</td></tr>
-<tr><td style="height:4px;background:${BRASS};font-size:0">&nbsp;</td></tr>
-<tr><td style="padding:24px"><h1 style="margin:0 0 16px;font-family:Georgia,serif;font-weight:400;font-size:26px;line-height:1.2">${esc(heading)}</h1>${inner}</td></tr>
+const shell = (heading: string, inner: string) => `<!doctype html><html lang="en-NZ"><body style="margin:0;background:${BEIGE};padding:24px 12px;font-family:Helvetica,Arial,sans-serif;color:${INK}">
+<table role="presentation" width="100%" style="max-width:600px;margin:0 auto;background:${PAPER};border-collapse:collapse">
+<tr><td style="background:${INK};color:${PAPER};padding:20px 24px;font-size:20px;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Shore Leave</td></tr>
+<tr><td style="padding:24px"><h1 style="margin:0 0 16px;font-weight:400;font-size:26px;line-height:1.2">${esc(heading)}</h1>${inner}</td></tr>
 </table></body></html>`;
 
 export function leadEmail(l: Lead) {
-  const rows: [string, string][] = [
-    ['Name', l.name],
-    ['Mobile', l.mobile],
-    ['Email', l.email],
-    ['Boat type', l.boatType],
-    ['Length', `${l.boatLength} ft`],
-    ['Location', l.location],
-    ['Services', l.services.join(', ')],
-    ['Date', l.date],
-    ['Time window', l.timeWindow],
-    ['Restock list / notes', l.notes || 'None'],
-    ['Heard about us', l.heard || 'Not given'],
-  ];
+  // Popup leads only carry a name, a number and where the boat is, so blank rows are dropped
+  const rows = (
+    [
+      ['Offer', l.offer],
+      ['Name', l.name],
+      ['Mobile', l.mobile],
+      ['Email', l.email],
+      ['Boat type', l.boatType],
+      ['Length', l.boatLength && `${l.boatLength} ft`],
+      ['Location', l.location],
+      ['Services', l.services.join(', ')],
+      ['Date', l.date],
+      ['Time window', l.date && l.timeWindow],
+      ['Restock list / notes', l.notes],
+      ['Heard about us', l.heard],
+    ] as [string, string][]
+  ).filter(([, v]) => v);
   const table = rows
     .map(
       ([k, v]) =>
-        `<tr><th align="left" valign="top" style="padding:8px 12px 8px 0;border-top:1px solid #d9cfba;font-size:14px;white-space:nowrap">${esc(k)}</th><td style="padding:8px 0;border-top:1px solid #d9cfba;font-size:15px;white-space:pre-wrap">${esc(v)}</td></tr>`,
+        `<tr><th align="left" valign="top" style="padding:8px 12px 8px 0;border-top:1px solid ${BEIGE};font-size:14px;white-space:nowrap">${esc(k)}</th><td style="padding:8px 0;border-top:1px solid ${BEIGE};font-size:15px;white-space:pre-wrap">${esc(v)}</td></tr>`,
     )
     .join('');
+  const next = l.email ? `Hit reply to answer ${esc(l.name)} directly.` : `Text ${esc(l.name)} a quote with the 50% off.`;
   return {
-    subject: oneLine(`New booking: ${l.name} – ${l.boatType} – ${l.date}`),
-    html: shell('New booking request', `<table role="presentation" style="width:100%;border-collapse:collapse">${table}</table><p style="font-size:14px;margin:16px 0 0">Hit reply to answer ${esc(l.name)} directly.</p>`),
+    subject: oneLine(l.offer ? `50% off claim: ${l.name} – ${l.boatType}` : `New booking: ${l.name} – ${l.boatType} – ${l.date}`),
+    html: shell(l.offer ? '50% off claim' : 'New booking request', `<table role="presentation" style="width:100%;border-collapse:collapse">${table}</table><p style="font-size:14px;margin:16px 0 0">${next}</p>`),
   };
 }
 

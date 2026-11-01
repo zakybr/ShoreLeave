@@ -10,31 +10,33 @@ import photo from '../assets/photos/cockpit.jpg';
   description="Boat valet in Auckland: deck wash-down, rubbish off, interior vacuumed, beds remade and fridge cleared. Walk off the boat and we’ll reset it."
   crumb="Boat valet Auckland"
   h1="Boat valet, Auckland. Done after you’ve gone."
-  lede="A post-trip reset for owners who’ve had a big day out. You walk off the boat. We clean it, make the beds and clear the fridge."
+  lede="You walk off the boat. We clean it, make the beds and clear the fridge."
   photo={photo}
   photoAlt="Cockpit of a motor boat on its berth, seen from above, with tan upholstery and a timber table"
   faqs={valet}
   serviceName="Boat valet and post-trip reset"
   og="valet"
   links={[
-    { href: '/book', label: 'Book a reset' },
+    { href: '/book', label: 'Enquire now' },
     { href: '/pricing', label: 'How quotes work' },
     { href: '/pine-harbour-boat-cleaning', label: 'Pine Harbour berths' },
     { href: '/trailer-boat-cleaning', label: 'Trailer boats at home' },
   ]}
 >
-  <section class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
-    <div class="lg:col-span-5">
-      <h2>What gets done</h2>
-      <p class="mt-4">The same list every time, so you know what you’re coming back to.</p>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">What gets done</h2>
+      <p class="lede">The same list every time, so you know what you’re coming back to.</p>
+      <ul class="crosses">{AFTER_TRIP.map((t) => <li>{t}</li>)}</ul>
     </div>
-    <ul class="crosses lg:col-span-6 lg:col-start-7 mt-6 lg:mt-2 text-lg">{AFTER_TRIP.map((t) => <li>{t}</li>)}</ul>
   </section>
-  <section class="wrap pb-16 lg:pb-24 lg:grid lg:grid-cols-12 lg:gap-12">
-    <h2 class="lg:col-span-5">A boat clean up after the trip, not before the next one</h2>
-    <div class="lg:col-span-6 lg:col-start-7 mt-4 lg:mt-2 grid gap-4">
-      <p>Salt, sunscreen, bait and spilled drinks are easier to shift the day after than three weeks later. Most boats sit dirty because nobody has anything left at the end of a weekend. That’s normal. It’s also why we exist.</p>
-      <p>We work on deck and inside the boat. That’s the whole job. Book it once after a big trip, or set up a regular reset so the boat is always ready.</p>
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2>A boat clean up after the trip, not before the next one</h2>
+        <p>Salt, sunscreen and bait shift easier the day after than three weeks later. Most boats sit dirty because nobody has anything left at the end of a weekend. That’s normal. It’s also why we exist.</p>
+        <p>Book it once after a big trip, or set up a regular reset so the boat is always ready.</p>
+      </div>
     </div>
   </section>
 </ServicePage>

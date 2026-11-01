@@ -4,14 +4,18 @@ import { SITE } from '../../config';
 ---
 
 <Base title="Got it | Shore Leave" description="Your booking request is with us." noindex>
-  <section class="wrap band on-sand min-h-[60svh] flex flex-col justify-center">
-    <h1>Got it. Here’s what happens next.</h1>
-    <ol class="crosses mt-8 text-xl max-w-[44ch]">
-      <li>Zak or Bozzy reads your request.</li>
-      <li>We reply with a quote and any questions.</li>
-      <li>We agree on access, and the boat gets reset.</li>
-    </ol>
-    <p class="mt-8">In a hurry? Call or text <a class="link" href={`tel:${SITE.phoneTel}`} data-track="click_call">{SITE.phoneDisplay}</a>.</p>
+  <section class="on-ink min-h-svh flex items-center pt-[var(--header)]">
+    <div class="wrap">
+      <div class="inset">
+        <h1>Got it. <span class="tint">Here’s what’s next.</span></h1>
+        <ol class="crosses lede">
+          <li>Zak or Bozzy reads your request.</li>
+          <li>We reply with a quote and any questions.</li>
+          <li>We agree on access, and the boat gets reset.</li>
+        </ol>
+        <p>In a hurry? Call or text <a class="underline" href={`tel:${SITE.phoneTel}`} data-track="click_call">{SITE.phoneDisplay}</a>.</p>
+      </div>
+    </div>
   </section>
   <script is:inline>
     addEventListener('load', function () { if (window.slTrack) slTrack('generate_lead'); });

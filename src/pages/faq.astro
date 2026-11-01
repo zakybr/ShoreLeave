@@ -24,13 +24,13 @@ const groups = [
   lede={`Can’t find yours? Call or text ${SITE.phoneDisplay}.`}
   faqs={[]}
   links={[
-    { href: '/book', label: 'Book a reset' },
+    { href: '/book', label: 'Enquire now' },
     { href: '/how-it-works', label: 'How it works' },
     { href: '/pricing', label: 'How quotes work' },
   ]}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(faqPage(groups.flatMap((g) => g.items)))} />
-  <div class="wrap pb-16 grid gap-14 lg:gap-20">
+  <div class="wrap band grid gap-14 lg:gap-20">
     {groups.map((g) => <section><Faq items={g.items} heading={g.heading} open /></section>)}
   </div>
 </ServicePage>

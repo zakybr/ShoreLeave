@@ -28,4 +28,8 @@ Confident, warm, Kiwi. Short sentences. No corporate filler, no hype, no exclama
 - No prices anywhere. Quotes come from the form.
 - Never say insured until `INSURED` is true in `src/config.ts`.
 - Topside and interior only. Never mention the excluded scope listed in the brief.
-- No fake urgency.
+- No fake urgency. The 50% off first reset has no countdown and no invented end date.
+
+## Offer
+
+50% off our time on a new customer's first post-trip reset, one per boat. Groceries excluded. Promoted by the popup in `src/components/Offer.astro`, and set out in the terms.

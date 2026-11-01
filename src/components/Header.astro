@@ -1,44 +1,170 @@
 ---
 import { NAV, SITE } from '../config';
 import Mark from './Mark.astro';
+import Arrow from './Arrow.astro';
 const here = Astro.url.pathname;
+const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label: 'FAQ' }];
 ---
 
-<header class="sticky top-0 z-40 bg-sand/95 border-b border-navy/10">
-  <div class="wrap flex items-center justify-between gap-6 h-16 lg:h-20">
-    <a href="/" class="flex items-center gap-2.5 no-underline" aria-label={`${SITE.name} home`}>
-      <Mark size={22} />
-      <span class="font-display text-[1.35rem] tracking-tight">{SITE.name}</span>
+<header id="top" class="text-white">
+  <div class="wrap flex items-center justify-between h-[var(--header)]">
+    <a href="/" class="relative z-10 flex items-center gap-2.5 no-underline" aria-label={`${SITE.name} home`}>
+      <Mark size={20} />
+      <span class="font-display text-[1.45rem] uppercase tracking-[0.02em]">{SITE.name}</span>
     </a>
+    <button id="menu-btn" type="button" class="relative z-10 flex items-center gap-3 min-h-11 -mr-1 px-1" aria-expanded="false" aria-controls="menu">
+      <span id="menu-label">Menu</span>
+      <span class="burger" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
 
-    <nav class="hidden lg:flex items-center gap-7" aria-label="Main">
-      {
-        NAV.map((n) => (
-          <a href={n.href} class:list={['no-underline hover:underline', here === n.href && 'underline']} aria-current={here === n.href ? 'page' : undefined}>
-            {n.label}
-          </a>
-        ))
-      }
-      <a href="/book" class="btn btn-navy !min-h-11 !py-2" data-track="click_book_cta">Book a reset</a>
-    </nav>
-
-    <details class="lg:hidden relative">
-      <summary class="flex items-center gap-2 min-h-11 px-1 font-semibold">
-        Menu <span class="sum-mark !mt-0"></span>
-      </summary>
-      <nav class="fixed left-0 right-0 top-16 bg-sand border-b border-navy/15 px-5 pb-6 pt-2" aria-label="Mobile">
-        <ul class="grid">
+  <div id="menu" class="on-ink" inert>
+    <div class="wrap menu-grid">
+      <nav aria-label="Main">
+        <ul>
           {
-            [...NAV, { href: '/faq', label: 'FAQ' }, { href: '/about', label: 'About' }].map((n) => (
-              <li>
-                <a href={n.href} class="block py-3 font-display text-2xl no-underline border-b border-navy/10">
-                  {n.label}
-                </a>
+            links.map((n, i) => (
+              <li style={`--i:${i}`}>
+                <a href={n.href} aria-current={here === n.href ? 'page' : undefined}>{n.label}</a>
               </li>
             ))
           }
         </ul>
       </nav>
-    </details>
+      <div class="menu-side" style={`--i:${links.length}`}>
+        <a href="/book" class="go text-beige" data-track="click_book_cta">Enquire now <Arrow /></a>
+        <a href={`tel:${SITE.phoneTel}`} class="block" data-track="click_call">Call {SITE.phoneDisplay}</a>
+        <a href={`sms:${SITE.phoneTel}`} class="block" data-track="click_sms">Text us</a>
+        <p class="text-beige/80 text-[0.9rem]">{SITE.area}.</p>
+      </div>
+    </div>
   </div>
 </header>
+
+<style is:global>
+  #top {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    transition:
+      background-color 0.35s var(--ease-tide),
+      transform 0.35s var(--ease-tide);
+  }
+  #top.solid {
+    background: var(--color-ink);
+  }
+  html.menu-open #top {
+    background: transparent;
+  }
+  html.menu-open {
+    overflow: hidden;
+  }
+  .burger {
+    display: grid;
+    gap: 0.5rem;
+    width: 1.8rem;
+  }
+  .burger i {
+    display: block;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.35s var(--ease-tide);
+  }
+  html.menu-open .burger i:first-child {
+    transform: translateY(0.3rem) rotate(45deg);
+  }
+  html.menu-open .burger i:last-child {
+    transform: translateY(-0.3rem) rotate(-45deg);
+  }
+  #menu {
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity 0.35s var(--ease-tide),
+      visibility 0s linear 0.35s;
+  }
+  html.menu-open #menu {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }
+  .menu-grid {
+    display: grid;
+    gap: 2.25rem;
+    align-content: center;
+    min-height: 100%;
+    padding-block: calc(var(--header) + 1rem) 2.5rem;
+  }
+  @media (min-width: 48rem) {
+    .menu-grid {
+      grid-template-columns: 1fr 18rem;
+      align-items: end;
+      padding-left: calc(var(--gutter) + var(--indent));
+    }
+  }
+  #menu li a {
+    display: block;
+    padding-block: 0.22rem;
+    font-weight: 300;
+    font-size: clamp(1.75rem, min(6vw, 5.4svh), 2.75rem);
+    line-height: 1.16;
+    text-decoration: none;
+    transition: color 0.2s linear;
+  }
+  #menu li a:hover,
+  #menu li a[aria-current='page'] {
+    color: var(--color-beige);
+  }
+  #menu li,
+  .menu-side {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.menu-open #menu li,
+  html.menu-open .menu-side {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.6s var(--ease-tide),
+      transform 0.6s var(--ease-tide);
+    transition-delay: calc(var(--i) * 35ms + 80ms);
+  }
+  .menu-side {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+  }
+  .menu-side a.block {
+    min-height: 2.25rem;
+    text-decoration: none;
+  }
+  .menu-side a.block:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var d = document.documentElement;
+    var top = document.getElementById('top'), btn = document.getElementById('menu-btn');
+    var menu = document.getElementById('menu'), label = document.getElementById('menu-label');
+    function set(open) {
+      d.classList.toggle('menu-open', open);
+      btn.setAttribute('aria-expanded', open);
+      label.textContent = open ? 'Close' : 'Menu';
+      menu.inert = !open;
+    }
+    btn.addEventListener('click', function () { set(!d.classList.contains('menu-open')); });
+    addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && d.classList.contains('menu-open')) { set(false); btn.focus(); }
+    });
+    addEventListener('pageshow', function () { set(false); });
+    function solid() { top.classList.toggle('solid', scrollY > 40); }
+    addEventListener('scroll', solid, { passive: true });
+    solid();
+  })();
+</script>

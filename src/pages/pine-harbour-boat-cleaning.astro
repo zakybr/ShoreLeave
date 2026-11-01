@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
+import Arrow from '../components/Arrow.astro';
 import { pineHarbour } from '../data/qa';
 import photo from '../assets/photos/marina-walkway.jpg';
 ---
@@ -9,32 +10,32 @@ import photo from '../assets/photos/marina-walkway.jpg';
   description="Boat cleaning at Pine Harbour Marina, Beachlands. We reset your boat on the berth: clean, beds made, fridge stocked. You just leave it and go home."
   crumb="Pine Harbour boat cleaning"
   h1="Pine Harbour Marina, on your berth."
-  lede="Tie up, grab your bag and walk up the pontoon. We’ll reset the boat on the berth, so it’s ready when you’re next down."
+  lede="Tie up, grab your bag and walk up the pontoon. We’ll reset the boat on the berth."
   photo={photo}
   photoAlt="Pontoon walkway running between berthed boats at a marina"
   faqs={pineHarbour}
   serviceName="Boat cleaning at Pine Harbour Marina"
   og="pine-harbour"
   links={[
-    { href: '/book', label: 'Book a reset' },
+    { href: '/book', label: 'Enquire now' },
     { href: '/pricing', label: 'How quotes work' },
     { href: '/boat-cleaning-beachlands', label: 'Beachlands' },
     { href: '/boat-fridge-restock', label: 'Fridge restock' },
   ]}
 >
-  <section class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
-    <h2 class="lg:col-span-5">Built around how Pine Harbour gets used</h2>
-    <div class="lg:col-span-6 lg:col-start-7 mt-4 lg:mt-2 grid gap-4">
-      <p>Pine Harbour sits at the eastern end of the coast with the Hauraki Gulf on its doorstep. Waiheke, Ponui and the Coromandel are all an easy run, which means plenty of weekends away and plenty of boats that come home needing a proper going-over.</p>
-      <p>Berth holders tend to use us two ways. A one-off reset after a big trip, or a standing arrangement: a clean after each weekend away, then a restock before the next one.</p>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2>Built around how Pine Harbour gets used</h2>
+      <p>Waiheke, Ponui and the Coromandel are all an easy run from here. That means plenty of weekends away, and plenty of boats that come home needing a proper going-over.</p>
+      <p>Berth holders use us two ways. A one-off reset after a big trip, or a standing arrangement: a clean after each weekend away, then a restock before the next one.</p>
     </div>
   </section>
-  <section class="bg-sand-2">
-    <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
-      <h2 class="lg:col-span-5">Boat grocery delivery to your berth</h2>
-      <div class="lg:col-span-6 lg:col-start-7 mt-4 lg:mt-2 grid gap-4">
-        <p>Tell us your pier and berth and when you’re leaving. We shop your list, bring it down the pontoon and stow it aboard. You don’t need to make the trip down first.</p>
-        <p><a class="link" href="/boat-fridge-restock">How the fridge restock works</a></p>
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2>Boat grocery delivery to your berth</h2>
+        <p>Tell us your pier and berth and when you’re leaving. We shop your list, bring it down the pontoon and stow it aboard.</p>
+        <a class="go" href="/boat-fridge-restock">How the fridge restock works <Arrow /></a>
       </div>
     </div>
   </section>

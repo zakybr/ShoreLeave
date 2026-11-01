@@ -1,17 +1,19 @@
 ---
 import { SITE } from '../config';
-import Mark from './Mark.astro';
+import Arrow from './Arrow.astro';
 const { heading = "Leave the boat. We’ve got it from here." } = Astro.props;
 ---
 
-<section class="on-navy relative overflow-hidden">
-  <Mark size={340} class="absolute right-[var(--gutter)] top-1/2 -translate-y-1/2 text-navy-2 hidden lg:block" />
-  <div class="wrap band relative">
-    <h2 class="max-w-[16ch]">{heading}</h2>
-    <p class="mt-5 text-mist">Tell us about the boat. We’ll come back with a quote before anything starts.</p>
-    <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-      <a href="/book" class="btn btn-brass" data-track="click_book_cta">Book a reset</a>
-      <a href={`tel:${SITE.phoneTel}`} class="link" data-track="click_call">Call {SITE.phoneDisplay}</a>
+<section class="on-beige">
+  <div class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">{heading}</h2>
+      <p class="lede">Tell us about the boat. You’ll get a quote before anything starts, and your first reset is 50% off.</p>
+      <div class="flex flex-col items-start sm:flex-row sm:flex-wrap gap-x-9">
+        <a href="/book" class="go" data-track="click_book_cta">Enquire now <Arrow /></a>
+        <button type="button" class="go cursor-pointer" data-offer-open>Claim 50% off <Arrow /></button>
+        <a href={`tel:${SITE.phoneTel}`} class="go" data-track="click_call">Call {SITE.phoneDisplay} <Arrow /></a>
+      </div>
     </div>
   </div>
 </section>

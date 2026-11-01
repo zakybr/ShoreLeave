@@ -4,16 +4,16 @@ import Mark from './Mark.astro';
 const year = new Date().getFullYear();
 ---
 
-<footer class="on-navy">
+<footer class="on-ink">
   <div class="wrap py-14 lg:py-20 grid gap-10 lg:grid-cols-12">
     <div class="lg:col-span-5">
-      <div class="flex items-center gap-3">
-        <Mark size={24} class="text-brass" />
-        <span class="font-display text-2xl">{SITE.name}</span>
+      <div class="flex items-center gap-2.5">
+        <Mark size={20} class="text-beige" />
+        <span class="font-display text-[1.45rem] uppercase tracking-[0.02em]">{SITE.name}</span>
       </div>
-      <p class="mt-4 text-mist">{SITE.area}.</p>
+      <p class="mt-4 text-beige/85">{SITE.area}.</p>
       <p class="mt-4">
-        <a class="link" href={`tel:${SITE.phoneTel}`} data-track="click_call">{SITE.phoneDisplay}</a>
+        <a class="underline" href={`tel:${SITE.phoneTel}`} data-track="click_call">{SITE.phoneDisplay}</a>
       </p>
     </div>
     <nav class="lg:col-span-3" aria-label="Services">
@@ -32,5 +32,5 @@ const year = new Date().getFullYear();
       </ul>
     </nav>
   </div>
-  <div class="wrap pb-8 text-mist text-sm">© {year} {SITE.name}. Run by {SITE.owners}, Auckland.</div>
+  <div class="wrap pb-8 text-beige/85 text-sm">© {year} {SITE.name}. Run by {SITE.owners}, Auckland.</div>
 </footer>

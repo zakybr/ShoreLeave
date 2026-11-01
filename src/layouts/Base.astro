@@ -1,24 +1,24 @@
 ---
-import '@fontsource-variable/fraunces/opsz.css';
-import '@fontsource-variable/inter-tight/index.css';
+import '@fontsource/anton/400.css';
+import '@fontsource-variable/hanken-grotesk/wght.css';
 import '../styles/global.css';
-import frauncesUrl from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import antonUrl from '@fontsource/anton/files/anton-latin-400-normal.woff2?url';
 import { SITE } from '../config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
 import Loader from '../components/Loader.astro';
 import Consent from '../components/Consent.astro';
+import Offer from '../components/Offer.astro';
 
 interface Props {
   title: string;
   description: string;
   og?: string;
   schema?: object[];
-  loader?: boolean;
   noindex?: boolean;
 }
-const { title, description, og = 'home', schema = [], loader = false, noindex = false } = Astro.props;
+const { title, description, og = 'home', schema = [], noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href.replace(/\/$/, '');
 const ogImage = new URL(`/og/${og}.jpg`, SITE.url).href;
 const gVerify = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -34,9 +34,10 @@ const bVerify = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#0e2233" />
+    <meta name="theme-color" content="#2b2a28" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href={frauncesUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={antonUrl} as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:locale" content="en_NZ" />
@@ -53,40 +54,36 @@ const bVerify = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     {gVerify && <meta name="google-site-verification" content={gVerify} />}
     {bVerify && <meta name="msvalidate.01" content={bVerify} />}
     {schema.map((s) => <script is:inline type="application/ld+json" set:html={JSON.stringify(s)} />)}
-    {
-      loader && (
-        <script is:inline>
-          (function () {
-            document.documentElement.classList.add('bar-hold');
-            try {
-              var c = navigator.connection;
-              var force = /[?&]loader\b/.test(location.search);
-              if (force) document.documentElement.classList.add('loader-forced');
-              else if (sessionStorage.getItem('sl-seen') || matchMedia('(prefers-reduced-motion: reduce)').matches || (c && c.saveData)) return;
-              sessionStorage.setItem('sl-seen', '1');
-              document.documentElement.classList.add('loading', 'hold');
-              [1, 2, 3, 4, 5].forEach(function (n) { new Image().src = '/loader/' + n + '.webp'; });
-            } catch (e) {}
-          })();
-        </script>
-      )
-    }
+    <script is:inline>
+      document.documentElement.classList.add('loading', 'hold', 'bar-hold');
+      if ('IntersectionObserver' in window) document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
     <Fragment set:html={`<!--
 THESIS: A boat hotel turndown, not a cleaning company. Refuses the blue-gradient trades template.
-OWN-WORLD: Sand and navy fields, one brass field, the R signal-flag cross as mark, bullet and loader window. Fraunces at display cut, Inter Tight for text.
-STORY: Owners see their worst Sunday named, believe the boat can be left as it is, and book from the pontoon.
-FIRST VIEWPORT: Huge navy two-line promise left on sand, portrait deck-lounge photo bleeding right, brass-free navy primary button under the copy, call link beside it.
-FORM: Direction taken from the owner brief. The concept roll was not run, because the owner pinned the aesthetic and asked not to be interviewed. No seed key exists.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+OWN-WORLD: Beige, dark grey and white, taken from the owner's brief and modelled on tracta.co.nz. Full-bleed film, Anton caps over light Hanken Grotesk, the R flag cross as mark, bullet and loader window.
+STORY: Owners see their worst Sunday named, believe the boat can be left as it is, and enquire from the pontoon.
+FIRST VIEWPORT: Full-screen film of a boat on the water, a two-tone caps promise set in from the left, two arrow links under it.
 -->`} />
-    {loader && <Loader />}
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-navy focus:text-sand focus:p-3">Skip to content</a>
+    <Loader />
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-ink focus:text-paper focus:p-3">Skip to content</a>
     <Header />
     <main id="main"><slot /></main>
     <Footer />
     <MobileBar />
+    <Offer />
     <Consent />
+    <script is:inline>
+      (function () {
+        if (!document.documentElement.classList.contains('js')) return;
+        var io = new IntersectionObserver(function (list) {
+          list.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.flow').forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
 </html>
