@@ -1,8 +1,7 @@
 ---
-// The R signal flag, reduced to its cross: R for Reset.
-const { size = 26, class: cls = '' } = Astro.props;
+// The Shore Leave logo. A CSS mask over /logo.svg, so it takes the text colour and loads once.
+const { size = 36, class: cls = '' } = Astro.props;
+const shape = 'url(/logo.svg) center / contain no-repeat';
 ---
 
-<svg class={cls} width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" fill="currentColor">
-  <path d="M0 0h13v13H0zM19 0h13v13H19zM0 19h13v13H0zM19 19h13v13H19z"></path>
-</svg>
+<span class={cls} style={`display:inline-block;flex:none;height:${size}px;aspect-ratio:1234/704;background:currentColor;mask:${shape};-webkit-mask:${shape}`} aria-hidden="true"></span>

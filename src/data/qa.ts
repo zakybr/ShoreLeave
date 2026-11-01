@@ -42,7 +42,7 @@ export const restock: QA[] = [
 export const trailer: QA[] = [
   {
     q: 'Do you clean trailer boats at home?',
-    a: "Yes. We come to your driveway after the trip and do the wash-down, rubbish, surfaces and interior while the boat sits on the trailer. Callouts cover Beachlands, Maraetai, the North Shore and Whangaparāoa. If you’re elsewhere in Auckland, ask anyway and we’ll tell you straight.",
+    a: "Yes. We come to your driveway after the trip and do the wash-down, rubbish, surfaces and interior while the boat sits on the trailer. Callouts cover the North Shore, Whangaparāoa, Beachlands and Maraetai. If you’re elsewhere in Auckland, ask anyway and we’ll tell you straight.",
   },
   {
     q: 'What do you need from me for a trailer boat clean?',
@@ -91,7 +91,22 @@ export const eastAuckland: QA[] = [
   },
   {
     q: 'How far do you travel for a boat clean?',
-    a: "We work Pine Harbour Marina, Beachlands, Maraetai, the North Shore and Whangaparāoa. Past that, it depends on the job and the week. Put your suburb in the booking form. If we can’t get there and do it properly, we’ll say so instead of stretching the schedule.",
+    a: "We work the North Shore, Whangaparāoa, Pine Harbour Marina, Beachlands and Maraetai. Past that, it depends on the job and the week. Put your suburb in the booking form. If we can’t get there and do it properly, we’ll say so instead of stretching the schedule.",
+  },
+];
+
+export const northShore: QA[] = [
+  {
+    q: 'Do you clean boats on the North Shore?',
+    a: "Yes. We reset boats on the berth and on the trailer across the North Shore, from Devonport to Long Bay. Tell us your marina and berth, or your home address, and we’ll send a quote.",
+  },
+  {
+    q: 'Can you clean my trailer boat at home on the North Shore?',
+    a: "Yes. Tow home and leave it in the driveway. We bring everything to you and reset the boat on the trailer. An outside tap is all we need from you.",
+  },
+  {
+    q: 'Can you restock a boat on a North Shore berth?',
+    a: "Yes. Send us a list and tell us when you’re leaving. We shop it, carry it aboard and put it away, so the fridge is cold when you arrive.",
   },
 ];
 
@@ -117,7 +132,7 @@ export const general: QA[] = [
   },
   {
     q: 'What areas do you cover?',
-    a: 'Pine Harbour Marina berths, plus trailer-boat callouts in Beachlands, Maraetai, the North Shore and Whangaparāoa. If you keep your boat somewhere else in Auckland, put the location in the booking form and we will tell you straight whether we can do it well.',
+    a: 'Berths on the North Shore and at Pine Harbour Marina, plus trailer-boat callouts on the North Shore and in Whangaparāoa, Beachlands and Maraetai. If you keep your boat somewhere else in Auckland, put the location in the booking form and we will tell you straight whether we can do it well.',
   },
   {
     q: 'What happens if the weather turns?',

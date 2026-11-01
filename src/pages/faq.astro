@@ -3,13 +3,14 @@ import ServicePage from '../layouts/ServicePage.astro';
 import Faq from '../components/Faq.astro';
 import { SITE } from '../config';
 import { faqPage } from '../lib/schema';
-import { beachlands, eastAuckland, general, pineHarbour, pricing, restock, trailer, valet } from '../data/qa';
+import { beachlands, eastAuckland, general, northShore, pineHarbour, pricing, restock, trailer, valet } from '../data/qa';
 
 const groups = [
   { heading: 'About Shore Leave', items: general },
   { heading: 'The post-trip reset', items: valet },
   { heading: 'Fridge restock', items: restock },
   { heading: 'Trailer boats', items: trailer },
+  { heading: 'North Shore', items: northShore },
   { heading: 'Pine Harbour and Beachlands', items: [...pineHarbour, ...beachlands] },
   { heading: 'East Auckland', items: eastAuckland },
   { heading: 'Pricing', items: pricing },

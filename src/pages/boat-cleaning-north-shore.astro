@@ -1,0 +1,49 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { northShore } from '../data/qa';
+import photo from '../assets/photos/deck-sunpad.jpg';
+---
+
+<ServicePage
+  title="Boat Cleaning North Shore, Auckland | Berth or trailer | Shore Leave"
+  description="Boat cleaning on Auckland’s North Shore, on the berth or on the trailer at home. Deck, interior, beds and a stocked fridge, from Devonport to Long Bay."
+  crumb="Boat cleaning North Shore"
+  h1="North Shore boats. Berth or driveway."
+  lede="Tie up or tow home. We come to wherever the boat ends up, from Devonport to Long Bay."
+  photo={photo}
+  photoAlt="Deck lounge on a modern boat with tan cushions laid out neatly, moored at a marina"
+  faqs={northShore}
+  serviceName="Boat cleaning on the North Shore"
+  og="north-shore"
+  links={[
+    { href: '/book', label: 'Enquire now' },
+    { href: '/pricing', label: 'How quotes work' },
+    { href: '/trailer-boat-cleaning', label: 'Trailer boats at home' },
+    { href: '/boat-fridge-restock', label: 'Fridge restock' },
+  ]}
+  ctaHeading="Back on the Shore? Leave the boat with us."
+>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">Two kinds of North Shore boat</h2>
+      <div class="grid gap-6">
+        <div>
+          <h3 class="sub">On the berth</h3>
+          <p class="mt-1">Tell us your marina and berth. We’ll agree a way aboard and reset the boat where it lies, with no need for you to come back down.</p>
+        </div>
+        <div>
+          <h3 class="sub">On the trailer</h3>
+          <p class="mt-1">Home from a run to Rangitoto, Motutapu or Tiritiri Matangi? Leave it in the driveway. We bring everything to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2>Clean boat, made beds, cold fridge</h2>
+        <p>Same reset as everywhere we work: deck, rubbish, surfaces, interior, beds and fridge. Add a restock and the boat’s ready before you are.</p>
+      </div>
+    </div>
+  </section>
+</ServicePage>

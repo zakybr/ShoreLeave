@@ -8,7 +8,7 @@ A post-trip reset and restock service for boat owners in Auckland. Hospitality f
 
 ## Who it serves
 
-Owners coming off a day or weekend on the water, tired, usually on a phone on the pontoon or in the driveway. Berth holders at Pine Harbour Marina, and trailer-boat owners in Beachlands, Maraetai, the North Shore and Whangaparāoa.
+Owners coming off a day or weekend on the water, tired, usually on a phone on the pontoon or in the driveway. Berth holders on the North Shore and at Pine Harbour Marina, and trailer-boat owners on the North Shore and in Whangaparāoa, Beachlands and Maraetai.
 
 ## What they should believe
 

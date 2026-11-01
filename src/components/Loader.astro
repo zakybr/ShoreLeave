@@ -1,41 +1,36 @@
 ---
-// Tracta-style reveal: beige panels part from a flag-cross window onto the live page. Decorative, so
-// hidden from assistive tech. It only exists while html.loading is set, which needs JavaScript, so
-// crawlers and no-JS visitors never see it. It runs on every page load and doubles as the wait for
-// the hero video: it lifts once the page is ready, after a short minimum and before a hard cap.
+// Tracta-style reveal: a beige sheet with the logo cut out of it, so the live page shows through the
+// silhouette, then the cut-out grows until the sheet is gone. Decorative, so hidden from assistive
+// tech. It only exists while html.loading is set, which needs JavaScript, so crawlers and no-JS
+// visitors never see it. It runs on every page load and doubles as the wait for the hero video: it
+// lifts once the page is ready, after a short minimum and before a hard cap.
+import logo from '../assets/logo.svg?raw';
+const shape = logo.match(/ d="([^"]+)"/)?.[1];
 ---
 
 <div id="loader" aria-hidden="true">
-  <i class="s st"></i><i class="s sb"></i><i class="s sl"></i><i class="s sr"></i>
-  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+  <svg viewBox="-583 -848 2400 2400" preserveAspectRatio="xMidYMid meet">
+    <mask id="lm" maskUnits="userSpaceOnUse" x="-30000" y="-30000" width="60000" height="60000">
+      <rect x="-30000" y="-30000" width="60000" height="60000" fill="#fff"></rect>
+      <path id="ls" d={shape} fill="#000"></path>
+    </mask>
+    <rect x="-30000" y="-30000" width="60000" height="60000" fill="#d6c8b0" mask="url(#lm)"></rect>
+  </svg>
   <div class="hud"><div id="lb"></div></div>
 </div>
 
 <style is:inline>
   #loader { display: none; }
   html.loading #loader {
-    --a: clamp(84px, 13vmin, 130px);
-    --s: calc(var(--a) * 3);
     display: block; position: fixed; inset: 0; z-index: 100; overflow: hidden; cursor: default;
     animation: sl-failsafe 0.01s linear 5s forwards;
   }
   @keyframes sl-failsafe { to { visibility: hidden; } }
-  #loader i { position: absolute; display: block; background: #d6c8b0; transition: transform .9s cubic-bezier(.76,0,.24,1); }
-  #loader .st { left: 0; right: 0; top: 0; height: calc(50% - var(--s) / 2); }
-  #loader .sb { left: 0; right: 0; bottom: 0; height: calc(50% - var(--s) / 2); }
-  #loader .sl { top: 0; bottom: 0; left: 0; width: calc(50% - var(--s) / 2); }
-  #loader .sr { top: 0; bottom: 0; right: 0; width: calc(50% - var(--s) / 2); }
-  #loader .c { width: calc(50% - var(--a) / 2); height: calc(50% - var(--a) / 2); }
-  #loader .tl { left: 0; top: 0; } #loader .tr { right: 0; top: 0; }
-  #loader .bl { left: 0; bottom: 0; } #loader .br { right: 0; bottom: 0; }
+  #loader svg { display: block; width: 100%; height: 100%; }
   #loader .hud { position: absolute; left: 50%; bottom: max(8vh, 3.25rem); width: min(calc(100% - 4rem), 16rem); height: 2px; transform: translateX(-50%); background: rgba(43,42,40,.2); transition: opacity .2s linear; }
   #loader #lb { height: 100%; background: #2b2a28; transform: scaleX(0); transform-origin: left; }
   #loader.out { pointer-events: none; }
   #loader.out .hud { opacity: 0; }
-  #loader.out .st { transform: translateY(-180vmax); } #loader.out .sb { transform: translateY(180vmax); }
-  #loader.out .sl { transform: translateX(-180vmax); } #loader.out .sr { transform: translateX(180vmax); }
-  #loader.out .tl { transform: translate(-60vmax, -60vmax); } #loader.out .tr { transform: translate(60vmax, -60vmax); }
-  #loader.out .bl { transform: translate(-60vmax, 60vmax); } #loader.out .br { transform: translate(60vmax, 60vmax); }
 </style>
 
 <script is:inline>
@@ -43,17 +38,29 @@
     var d = document.documentElement;
     var el = document.getElementById('loader');
     if (!d.classList.contains('loading')) { el.remove(); return; }
-    var lb = document.getElementById('lb');
-    var MIN = 700, CAP = 2600, start = performance.now(), ready = false, done = false, p = 0;
+    var lb = document.getElementById('lb'), ls = document.getElementById('ls');
+    var MIN = 900, CAP = 2600, OUT = 950, start = performance.now(), ready = false, done = false, p = 0;
+    // The middle of the hull, the widest solid part of the logo, so the cut-out opens from there
+    var CX = 800, CY = 490, GROW = 46;
     window.slReady = function () { ready = true; };
     addEventListener('load', function () { if (!document.querySelector('[data-hero-video]')) ready = true; });
+    function grow(t0) {
+      return function step(now) {
+        var t = Math.min((now - t0) / OUT, 1), e = t * t * t;
+        var s = 1 + (GROW - 1) * e;
+        ls.setAttribute('transform', 'translate(' + CX + ' ' + CY + ') scale(' + s + ') translate(' + -CX + ' ' + -CY + ')');
+        if (t > 0.7) el.style.opacity = (1 - t) / 0.3;
+        if (t < 1) requestAnimationFrame(step);
+        else { d.classList.remove('loading'); el.remove(); dispatchEvent(new Event('sl-loaded')); }
+      };
+    }
     function finish() {
       if (done) return;
       done = true;
       lb.style.transform = 'scaleX(1)';
       el.classList.add('out');
       setTimeout(function () { d.classList.remove('hold'); }, 220);
-      setTimeout(function () { d.classList.remove('loading'); el.remove(); dispatchEvent(new Event('sl-loaded')); }, 950);
+      requestAnimationFrame(function (now) { grow(now)(now); });
     }
     function frame(now) {
       if (done) return;

@@ -9,7 +9,7 @@ const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label
 <header id="top" class="text-white">
   <div class="wrap flex items-center justify-between h-[var(--header)]">
     <a href="/" class="relative z-10 flex items-center gap-2.5 no-underline" aria-label={`${SITE.name} home`}>
-      <Mark size={20} />
+      <Mark />
       <span class="font-display text-[1.45rem] uppercase tracking-[0.02em]">{SITE.name}</span>
     </a>
     <button id="menu-btn" type="button" class="relative z-10 flex items-center gap-3 min-h-11 -mr-1 px-1" aria-expanded="false" aria-controls="menu">
@@ -110,7 +110,7 @@ const links = [...NAV, { href: '/about', label: 'About' }, { href: '/faq', label
     display: block;
     padding-block: 0.22rem;
     font-weight: 300;
-    font-size: clamp(1.75rem, min(6vw, 5.4svh), 2.75rem);
+    font-size: clamp(1.5rem, min(6vw, 4.4svh), 2.75rem);
     line-height: 1.16;
     text-decoration: none;
     transition: color 0.2s linear;

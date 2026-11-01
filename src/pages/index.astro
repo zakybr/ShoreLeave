@@ -27,20 +27,23 @@ const schema = [
 const wide = await getImage({ src: poster, format: 'avif', width: 1440, quality: 50 });
 const tall = await getImage({ src: posterMobile, format: 'avif', width: 540, quality: 50 });
 const fallback = await getImage({ src: poster, format: 'jpg', width: 1280, quality: 60 });
-const PHONE = '(max-width: 47.99rem)';
-const DESK = '(min-width: 48rem)';
+// The tall cut only suits tall screens, so a narrow landscape window still gets the wide film
+const PHONE = '(max-aspect-ratio: 4/5)';
+const DESK = '(min-aspect-ratio: 4/5)';
 
 const services = [
   { title: 'The reset', text: 'You walk off. We wash the deck, clear the rubbish, vacuum inside, remake the beds and empty the fridge.', href: '/boat-valet-auckland' },
   { title: 'The restock', text: 'Send us a list. Fridge and pantry stocked, drinks and ice aboard, groceries put away.', href: '/boat-fridge-restock' },
+  { title: 'North Shore', text: 'Berth or trailer, Devonport to Long Bay. Tie up or tow home, and we’ll take it from there.', href: '/boat-cleaning-north-shore' },
   { title: 'Pine Harbour berths', text: 'Tie up and go home. We reset the boat right there on the berth.', href: '/pine-harbour-boat-cleaning' },
-  { title: 'Trailer boats', text: 'Back from the ramp? We come to your driveway in Beachlands, Maraetai, the North Shore and Whangaparāoa.', href: '/trailer-boat-cleaning' },
+  { title: 'Trailer boats', text: 'Back from the ramp? We come to your driveway on the North Shore, in Whangaparāoa, Beachlands and Maraetai.', href: '/trailer-boat-cleaning' },
+  { title: 'East Auckland', text: 'Beachlands, Maraetai and the ramps around them. We’re local to this end of the coast.', href: '/boat-cleaning-east-auckland' },
 ];
 ---
 
 <Base
   title="Shore Leave | Boat valet and fridge restock, Auckland"
-  description="Get off the boat. We’ll reset it. Boat cleaning, made beds and a stocked fridge in Auckland, from Pine Harbour Marina to your driveway."
+  description="Get off the boat. We’ll reset it. Boat cleaning, made beds and a stocked fridge in Auckland, on the berth or trailer, from the North Shore to Pine Harbour."
   schema={schema}
 >
   <Fragment slot="head">
@@ -54,11 +57,15 @@ const services = [
       <source media={DESK} srcset={wide.src} type="image/avif" />
       <img src={fallback.src} alt="White motor launch sitting on calm blue water off a pine-lined Auckland shore" fetchpriority="high" />
     </picture>
-    <video data-hero-video data-d={film} data-m={filmMobile} muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video data-hero-video autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source media={PHONE} src={filmMobile} type="video/mp4" />
+      <source src={film} type="video/mp4" />
+    </video>
     <div class="wrap">
       <div class="inset">
         <h1 class="rise">Get off the boat.<br /><span class="tint">We’ll reset it.</span></h1>
-        <div class="rise rise-2 tint flex flex-wrap gap-x-9">
+        <p class="lede rise rise-2">Berths and trailer boats, from the North Shore to Pine Harbour.</p>
+        <div class="rise rise-3 tint flex flex-wrap gap-x-9">
           <a href="#what-we-do" class="go">What we do <Arrow /></a>
           <a href="/book" class="go" data-hero-cta data-track="click_book_cta">Enquire now <Arrow /></a>
         </div>
@@ -145,7 +152,19 @@ const services = [
   <section class="wrap band">
     <div class="inset flow">
       <h2 class="title">Where we work</h2>
-      <p class="lede">On the berth at <a class="underline" href="/pine-harbour-boat-cleaning">Pine Harbour Marina</a>. On the trailer at your place in <a class="underline" href="/boat-cleaning-beachlands">Beachlands</a>, <a class="underline" href="/boat-cleaning-east-auckland">Maraetai</a>, the North Shore and Whangaparāoa.</p>
+      <p class="lede">Two sides of the Gulf. On the berth or on the trailer, at both.</p>
+    </div>
+    <div class="mt-10 grid md:grid-cols-2 gap-4">
+      <article class="card flow">
+        <h3>North Shore</h3>
+        <p>Berths and trailer boats, from Devonport up to Long Bay, plus Whangaparāoa.</p>
+        <a href="/boat-cleaning-north-shore" class="go" aria-label="Boat cleaning on the North Shore">See the North Shore <Arrow /></a>
+      </article>
+      <article class="card flow">
+        <h3>East Auckland</h3>
+        <p>Berths at <a class="underline" href="/pine-harbour-boat-cleaning">Pine Harbour Marina</a>, and trailer boats in <a class="underline" href="/boat-cleaning-beachlands">Beachlands</a> and Maraetai.</p>
+        <a href="/boat-cleaning-east-auckland" class="go" aria-label="Boat cleaning in East Auckland">See East Auckland <Arrow /></a>
+      </article>
     </div>
   </section>
 
@@ -201,31 +220,41 @@ const services = [
     z-index: -1;
     background:
       linear-gradient(180deg, rgb(32 30 27 / 0.45), rgb(32 30 27 / 0) 30%),
-      linear-gradient(90deg, rgb(32 30 27 / 0.6), rgb(32 30 27 / 0.25));
+      linear-gradient(90deg, rgb(32 30 27 / 0.72), rgb(32 30 27 / 0.3));
   }
   .hero .inset > * + * {
     margin-top: 1.5rem;
   }
+  /* Sized so each sentence holds one line on a phone */
   .hero h1 {
+    font-size: clamp(2rem, 11.6vw, 6.5rem);
     line-height: 0.96;
   }
   @media (max-width: 47.99rem) {
     .hero::after {
-      background: linear-gradient(180deg, rgb(32 30 27 / 0.55), rgb(32 30 27 / 0.3) 45%, rgb(32 30 27 / 0.55));
+      background: linear-gradient(180deg, rgb(32 30 27 / 0.6), rgb(32 30 27 / 0.5) 50%, rgb(32 30 27 / 0.6));
     }
   }
 </style>
 
 <script is:inline>
-  // Attached after first paint so the film never holds up the page. The loader waits for it, up to its cap.
+  // The film plays for everyone. The loader waits for it, up to its cap, and if a phone blocks autoplay
+  // (low power mode) the poster holds until the visitor's first touch or scroll starts it.
   (function () {
     var v = document.querySelector('[data-hero-video]');
     var ready = function () { if (window.slReady) slReady(); };
-    var c = navigator.connection;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || (c && c.saveData)) { v.remove(); return ready(); }
+    function go() {
+      v.muted = true;
+      var p = v.play();
+      if (p) p.catch(ready);
+    }
     v.addEventListener('playing', function () { v.classList.add('on'); ready(); }, { once: true });
-    v.addEventListener('error', ready, { once: true });
-    v.src = matchMedia('(max-width: 47.99rem)').matches ? v.dataset.m : v.dataset.d;
-    v.play().catch(ready);
+    v.addEventListener('canplay', go);
+    v.querySelector('source:last-child').addEventListener('error', ready, { once: true });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) go(); });
+    ['pointerdown', 'touchstart', 'scroll', 'keydown'].forEach(function (e) {
+      addEventListener(e, function () { if (v.paused) go(); }, { once: true, passive: true });
+    });
+    go();
   })();
 </script>

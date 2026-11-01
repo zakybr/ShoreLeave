@@ -9,7 +9,7 @@ export const SITE = {
   tagline: "Get off the boat. We’ll reset it.",
   summary:
     'Shore Leave is a post-trip reset and restock service for boat owners in Auckland. We clean the boat, make the beds and stock the fridge, so it is ready for the next trip.',
-  area: 'Pine Harbour Marina berths, plus trailer-boat callouts in Beachlands, Maraetai, the North Shore and Whangaparāoa',
+  area: 'Berths on the North Shore and at Pine Harbour Marina, plus trailer-boat callouts on the North Shore and in Whangaparāoa, Beachlands and Maraetai',
   // Flip to true only once cover is in place. Nothing on the site says "insured" until then.
   INSURED: false,
 };
@@ -25,6 +25,7 @@ export const AREAS = [
 export const NAV = [
   { href: '/boat-valet-auckland', label: 'Boat valet' },
   { href: '/boat-fridge-restock', label: 'Fridge restock' },
+  { href: '/boat-cleaning-north-shore', label: 'North Shore' },
   { href: '/trailer-boat-cleaning', label: 'Trailer boats' },
   { href: '/pine-harbour-boat-cleaning', label: 'Pine Harbour' },
   { href: '/how-it-works', label: 'How it works' },
