@@ -2,13 +2,9 @@
 
 ## Do these first
 
-### 1. Turn the booking form on
+### 1. Booking form
 
-The form won't send until this is done. It shows visitors your phone number instead of failing silently.
-
-1. Create a Resend account with **zak@tallynz.co** (test mode only delivers to the account owner's email) and copy an API key.
-2. In Vercel: **Project > Settings > Environment Variables**, add `RESEND_API_KEY` and `LEAD_TO_EMAIL=zak@tallynz.co` for Production.
-3. Redeploy, then submit a test booking.
+Done. Leads go to thezakyrachmadi@gmail.com, because Resend's test sender only delivers to the account's own address. To send them to another address, verify a domain in Resend first, then change `LEAD_TO_EMAIL` in Vercel and redeploy.
 
 ### 2. Check marina access
 
