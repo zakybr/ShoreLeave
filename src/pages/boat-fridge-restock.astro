@@ -28,7 +28,7 @@ import photo from '../assets/photos/iced-drink.jpg';
     <div class="inset flow">
       <h2>Boat cleaning and restocking, in one booking</h2>
       <p class="lede">Most services stop at the clean. We finish the job, so you’re not stopping at the supermarket on the way to the boat.</p>
-      <ul class="crosses">{BEFORE_TRIP.map((t) => <li>{t}</li>)}</ul>
+      <ul class="crosses">{BEFORE_TRIP.map((t) => <li>{t.includes('Fresh Beds') ? <a class="underline" href="/boat-bed-making">{t}</a> : t}</li>)}</ul>
     </div>
   </section>
   <section class="bg-beige-2">

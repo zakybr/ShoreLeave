@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import Arrow from '../components/Arrow.astro';
+import { DONT_DO_SHORT } from '../config';
 import { general, restock, valet, pricing } from '../data/qa';
 import { business, faqPage, organization, service, website } from '../lib/schema';
 import deck from '../assets/photos/deck-sunpad.jpg';
@@ -18,8 +19,9 @@ const schema = [
   business(),
   website(),
   organization(),
-  service('Post-trip boat reset', 'Deck wash-down, rubbish removed, surfaces wiped, interior vacuumed, beds remade and fridge cleared.', '/boat-valet-auckland'),
+  service('Post-trip boat reset', 'Deck wash-down, rubbish removed, surfaces wiped, interior vacuumed and fridge cleared.', '/boat-valet-auckland'),
   service('Boat fridge and pantry restock', 'Fridge and pantry stocked to your list, with drinks, ice, snacks and groceries delivered aboard.', '/boat-fridge-restock'),
+  service('Fresh Beds', 'Boat beds stripped and remade with the clean linen on board, as an add-on to a reset or restock.', '/boat-bed-making'),
   faqPage(faqs),
 ];
 
@@ -32,12 +34,12 @@ const PHONE = '(max-aspect-ratio: 4/5)';
 const DESK = '(min-aspect-ratio: 4/5)';
 
 const services = [
-  { title: 'The reset', text: 'You walk off. We wash the deck, clear the rubbish, vacuum inside, remake the beds and empty the fridge.', href: '/boat-valet-auckland' },
+  { title: 'The reset', text: 'You walk off. We wash the deck, clear the rubbish, vacuum inside and empty the fridge.', href: '/boat-valet-auckland' },
+  { title: 'Fresh Beds', text: 'Add it to a reset or restock. We remake the beds with your clean linen on board.', href: '/boat-bed-making' },
   { title: 'The restock', text: 'Send us a list. Fridge and pantry stocked, drinks and ice aboard, groceries put away.', href: '/boat-fridge-restock' },
   { title: 'North Shore', text: 'Berth or trailer, Devonport to Long Bay. Tie up or tow home, and we’ll take it from there.', href: '/boat-cleaning-north-shore' },
   { title: 'Pine Harbour berths', text: 'Tie up and go home. We reset the boat right there on the berth.', href: '/pine-harbour-boat-cleaning' },
   { title: 'Trailer boats', text: 'Back from the ramp? We come to your driveway on the North Shore, in Whangaparāoa, Beachlands and Maraetai.', href: '/trailer-boat-cleaning' },
-  { title: 'East Auckland', text: 'Beachlands, Maraetai and the ramps around them. We’re local to this end of the coast.', href: '/boat-cleaning-east-auckland' },
 ];
 ---
 
@@ -99,6 +101,11 @@ const services = [
         ))
       }
     </div>
+    <div class="inset flow mt-12 lg:mt-16">
+      <h3 class="sub">What we don’t do</h3>
+      <ul class="crosses no two">{DONT_DO_SHORT.map((t) => <li>{t}</li>)}</ul>
+      <a href="/how-it-works#what-we-dont-do" class="go">See the full list <Arrow /></a>
+    </div>
   </section>
 
   <section class="banner">
@@ -107,7 +114,7 @@ const services = [
     <div class="wrap">
       <div class="inset flow">
         <p class="statement">Hotels don’t ask you to change the sheets before you check out. Neither do we.</p>
-        <a href="/how-it-works" class="go tint">How it works <Arrow /></a>
+        <a href="/boat-bed-making" class="go tint">Fresh Beds <Arrow /></a>
       </div>
     </div>
   </section>
@@ -130,7 +137,7 @@ const services = [
           <li>
             <b>3</b>
             <h3>You come back</h3>
-            <p>Clean decks. Made beds. A cold, stocked fridge if you asked for one.</p>
+            <p>Clean decks. Made beds and a cold, stocked fridge if you asked for them.</p>
           </li>
         </ol>
         <a href="/how-it-works" class="go">Keys, access and what we need from you <Arrow /></a>

@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
+import { BEDS_PRICE } from '../config';
 import { pricing } from '../data/qa';
 ---
 
@@ -15,7 +16,7 @@ import { pricing } from '../data/qa';
     { href: '/book', label: 'Get a quote' },
     { href: '/boat-valet-auckland', label: 'Boat valet' },
     { href: '/boat-fridge-restock', label: 'Fridge restock' },
-    { href: '/pine-harbour-boat-cleaning', label: 'Pine Harbour' },
+    { href: '/boat-bed-making', label: 'Fresh Beds' },
   ]}
   ctaHeading="Tell us about the boat."
 >
@@ -28,7 +29,8 @@ import { pricing } from '../data/qa';
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Boat length</th><td class="py-3">More deck, more time.</td></tr>
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Layout</th><td class="py-3">Cabins, berths and galley.</td></tr>
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Where it is</th><td class="py-3">Berth or driveway, and which suburb.</td></tr>
-          <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">What you’d like done</th><td class="py-3">Reset, beds, restock, or all three.</td></tr>
+          <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">What you’d like done</th><td class="py-3">Reset, restock, or both.</td></tr>
+          <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top"><a class="underline" href="/boat-bed-making">Fresh Beds</a></th><td class="py-3">Per bed, made with your linen on board. {BEDS_PRICE}.</td></tr>
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Groceries</th><td class="py-3">Listed separately from our time.</td></tr>
           <tr class="border-y border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">How often</th><td class="py-3">One-off, or a regular arrangement.</td></tr>
         </tbody>

@@ -39,7 +39,11 @@ import { SITE } from '../../config';
         <legend>What would you like done?</legend>
         <div class="mt-2 grid gap-3">
           <label class="check"><input type="checkbox" name="services" value="Post-trip reset" /> Post-trip reset</label>
-          <label class="check"><input type="checkbox" name="services" value="Beds and linen" /> Beds and linen</label>
+          <label class="check"><input type="checkbox" name="services" value="Fresh Beds" /> Fresh Beds (made with your linen on board)</label>
+          <div id="bed-fields" class="grid sm:grid-cols-[9rem_1fr] gap-4">
+            <div class="field"><label for="beds">How many beds?</label><input id="beds" name="beds" type="number" inputmode="numeric" min="1" max="10" /></div>
+            <div class="field"><label for="linen">Where’s the clean linen kept?</label><input id="linen" name="linen" maxlength="150" /></div>
+          </div>
           <label class="check"><input type="checkbox" name="services" value="Fridge and pantry restock" /> Fridge and pantry restock</label>
         </div>
       </fieldset>
@@ -100,6 +104,15 @@ import { SITE } from '../../config';
   </div>
 </ServicePage>
 
+<style>
+  #bed-fields {
+    display: none;
+  }
+  form:has([value='Fresh Beds']:checked) #bed-fields {
+    display: grid;
+  }
+</style>
+
 <script>
   const form = document.getElementById('book') as HTMLFormElement;
   const err = document.getElementById('err') as HTMLElement;
@@ -107,8 +120,22 @@ import { SITE } from '../../config';
   (document.getElementById('t') as HTMLInputElement).value = String(Date.now());
   (document.getElementById('date') as HTMLInputElement).min = new Date().toISOString().slice(0, 10);
 
+  const ticks = [...form.querySelectorAll<HTMLInputElement>('[name=services]')];
+  const [reset, beds] = ticks;
+  const bedFields = [document.getElementById('beds'), document.getElementById('linen')] as HTMLInputElement[];
+
+  // The extra fields only count while Fresh Beds is ticked
+  const syncBeds = () => bedFields.forEach((f) => { f.disabled = !beds.checked; f.required = beds.checked; });
+
   const wanted = new URLSearchParams(location.search).get('service');
-  if (wanted) form.querySelectorAll<HTMLInputElement>('[name=services]').forEach((c) => { c.checked = c.value === wanted; });
+  if (wanted) ticks.forEach((c) => { c.checked = c.value === wanted; });
+
+  // Fresh Beds is an add-on, so it brings a reset with it unless something else is ticked
+  const addReset = () => { if (beds.checked && ticks.filter((c) => c.checked).length === 1) reset.checked = true; };
+  beds.addEventListener('change', () => { addReset(); syncBeds(); });
+  addReset();
+  syncBeds();
+  addEventListener('pageshow', syncBeds);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

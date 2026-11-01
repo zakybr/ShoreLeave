@@ -27,7 +27,7 @@ Confident, warm, Kiwi. Short sentences. No corporate filler, no hype, no exclama
 - No invented reviews, ratings, customer counts, logos or years in business.
 - No prices anywhere. Quotes come from the form.
 - Never say insured until `INSURED` is true in `src/config.ts`.
-- Topside and interior only. Never mention the excluded scope listed in the brief.
+- Topside and interior only. Excluded work appears only in the "What we don't do" list (`DONT_DO` in `src/config.ts`) and the answers drawn from it, never as a service.
 - No fake urgency. The 50% off first reset has no countdown and no invented end date.
 
 ## Offer

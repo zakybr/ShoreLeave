@@ -22,8 +22,9 @@ interface Props {
   hideCta?: boolean;
   noindex?: boolean;
   ctaHeading?: string;
+  book?: string;
 }
-const { title, description, crumb, h1, lede, photo, photoAlt = '', faqs = [], serviceName, og, links = [], hideCta = false, noindex = false, ctaHeading } = Astro.props;
+const { title, description, crumb, h1, lede, photo, photoAlt = '', faqs = [], serviceName, og, links = [], hideCta = false, noindex = false, ctaHeading, book = '/book' } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, '');
 const schema = [
   breadcrumbs([{ name: crumb, path }]),
@@ -49,7 +50,7 @@ const head = sentences.join(' ');
         </nav>
         <h1 class="rise">{head}{tail && <><br /><span class="tint">{tail}</span></>}</h1>
         <p class="lede rise rise-2">{lede}</p>
-        {!hideCta && <a href="/book" class="go tint rise rise-3" data-track="click_book_cta">Enquire now <Arrow /></a>}
+        {!hideCta && <a href={book} class="go tint rise rise-3" data-track="click_book_cta">Enquire now <Arrow /></a>}
       </div>
     </div>
   </section>
@@ -83,7 +84,7 @@ const head = sentences.join(' ');
     )
   }
 
-  {!hideCta && <Cta heading={ctaHeading} />}
+  {!hideCta && <Cta heading={ctaHeading} book={book} />}
 </Base>
 
 <style is:global>
@@ -95,5 +96,6 @@ const head = sentences.join(' ');
   }
   .page-top h1 {
     font-size: clamp(2.75rem, 6.6vw, 4.75rem);
+    text-wrap: balance;
   }
 </style>

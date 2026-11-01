@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
+import { DONT_DO } from '../config';
 import { pineHarbour } from '../data/qa';
 import photo from '../assets/photos/cabin.jpg';
 ---
@@ -37,7 +38,7 @@ import photo from '../assets/photos/cabin.jpg';
         <li>
           <b>3</b>
           <h3>You come back</h3>
-          <p>We lock up and send you a short note. The deck’s clean, the beds are made and the fridge is sorted.</p>
+          <p>We lock up and send you a short note. The deck’s clean, and the beds and fridge are sorted if you booked them.</p>
         </li>
       </ol>
     </div>
@@ -52,17 +53,18 @@ import photo from '../assets/photos/cabin.jpg';
           <li>A way aboard, agreed before the first job</li>
           <li>Fresh water at the berth, or an outside tap at home</li>
           <li>Your restock list, if you want one</li>
-          <li>Where your spare linen is kept</li>
+          <li>Where your clean linen is kept, if you’ve added Fresh Beds</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="wrap band">
+  <section id="what-we-dont-do" class="wrap band">
     <div class="inset flow">
-      <h2 class="title">What’s not included</h2>
-      <p class="lede">We work on deck and inside the boat. That’s the whole scope.</p>
-      <p>Engines, electrics and repairs aren’t us. If we notice something that needs a specialist, we’ll tell you and you can decide what to do about it.</p>
+      <h2 class="title">What we don’t do</h2>
+      <p class="lede">We do the deck and the interior, and we do them properly. The rest belongs with a specialist.</p>
+      <ul class="crosses no two">{DONT_DO.map((t) => <li>{t}</li>)}</ul>
+      <p>If we spot something that needs a specialist, we’ll tell you.</p>
     </div>
   </section>
 </ServicePage>

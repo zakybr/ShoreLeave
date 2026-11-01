@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
+import Arrow from '../components/Arrow.astro';
 import { AFTER_TRIP } from '../config';
 import { valet } from '../data/qa';
 import photo from '../assets/photos/cockpit.jpg';
@@ -7,10 +8,10 @@ import photo from '../assets/photos/cockpit.jpg';
 
 <ServicePage
   title="Boat Valet Auckland | Post-trip reset | Shore Leave"
-  description="Boat valet in Auckland: deck wash-down, rubbish off, interior vacuumed, beds remade and fridge cleared. Walk off the boat and we’ll reset it."
+  description="Boat valet in Auckland: deck wash-down, rubbish off, interior vacuumed and fridge cleared. Add Fresh Beds for made beds. Walk off and we’ll reset it."
   crumb="Boat valet Auckland"
   h1="Boat valet, Auckland. Done after you’ve gone."
-  lede="You walk off the boat. We clean it, make the beds and clear the fridge."
+  lede="You walk off the boat. We clean it and clear the fridge. Add Fresh Beds and the beds are made too."
   photo={photo}
   photoAlt="Cockpit of a motor boat on its berth, seen from above, with tan upholstery and a timber table"
   faqs={valet}
@@ -28,6 +29,9 @@ import photo from '../assets/photos/cockpit.jpg';
       <h2 class="title">What gets done</h2>
       <p class="lede">The same list every time, so you know what you’re coming back to.</p>
       <ul class="crosses">{AFTER_TRIP.map((t) => <li>{t}</li>)}</ul>
+      <h3 class="sub !mt-10">Add Fresh Beds</h3>
+      <p>We remake the beds with the clean linen on board. You come back to made beds.</p>
+      <a href="/boat-bed-making" class="go">How Fresh Beds works <Arrow /></a>
     </div>
   </section>
   <section class="bg-beige-2">

@@ -1,4 +1,4 @@
-import { AREAS, SITE } from '../config';
+import { AREAS, FRESH_BEDS, SITE } from '../config';
 import type { QA } from '../data/qa';
 
 const abs = (path: string) => new URL(path, SITE.url).href.replace(/\/$/, '');
@@ -41,7 +41,9 @@ export const organization = () => ({
   telephone: SITE.phoneTel,
 });
 
-// No price on the Offer: the owner has chosen quote-only pricing.
+// No price on the Offer: the owner has chosen quote-only pricing. Fresh Beds gains one if its price is switched on.
+const showBedPrice = (name: string) => name === FRESH_BEDS.name && FRESH_BEDS.priceDisplay === 'show';
+
 export const service = (name: string, description: string, path: string) => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -56,6 +58,7 @@ export const service = (name: string, description: string, path: string) => ({
     url: abs('/book'),
     availability: 'https://schema.org/InStock',
     description: 'Quote on request',
+    ...(showBedPrice(name) && { price: FRESH_BEDS.perBed, priceCurrency: 'NZD', description: `Per bed, $${FRESH_BEDS.min} minimum` }),
   },
 });
 

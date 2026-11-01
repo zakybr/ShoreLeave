@@ -8,6 +8,7 @@ const CARDS = [
   ['home', 'deck-sunpad', ['Get off the boat.', "We'll reset it."]],
   ['valet', 'cockpit', ['Boat valet,', 'Auckland.']],
   ['restock', 'iced-drink', ['Stock my', 'boat fridge.']],
+  ['beds', 'cabin', ['Come back to', 'made beds.']],
   ['trailer', 'trailer-home', ['Trailer boats,', 'at your place.']],
   ['north-shore', 'deck-sunpad', ['North Shore,', 'berth or driveway.']],
   ['pine-harbour', 'marina-walkway', ['Pine Harbour,', 'on your berth.']],

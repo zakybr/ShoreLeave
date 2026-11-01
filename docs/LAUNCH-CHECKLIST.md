@@ -28,6 +28,7 @@ These commitments are in the copy, inferred from the brief. Change any you won't
 - Rescheduling for weather at no extra cost
 - Groceries shown as their own line on quotes
 - Founding boats get Zak or Bozzy on the job
+- Fresh Beds: used linen bagged and left aboard, and you tell the owner if there was no clean set
 - Regular restock orders kept on file
 
 Have `/terms` and `/privacy` read by someone qualified before you take on customers. They're solid drafts, not legal advice. Add your legal entity name if you form a company.

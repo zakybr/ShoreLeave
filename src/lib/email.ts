@@ -6,6 +6,8 @@ export type Lead = {
   boatLength: string;
   location: string;
   services: string[];
+  beds: string;
+  linen: string;
   date: string;
   timeWindow: string;
   notes: string;
@@ -39,6 +41,8 @@ export function leadEmail(l: Lead) {
       ['Length', l.boatLength && `${l.boatLength} ft`],
       ['Location', l.location],
       ['Services', l.services.join(', ')],
+      ['Beds', l.beds],
+      ['Clean linen kept', l.linen],
       ['Date', l.date],
       ['Time window', l.date && l.timeWindow],
       ['Restock list / notes', l.notes],

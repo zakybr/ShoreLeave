@@ -280,6 +280,16 @@
       linear-gradient(currentColor, currentColor) center / 28% 100% no-repeat;
     opacity: 0.65;
   }
+  /* The same mark turned, for the things we don't do */
+  .crosses.no li::before {
+    transform: translateY(0.05rem) rotate(45deg);
+  }
+  @media (min-width: 48rem) {
+    .crosses.two {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 2.5rem;
+    }
+  }
   .prose-sl > * + * {
     margin-top: 1rem;
   }

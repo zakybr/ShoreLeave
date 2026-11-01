@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { AFTER_TRIP, BEFORE_TRIP, SITE } from '../config';
-import { beachlands, eastAuckland, general, pineHarbour, pricing, restock, trailer, valet, type QA } from '../data/qa';
+import { AFTER_TRIP, BEDS_FACTS, BEFORE_TRIP, DONT_DO, FRESH_BEDS, SITE } from '../config';
+import { beachlands, beds, eastAuckland, general, northShore, pineHarbour, pricing, restock, trailer, valet, type QA } from '../data/qa';
 
 const section = (title: string, items: QA[]) =>
   `## ${title}\n\n${items.map(({ q, a }) => `### ${q}\n\n${a}`).join('\n\n')}`;
@@ -25,11 +25,21 @@ ${AFTER_TRIP.map((t) => `- ${t}`).join('\n')}
 
 ${BEFORE_TRIP.map((t) => `- ${t}`).join('\n')}
 
+## ${FRESH_BEDS.name} (add-on)
+
+${BEDS_FACTS.map((t) => `- ${t}`).join('\n')}
+
+## What we don’t do
+
+${DONT_DO.map((t) => `- ${t}`).join('\n')}
+
 ${[
   section('About', general),
   section('Post-trip reset', valet),
   section('Fridge restock and provisioning', restock),
+  section(FRESH_BEDS.name, beds),
   section('Trailer boats', trailer),
+  section('North Shore', northShore),
   section('Pine Harbour Marina', pineHarbour),
   section('Beachlands', beachlands),
   section('East Auckland', eastAuckland),

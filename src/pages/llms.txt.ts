@@ -1,8 +1,10 @@
 import type { APIRoute } from 'astro';
-import { SITE } from '../config';
+import { BEDS_PRICE, DONT_DO, FRESH_BEDS, SITE } from '../config';
+import { DETAIL_PAGES, SERVICE_PAGES } from '../lib/pages';
 
 export const GET: APIRoute = ({ site }) => {
   const u = (p: string) => new URL(p, site).href;
+  const list = (pages: typeof SERVICE_PAGES) => pages.map((p) => `- [${p.label}](${u(p.path)}): ${p.description}`).join('\n');
   const body = `# ${SITE.name}
 
 > ${SITE.summary}
@@ -13,26 +15,16 @@ ${SITE.name} is a post-trip reset and restock service: hospitality for boat owne
 - Phone: ${SITE.phoneDisplay}
 - Pricing: quoted per boat through the booking form. No published prices.
 - Scope: on deck and inside the boat only.
+- ${FRESH_BEDS.name}: an add-on to a reset or restock. Beds remade with the owner’s clean linen on board. ${BEDS_PRICE}.
+- What we don’t do: ${DONT_DO.join('; ')}.
 
-## Services
+## Services and areas
 
-- [Boat valet Auckland](${u('/boat-valet-auckland')}): post-trip reset. Deck wash-down and brush, rubbish removed, surfaces wiped, interior vacuumed, beds remade, fridge cleared.
-- [Boat fridge restock](${u('/boat-fridge-restock')}): boat provisioning. Fridge and pantry stocked to the owner’s list with drinks, ice, snacks and groceries.
-- [Trailer boat cleaning](${u('/trailer-boat-cleaning')}): callout to the owner’s home.
-- [Pine Harbour boat cleaning](${u('/pine-harbour-boat-cleaning')}): service on the berth at Pine Harbour Marina, Beachlands.
-
-## Areas
-
-- [Boat cleaning Beachlands](${u('/boat-cleaning-beachlands')})
-- [Boat cleaning East Auckland](${u('/boat-cleaning-east-auckland')})
+${list(SERVICE_PAGES)}
 
 ## Booking and details
 
-- [Book a reset](${u('/book')})
-- [How it works](${u('/how-it-works')})
-- [Pricing](${u('/pricing')})
-- [FAQ](${u('/faq')})
-- [About](${u('/about')})
+${list(DETAIL_PAGES)}
 - [Full text for AI systems](${u('/llms-full.txt')})
 `;
   return new Response(body, { headers: { 'content-type': 'text/plain; charset=utf-8' } });

@@ -1,10 +1,12 @@
+import { FRESH_BEDS } from '../config';
+
 export type QA = { q: string; a: string };
 
 // Each answer stands alone in 40 to 60 words, so search and AI engines can lift it as written.
 export const valet: QA[] = [
   {
     q: "What’s included in a post-trip boat reset?",
-    a: "A post-trip reset covers the deck wash-down and brush, rubbish off the boat, every bench and surface wiped, the interior vacuumed, beds stripped and remade, and the fridge cleared. It’s topside and interior only. You walk off the boat, and it’s ready when you come back.",
+    a: "A post-trip reset covers the deck wash-down and brush, rubbish off the boat, every bench and surface wiped, the interior vacuumed and the fridge cleared. Add Fresh Beds and we’ll remake the beds too. It’s topside and interior only. You walk off the boat, and it’s ready when you come back.",
   },
   {
     q: 'How much does a boat valet cost in Auckland?',
@@ -12,18 +14,18 @@ export const valet: QA[] = [
   },
   {
     q: 'Can someone clean my boat after the weekend?',
-    a: "Yes. That’s the job. Book through the form or call 022 305 3853, tell us where the boat is, and we’ll arrange access. You can leave straight from the pontoon or the driveway. We handle the wash-down, the rubbish, the interior and the beds.",
+    a: "Yes. That’s the job. Book through the form or call 022 305 3853, tell us where the boat is, and we’ll arrange access. You can leave straight from the pontoon or the driveway. We handle the wash-down, the rubbish and the interior, plus the beds if you add Fresh Beds.",
   },
   {
     q: 'Do you make beds on a boat?',
-    a: "Yes. Beds are part of every reset. We strip them and remake them with clean linen, so the cabin is ready for the next trip. Tell us on the booking form where your spare linen lives, and how many berths you sleep, and we’ll sort out the rest with you.",
+    a: "Yes. Add Fresh Beds to your post-trip reset or restock and we’ll strip the beds and remake them with the clean linen on board. Used linen gets bagged and left aboard for you to take home. We don’t supply linen. Tell us on the booking form how many beds you have.",
   },
 ];
 
 export const restock: QA[] = [
   {
     q: 'Can someone clean my boat and stock the fridge before my trip?',
-    a: "Yes. Book a post-trip reset, a restock, or both. Send us your list of drinks, ice, snacks and groceries, and we’ll shop it, load the fridge and pantry, make the beds and leave the boat ready. You turn up with your bag and go.",
+    a: "Yes. Book a post-trip reset, a restock, or both. Send us your list of drinks, ice, snacks and groceries, and we’ll shop it, load the fridge and pantry and leave the boat ready. Add Fresh Beds and the beds are made too. You turn up with your bag and go.",
   },
   {
     q: 'How does boat provisioning work in Auckland?',
@@ -36,6 +38,28 @@ export const restock: QA[] = [
   {
     q: 'What can I put on my restock list?',
     a: "Anything you’d normally pack for the trip: drinks, ice, snacks, breakfast, dinner, sunscreen, the good coffee. Be as specific as you like, brand and all. If you’ve got a regular order, tell us and we’ll keep it on file, so the next restock is a one-line text.",
+  },
+];
+
+export const beds: QA[] = [
+  {
+    q: 'Can someone make the beds on my boat after a trip?',
+    a: "Yes. Add Fresh Beds to a post-trip reset or restock and we’ll strip the beds, remake them with the clean linen on board and bag the used set. It covers V-berths, double cabins, quarter berths and saloon conversions. You come back to made beds.",
+  },
+  {
+    q: 'Do you supply or wash the linen?',
+    a: "No. We use the clean linen that’s already on board, and we don’t supply, wash or take away linen. Your used set goes in a bag, left aboard in a spot we’ve agreed, ready for you to take home. Keep a clean spare set on the boat and you’re sorted.",
+  },
+  {
+    q: 'What if there’s no clean linen on the boat?',
+    a: "We’ll strip the beds, bag the used linen and leave the berths tidy, so nothing’s left in a mess. Then we’ll let you know the beds couldn’t be made up, so you can leave a spare set aboard next time. We don’t supply linen ourselves.",
+  },
+  {
+    q: 'How much does it cost to have my boat beds made?',
+    a:
+      FRESH_BEDS.priceDisplay === 'show'
+        ? `Fresh Beds is $${FRESH_BEDS.perBed} per bed, with a $${FRESH_BEDS.min} minimum. It’s an add-on to a post-trip reset or restock, not a standalone job, and it shows as its own line on your quote. Tell us how many beds you have on the booking form and we’ll add it in.`
+        : "Fresh Beds is priced per bed and included in your quote, so you’ll see the full price before anything starts. It’s an add-on to a post-trip reset or restock, not a standalone job. Tell us how many beds you have on the booking form and we’ll price it in.",
   },
 ];
 
@@ -57,7 +81,7 @@ export const trailer: QA[] = [
 export const pineHarbour: QA[] = [
   {
     q: 'Do you clean boats at Pine Harbour Marina?',
-    a: "Yes. Pine Harbour Marina in Beachlands is where we work most. We reset boats on their berths: deck wash-down, rubbish, surfaces, interior, beds and fridge. Book through the form with your pier and berth, and we’ll arrange how we get aboard before the job starts.",
+    a: "Yes. Pine Harbour Marina in Beachlands is where we work most. We reset boats on their berths: deck wash-down, rubbish, surfaces, interior and fridge, plus Fresh Beds if you want the beds made. Book through the form with your pier and berth, and we’ll arrange how we get aboard before the job starts.",
   },
   {
     q: 'How do you get onto my boat at the marina?',
@@ -72,7 +96,7 @@ export const pineHarbour: QA[] = [
 export const beachlands: QA[] = [
   {
     q: 'Is there a boat cleaning service in Beachlands?',
-    a: "Yes. Shore Leave resets boats in Beachlands, on the berth at Pine Harbour Marina and on the trailer at your home. We wash the deck, clear the rubbish, wipe the surfaces, vacuum the interior, remake the beds and clear the fridge. Call 022 305 3853 or book online.",
+    a: "Yes. Shore Leave resets boats in Beachlands, on the berth at Pine Harbour Marina and on the trailer at your home. We wash the deck, clear the rubbish, wipe the surfaces, vacuum the interior and clear the fridge. Fresh Beds gets the beds made too. Call 022 305 3853 or book online.",
   },
   {
     q: 'I launch at Sunkist Bay. Can you clean the boat when I get home?',
@@ -83,7 +107,7 @@ export const beachlands: QA[] = [
 export const eastAuckland: QA[] = [
   {
     q: 'Who cleans boats in East Auckland?',
-    a: "Shore Leave covers the eastern end of the coast: Pine Harbour Marina berths, and trailer boats at home in Beachlands and Maraetai. We do the post-trip reset, the beds and the fridge restock. If you’re closer to Howick or Half Moon Bay, send your address and we’ll let you know.",
+    a: "Shore Leave covers the eastern end of the coast: Pine Harbour Marina berths, and trailer boats at home in Beachlands and Maraetai. We do the post-trip reset, Fresh Beds and the fridge restock. If you’re closer to Howick or Half Moon Bay, send your address and we’ll let you know.",
   },
   {
     q: 'Do you come to Maraetai?',
@@ -133,6 +157,10 @@ export const general: QA[] = [
   {
     q: 'What areas do you cover?',
     a: 'Berths on the North Shore and at Pine Harbour Marina, plus trailer-boat callouts on the North Shore and in Whangaparāoa, Beachlands and Maraetai. If you keep your boat somewhere else in Auckland, put the location in the booking form and we will tell you straight whether we can do it well.',
+  },
+  {
+    q: 'What don’t you do?',
+    a: "We stick to the deck and the interior. We don’t do hull cleaning, antifouling, cut and polish, gelcoat or teak restoration, engines, electrics, plumbing, repairs, bilges, holding tanks, on-berth pressure washing, linen supply or laundry, moving the boat or refuelling. If something needs a specialist, we’ll tell you.",
   },
   {
     q: 'What happens if the weather turns?',
