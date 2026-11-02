@@ -19,6 +19,7 @@ export default defineConfig({
     '/how-it-works': '/about#how-we-work',
     '/boat-fridge-restock': '/boat-provisioning-auckland',
     '/boat-bed-making': '/boat-valet-auckland',
+    '/trailer-boat-cleaning': '/about#where-we-work',
   },
   integrations: [sitemap({ filter: (page) => !page.includes('/book/thanks') })],
   vite: { plugins: [tailwindcss()] },

@@ -8,8 +8,8 @@ export const SITE = {
   email: 'zak@tallynz.co',
   tagline: "Get off the boat. We’ll reset it.",
   summary:
-    'Shore Leave looks after boats for their owners in Auckland. Four services: Essential Reset, Valet, Provisioning and Charter Ready, on the berth or on the trailer.',
-  area: 'Berths on the North Shore and at Pine Harbour Marina, plus trailer-boat callouts on the North Shore and in Whangaparāoa, Beachlands and Maraetai',
+    'Shore Leave looks after boats for their owners in Auckland. Four services: Essential Reset, Valet, Provisioning and Charter Ready, done right on your marina berth.',
+  area: 'Marina berths at Pine Harbour, Bayswater, Orakei, Westhaven and Gulf Harbour',
   // Flip to true only once cover is in place. Nothing on the site says "insured" until then.
   INSURED: false,
 };
@@ -18,10 +18,11 @@ export const GA4_ID = import.meta.env.PUBLIC_GA4_ID || 'G-4ZPN9NLNF0';
 
 export const AREAS = [
   { '@type': 'Place', name: 'Pine Harbour Marina, Beachlands' },
-  { '@type': 'City', name: 'Beachlands, Auckland' },
-  { '@type': 'City', name: 'Maraetai, Auckland' },
-  { '@type': 'City', name: 'North Shore, Auckland' },
-  { '@type': 'City', name: 'Whangaparāoa, Auckland' },
+  { '@type': 'Place', name: 'Bayswater Marina, North Shore' },
+  { '@type': 'Place', name: 'Orakei Marina, Auckland' },
+  { '@type': 'Place', name: 'Westhaven Marina, Auckland' },
+  { '@type': 'Place', name: 'Gulf Harbour Marina, Whangaparāoa' },
+  { '@type': 'City', name: 'Auckland' },
 ];
 
 // The menu, footer, home cards, booking form and schema all read this list, in this order.
@@ -59,11 +60,10 @@ export const SERVICES = [
 export const NAV = [{ href: '/about', label: 'About' }, ...SERVICES];
 
 export const PLACES = [
-  { href: '/boat-cleaning-north-shore', label: 'North Shore', text: 'Berths and trailer boats, from Devonport up to Long Bay, plus Whangaparāoa.' },
+  { href: '/boat-cleaning-north-shore', label: 'North Shore', text: 'Berths at Bayswater Marina, and up the coast at Gulf Harbour.' },
   { href: '/pine-harbour-boat-cleaning', label: 'Pine Harbour Marina', text: 'Tie up and go home. We look after the boat right there on the berth.' },
-  { href: '/boat-cleaning-beachlands', label: 'Beachlands', text: 'At Pine Harbour or on the trailer at home, after a launch at Sunkist Bay.' },
-  { href: '/boat-cleaning-east-auckland', label: 'East Auckland', text: 'Trailer boats at home in Maraetai and Beachlands. Further west, ask.' },
-  { href: '/trailer-boat-cleaning', label: 'Trailer boats at home', text: 'Back from the ramp? We come to your driveway.' },
+  { href: '/boat-cleaning-beachlands', label: 'Beachlands', text: 'Berth holders at Pine Harbour, back from Waiheke or Ponui.' },
+  { href: '/boat-cleaning-east-auckland', label: 'East Auckland', text: 'Pine Harbour and Orakei marinas. Elsewhere in the east, ask.' },
 ];
 
 export const bookHref = (service: string) => `/book?service=${encodeURIComponent(service)}`;

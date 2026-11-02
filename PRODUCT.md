@@ -8,7 +8,7 @@ Boat care for owners in Auckland, in four services: Essential Reset (the wash-up
 
 ## Who it serves
 
-Owners coming off a day or weekend on the water, tired, usually on a phone on the pontoon or in the driveway. Berth holders on the North Shore and at Pine Harbour Marina, and trailer-boat owners on the North Shore and in Whangaparāoa, Beachlands and Maraetai.
+Owners coming off a day or weekend on the water, tired, usually on a phone on the pontoon. Berth holders at Pine Harbour, Bayswater, Orakei, Westhaven and Gulf Harbour marinas.
 
 ## What they should believe
 

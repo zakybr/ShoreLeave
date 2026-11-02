@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { BEDS_FACTS, CHARTER_LIST, DONT_DO, PROVISION_LIST, RESET_LIST, SITE, VALET_LIST } from '../config';
-import { beachlands, charter, eastAuckland, general, northShore, pineHarbour, pricing, provisioning, reset, trailer, valet, type QA } from '../data/qa';
+import { beachlands, charter, eastAuckland, general, northShore, pineHarbour, pricing, provisioning, reset, valet, type QA } from '../data/qa';
 
 const section = (title: string, items: QA[]) =>
   `## ${title}\n\n${items.map(({ q, a }) => `### ${q}\n\n${a}`).join('\n\n')}`;
@@ -47,7 +47,6 @@ ${[
   section('Valet', valet),
   section('Provisioning', provisioning),
   section('Charter Ready', charter),
-  section('Trailer boats', trailer),
   section('North Shore', northShore),
   section('Pine Harbour Marina', pineHarbour),
   section('Beachlands', beachlands),

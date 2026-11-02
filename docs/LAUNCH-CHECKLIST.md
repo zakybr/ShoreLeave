@@ -79,7 +79,7 @@ This is the single biggest lever for "near me" searches.
 1. Go to business.google.com and add "Shore Leave".
 2. Category: try "Boat cleaning service" first. Use "Boat detailing service" if it's offered.
 3. Choose the service-area option, and hide your address.
-4. Add Pine Harbour, Beachlands, Maraetai, North Shore and Whangaparāoa.
+4. Add the areas around Pine Harbour, Bayswater, Orakei, Westhaven and Gulf Harbour marinas.
 5. Use exactly this phone number: 022 305 3853. Same name and number everywhere.
 6. Add real photos as soon as you have them.
 7. Ask every founding customer for an honest review. That's your first real proof.

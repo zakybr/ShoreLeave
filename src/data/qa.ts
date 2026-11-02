@@ -8,7 +8,7 @@ export const reset: QA[] = [
   },
   {
     q: 'Can someone clean my boat after the weekend?',
-    a: "Yes. That’s the job. Book through the form or call 022 305 3853, tell us where the boat is, and we’ll arrange access. You can leave straight from the pontoon or the driveway. We handle the wash-down, the dishes and the rubbish, so the boat doesn’t sit dirty until next time.",
+    a: "Yes. That’s the job. Book through the form or call 022 305 3853, tell us where the boat is, and we’ll arrange access. You can leave straight from the pontoon. We handle the wash-down, the dishes and the rubbish, so the boat doesn’t sit dirty until next time.",
   },
   {
     q: 'What’s the difference between the Essential Reset and the Valet?',
@@ -77,21 +77,6 @@ export const charter: QA[] = [
   },
 ];
 
-export const trailer: QA[] = [
-  {
-    q: 'Do you clean trailer boats at home?',
-    a: "Yes. We come to your driveway after the trip and do the wash-down, rubbish, surfaces and interior while the boat sits on the trailer. Callouts cover the North Shore, Whangaparāoa, Beachlands and Maraetai. If you’re elsewhere in Auckland, ask anyway and we’ll tell you straight.",
-  },
-  {
-    q: 'What do you need from me for a trailer boat clean?',
-    a: "An outside tap, room to walk around the boat, and a clear run to it. That’s about it. Tell us your suburb, the boat’s length and when you’ll be back from the trip. You don’t need to be home if we can reach the boat and the tap.",
-  },
-  {
-    q: 'Can you clean my trailer boat in East Auckland?',
-    a: "Yes, in Beachlands and Maraetai we come to your home. For Howick, Bucklands Beach, Half Moon Bay and nearby suburbs, put your address in the booking form and we’ll tell you honestly whether we can get there. We’d rather say no than turn up late.",
-  },
-];
-
 export const pineHarbour: QA[] = [
   {
     q: 'Do you clean boats at Pine Harbour Marina?',
@@ -110,37 +95,37 @@ export const pineHarbour: QA[] = [
 export const beachlands: QA[] = [
   {
     q: 'Is there a boat cleaning service in Beachlands?',
-    a: "Yes. Shore Leave looks after boats in Beachlands, on the berth at Pine Harbour Marina and on the trailer at your home. Pick an Essential Reset for the wash-up and rubbish, or a Valet for a full interior clean and made beds. Call 022 305 3853 or book online.",
+    a: "Yes. Shore Leave looks after Beachlands boats on their berths at Pine Harbour Marina. Pick an Essential Reset for the wash-up and rubbish, or a Valet for a full interior clean and made beds. Call 022 305 3853 or book online.",
   },
   {
-    q: 'I launch at Sunkist Bay. Can you clean the boat when I get home?',
-    a: "Yes. Tow home from Sunkist Bay Reserve as usual, tell us when you’re back, and we’ll come to your driveway in Beachlands. Salt is easier to shift the same day or the next, so the sooner you tell us the better. The booking form takes under two minutes.",
+    q: 'Can you clean my boat at Pine Harbour after the weekend?',
+    a: "Yes. Tie up, head home, and tell us you’re back. We’ll reset the boat on its berth at Pine Harbour, with the beds made and the fridge sorted if you’d like. Salt is easier to shift the same day or the next, so the sooner you tell us the better. The booking form takes under two minutes.",
   },
 ];
 
 export const eastAuckland: QA[] = [
   {
     q: 'Who cleans boats in East Auckland?',
-    a: "Shore Leave covers the eastern end of the coast: Pine Harbour Marina berths, and trailer boats at home in Beachlands and Maraetai. We do the Essential Reset, Valet, Provisioning and Charter Ready. If you’re closer to Howick or Half Moon Bay, send your address and we’ll let you know.",
+    a: "Shore Leave looks after boats on their berths at Pine Harbour Marina and Orakei Marina. We do the Essential Reset, Valet, Provisioning and Charter Ready. If you’re berthed at Half Moon Bay, tell us your berth and we’ll let you know.",
   },
   {
-    q: 'Do you come to Maraetai?',
-    a: "Yes. We do trailer-boat callouts in Maraetai, whether you launch at the Maraetai Park ramp or the Omana Esplanade ramp. Tow home, tell us you’re back, and we’ll reset the boat on the trailer. Your provisioning can be done the same way before the next trip.",
+    q: 'Do you work at Orakei Marina?',
+    a: "Yes. We look after boats on their berths at Orakei Marina, from an Essential Reset after a day out to a full Valet with the beds made. Tell us your pier and berth on the booking form, and we’ll agree how we get aboard before the first job. Provisioning works the same way.",
   },
   {
-    q: 'How far do you travel for a boat clean?',
-    a: "We work the North Shore, Whangaparāoa, Pine Harbour Marina, Beachlands and Maraetai. Past that, it depends on the job and the week. Put your suburb in the booking form. If we can’t get there and do it properly, we’ll say so instead of stretching the schedule.",
+    q: 'Which marinas do you work at?',
+    a: "We work at five marinas: Pine Harbour, Bayswater, Orakei, Westhaven and Gulf Harbour. Berthed somewhere else? Put the marina in the booking form. If we can’t get there and do it properly, we’ll say so instead of stretching the schedule.",
   },
 ];
 
 export const northShore: QA[] = [
   {
     q: 'Do you clean boats on the North Shore?',
-    a: "Yes. We reset boats on the berth and on the trailer across the North Shore, from Devonport to Long Bay. Tell us your marina and berth, or your home address, and we’ll send a quote.",
+    a: "Yes. We look after boats on their berths at Bayswater Marina and up the coast at Gulf Harbour Marina. Tell us your marina, pier and berth, and we’ll send a quote.",
   },
   {
-    q: 'Can you clean my trailer boat at home on the North Shore?',
-    a: "Yes. Tow home and leave it in the driveway. We bring everything to you and reset the boat on the trailer. An outside tap is all we need from you.",
+    q: 'Do you work at Gulf Harbour Marina?',
+    a: "Yes. Tie up after a day around Tiritiri Matangi or Kawau and head home. We reset the boat on its berth at Gulf Harbour, so it’s ready for the next trip.",
   },
   {
     q: 'Can you provision a boat on a North Shore berth?',
@@ -151,7 +136,7 @@ export const northShore: QA[] = [
 export const pricing: QA[] = [
   {
     q: 'Why don’t you publish prices?',
-    a: "A trailer boat after a day trip and a launch after a week away are very different jobs. A flat rate would overcharge one and undercharge the other. So we ask a few questions about your boat, then give you a straight quote before any work starts.",
+    a: "A small launch after a day trip and a big launch after a week away are very different jobs. A flat rate would overcharge one and undercharge the other. So we ask a few questions about your boat, then give you a straight quote before any work starts.",
   },
   {
     q: 'How do I get a quote for my boat?',
@@ -170,7 +155,7 @@ export const general: QA[] = [
   },
   {
     q: 'What areas do you cover?',
-    a: 'Berths on the North Shore and at Pine Harbour Marina, plus trailer-boat callouts on the North Shore and in Whangaparāoa, Beachlands and Maraetai. If you keep your boat somewhere else in Auckland, put the location in the booking form and we will tell you straight whether we can do it well.',
+    a: 'Marina berths at Pine Harbour, Bayswater, Orakei, Westhaven and Gulf Harbour. If you keep your boat at another Auckland marina, put it in the booking form and we will tell you straight whether we can do it well.',
   },
   {
     q: 'What don’t you do?',

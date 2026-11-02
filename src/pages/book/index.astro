@@ -22,18 +22,20 @@ import { SERVICES, SITE } from '../../config';
 
       <div class="grid sm:grid-cols-2 gap-6">
         <div class="field">
-          <label for="boat_type">Boat type</label>
+          <label for="boat_type">Marina</label>
           <select id="boat_type" name="boat_type" required>
             <option value="">Choose one</option>
-            <option>Trailer boat at home</option>
-            <option>Berthed on the North Shore</option>
-            <option>Berthed at Pine Harbour</option>
-            <option>Other</option>
-          </select>
+          <option>Pine Harbour Marina</option>
+          <option>Bayswater Marina</option>
+          <option>Orakei Marina</option>
+          <option>Westhaven Marina</option>
+          <option>Gulf Harbour Marina</option>
+          <option>Another marina</option>
+        </select>
         </div>
         <div class="field"><label for="boat_length">Boat length (ft)</label><input id="boat_length" name="boat_length" type="number" inputmode="numeric" min="8" max="200" required /></div>
       </div>
-      <div class="field"><label for="location">Location: berth and pier, or suburb</label><input id="location" name="location" required /></div>
+      <div class="field"><label for="location">Pier and berth</label><input id="location" name="location" required /></div>
 
       <fieldset class="field">
         <legend>What would you like done?</legend>
@@ -122,7 +124,7 @@ import { SERVICES, SITE } from '../../config';
   const ticks = [...form.querySelectorAll<HTMLInputElement>('[name=services]')];
   const bedFields = [document.getElementById('beds'), document.getElementById('linen')] as HTMLInputElement[];
 
-  // The extra fields only count while a service that includes beds is ticked. A trailer boat may have none.
+  // The extra fields only count while a service that includes beds is ticked. A small launch may have none.
   const withBeds = () => ticks.some((c) => c.checked && (c.value === 'Valet' || c.value === 'Charter Ready'));
   const syncBeds = () => bedFields.forEach((f) => { f.disabled = !withBeds(); });
 
