@@ -12,6 +12,14 @@ export default defineConfig({
   adapter: vercel({ webAnalytics: { enabled: true } }),
   trailingSlash: 'never',
   devToolbar: { enabled: false },
+  // Links load on hover or touch, so the next page is usually there before the tap lands
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
+  // Old addresses keep their search value and any links out there
+  redirects: {
+    '/how-it-works': '/about#how-we-work',
+    '/boat-fridge-restock': '/boat-provisioning-auckland',
+    '/boat-bed-making': '/boat-valet-auckland',
+  },
   integrations: [sitemap({ filter: (page) => !page.includes('/book/thanks') })],
   vite: { plugins: [tailwindcss()] },
 });

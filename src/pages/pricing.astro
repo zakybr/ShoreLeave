@@ -1,12 +1,11 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
-import { BEDS_PRICE } from '../config';
 import { pricing } from '../data/qa';
 ---
 
 <ServicePage
   title="Boat Valet Pricing Auckland | Shore Leave"
-  description="How Shore Leave prices a boat reset or fridge restock in Auckland. We quote each boat by length, layout and location. Use the form for a straight price."
+  description="How Shore Leave prices boat cleaning, valets and provisioning in Auckland. We quote each boat by length, layout and location. Use the form for a straight price."
   crumb="Pricing"
   h1="A straight quote, for your boat."
   lede="No two boats come back the same, so there’s no rate card. Tell us what you’ve got and you’ll get a price before anything starts."
@@ -14,9 +13,10 @@ import { pricing } from '../data/qa';
   serviceName="Boat valet quotes"
   links={[
     { href: '/book', label: 'Get a quote' },
-    { href: '/boat-valet-auckland', label: 'Boat valet' },
-    { href: '/boat-fridge-restock', label: 'Fridge restock' },
-    { href: '/boat-bed-making', label: 'Fresh Beds' },
+    { href: '/boat-cleaning-auckland', label: 'Essential Reset' },
+    { href: '/boat-valet-auckland', label: 'Valet' },
+    { href: '/boat-provisioning-auckland', label: 'Provisioning' },
+    { href: '/boat-detailing-auckland', label: 'Charter Ready' },
   ]}
   ctaHeading="Tell us about the boat."
 >
@@ -29,8 +29,7 @@ import { pricing } from '../data/qa';
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Boat length</th><td class="py-3">More deck, more time.</td></tr>
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Layout</th><td class="py-3">Cabins, berths and galley.</td></tr>
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Where it is</th><td class="py-3">Berth or driveway, and which suburb.</td></tr>
-          <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">What you’d like done</th><td class="py-3">Reset, restock, or both.</td></tr>
-          <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top"><a class="underline" href="/boat-bed-making">Fresh Beds</a></th><td class="py-3">Per bed, made with your linen on board. {BEDS_PRICE}.</td></tr>
+          <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">What you’d like done</th><td class="py-3">Essential Reset, Valet, Provisioning or Charter Ready.</td></tr>
           <tr class="border-t border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">Groceries</th><td class="py-3">Listed separately from our time.</td></tr>
           <tr class="border-y border-ink/25"><th scope="row" class="py-3 pr-6 font-semibold align-top">How often</th><td class="py-3">One-off, or a regular arrangement.</td></tr>
         </tbody>

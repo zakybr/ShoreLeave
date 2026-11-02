@@ -9,7 +9,7 @@ export const PAGES = Object.entries(sources).flatMap(([file, source]) => {
   return label && description ? [{ path: file.replace('../pages', '').replace(/(\/index)?\.astro$/, ''), label, description }] : [];
 });
 
-const DETAILS = ['/book', '/how-it-works', '/pricing', '/faq', '/about', '/privacy', '/terms'];
+const DETAILS = ['/book', '/pricing', '/faq', '/about', '/privacy', '/terms'];
 
 export const SERVICE_PAGES = PAGES.filter((p) => !DETAILS.includes(p.path));
 export const DETAIL_PAGES = PAGES.filter((p) => DETAILS.includes(p.path));

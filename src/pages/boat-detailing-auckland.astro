@@ -1,0 +1,49 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import Arrow from '../components/Arrow.astro';
+import { CHARTER_LIST } from '../config';
+import { charter } from '../data/qa';
+import photo from '../assets/photos/deck-sunpad.jpg';
+---
+
+<ServicePage
+  title="Boat Detailing Auckland | Charter Ready | Shore Leave"
+  description="Charter Ready boat detailing in Auckland. Interior and superstructure detail by hand, with seats and upholstery brought back. Ready for guests or a sale."
+  crumb="Charter Ready"
+  h1="Charter Ready. Fit for guests."
+  lede="A real detailing job, inside and out. Seats brought back, surfaces shining and every corner looked at, by hand."
+  photo={photo}
+  photoAlt="Deck lounge on a modern boat with tan cushions laid out neatly, moored at a marina"
+  faqs={charter}
+  serviceName="Charter Ready boat detailing"
+  og="charter"
+  ctaHeading="Ready to see it at its best?"
+>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">What gets done</h2>
+      <p class="lede">Everything in the <a class="underline" href="/boat-valet-auckland">Valet</a>, then an interior rejuvenation and a superstructure detail.</p>
+      <ul class="crosses">{CHARTER_LIST.map((t) => <li>{t}</li>)}</ul>
+    </div>
+  </section>
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2>When a boat detail makes sense</h2>
+        <ul class="crosses">
+          <li>Before a charter or a handover to paying guests</li>
+          <li>Before you list the boat for sale</li>
+          <li>Ahead of a big occasion on the water</li>
+          <li>At the start of the season, to bring the boat back up</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2>Above the deck and inside, by hand</h2>
+      <p>This is a hand detail. It doesn’t include cut and polish, gelcoat or teak restoration, or anything below the waterline.</p>
+      <a href="/about#what-we-dont-do" class="go">What we don’t do <Arrow /></a>
+    </div>
+  </section>
+</ServicePage>

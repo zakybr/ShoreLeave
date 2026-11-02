@@ -4,6 +4,8 @@ import type { ImageMetadata } from 'astro';
 import Base from './Base.astro';
 import Cta from '../components/Cta.astro';
 import Arrow from '../components/Arrow.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import { bookHref, PLACES, SERVICES } from '../config';
 import type { QA } from '../data/qa';
 import { breadcrumbs, faqPage, service } from '../lib/schema';
 
@@ -22,15 +24,20 @@ interface Props {
   hideCta?: boolean;
   noindex?: boolean;
   ctaHeading?: string;
-  book?: string;
+  /** Location pages sit under About in the breadcrumb, and link to the services and the other places */
+  place?: boolean;
 }
-const { title, description, crumb, h1, lede, photo, photoAlt = '', faqs = [], serviceName, og, links = [], hideCta = false, noindex = false, ctaHeading, book = '/book' } = Astro.props;
+const { title, description, crumb, h1, lede, photo, photoAlt = '', faqs = [], serviceName, og, links = [], hideCta = false, noindex = false, ctaHeading, place = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, '');
+const offered = SERVICES.find((s) => s.href === path);
+const book = offered ? bookHref(offered.label) : '/book';
+const trail = [...(place ? [{ name: 'About', path: '/about' }] : []), { name: crumb, path }];
 const schema = [
-  breadcrumbs([{ name: crumb, path }]),
+  breadcrumbs(trail),
   ...(serviceName ? [service(serviceName, description, path)] : []),
   ...(faqs.length ? [faqPage(faqs)] : []),
 ];
+const nearby = offered || place ? PLACES.filter((p) => p.href !== path) : [];
 // The last sentence of the headline takes the second colour, as on the home page
 const sentences = h1.split(/(?<=[.?])\s+/);
 const tail = sentences.length > 1 ? sentences.pop() : '';
@@ -45,6 +52,7 @@ const head = sentences.join(' ');
         <nav aria-label="Breadcrumb" class="text-[0.85rem] opacity-80">
           <ol class="flex flex-wrap gap-2">
             <li><a href="/" class="underline">Home</a> <span aria-hidden="true">/</span></li>
+            {place && <li><a href="/about" class="underline">About</a> <span aria-hidden="true">/</span></li>}
             <li aria-current="page">{crumb}</li>
           </ol>
         </nav>
@@ -71,6 +79,25 @@ const head = sentences.join(' ');
           </div>
         </div>
       </section>
+    )
+  }
+
+  {
+    (offered || place) && (
+      <ServiceCards class="wrap band" exclude={path} heading={offered ? 'Need something else?' : 'What we do here'} />
+    )
+  }
+
+  {
+    nearby.length > 0 && (
+      <nav class="wrap pb-14 lg:pb-20" aria-label="Where we work">
+        <div class="inset">
+          <h2 class="sub">Where we work</h2>
+          <ul class="mt-3 flex flex-wrap gap-x-8 gap-y-1">
+            {nearby.map((p) => <li><a class="go" href={p.href}>{p.label} <Arrow /></a></li>)}
+          </ul>
+        </div>
+      </nav>
     )
   }
 

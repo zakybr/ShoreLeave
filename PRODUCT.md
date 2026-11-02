@@ -4,7 +4,7 @@ Inferred from the owner's written brief. The owner asked not to be interviewed u
 
 ## What it is
 
-A post-trip reset and restock service for boat owners in Auckland. Hospitality for boat owners, not a cleaning company.
+Boat care for owners in Auckland, in four services: Essential Reset (the wash-up and rubbish), Valet (beds and full interior), Provisioning (food, drinks, bait, ice) and Charter Ready (interior and superstructure detail). Hospitality for boat owners, not a cleaning company.
 
 ## Who it serves
 
@@ -27,9 +27,9 @@ Confident, warm, Kiwi. Short sentences. No corporate filler, no hype, no exclama
 - No invented reviews, ratings, customer counts, logos or years in business.
 - No prices anywhere. Quotes come from the form.
 - Never say insured until `INSURED` is true in `src/config.ts`.
-- Topside and interior only. Excluded work appears only in the "What we don't do" list (`DONT_DO` in `src/config.ts`) and the answers drawn from it, never as a service.
+- Deck, superstructure and interior only. Excluded work appears only in the "What we don't do" list (`DONT_DO` in `src/config.ts`) and the answers drawn from it, never as a service.
 - No fake urgency. The 50% off first reset has no countdown and no invented end date.
 
 ## Offer
 
-50% off our time on a new customer's first post-trip reset, one per boat. Groceries excluded. Promoted by the popup in `src/components/Offer.astro`, and set out in the terms.
+50% off our time on a new customer's first Essential Reset, one per boat. Groceries excluded. Promoted by the popup in `src/components/Offer.astro`, and set out in the terms.

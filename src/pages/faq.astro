@@ -3,13 +3,14 @@ import ServicePage from '../layouts/ServicePage.astro';
 import Faq from '../components/Faq.astro';
 import { SITE } from '../config';
 import { faqPage } from '../lib/schema';
-import { beachlands, beds, eastAuckland, general, northShore, pineHarbour, pricing, restock, trailer, valet } from '../data/qa';
+import { beachlands, charter, eastAuckland, general, northShore, pineHarbour, pricing, provisioning, reset, trailer, valet } from '../data/qa';
 
 const groups = [
   { heading: 'About Shore Leave', items: general },
-  { heading: 'The post-trip reset', items: valet },
-  { heading: 'Fridge restock', items: restock },
-  { heading: 'Fresh Beds', items: beds },
+  { heading: 'Essential Reset', items: reset },
+  { heading: 'Valet', items: valet },
+  { heading: 'Provisioning', items: provisioning },
+  { heading: 'Charter Ready', items: charter },
   { heading: 'Trailer boats', items: trailer },
   { heading: 'North Shore', items: northShore },
   { heading: 'Pine Harbour and Beachlands', items: [...pineHarbour, ...beachlands] },
@@ -20,14 +21,14 @@ const groups = [
 
 <ServicePage
   title="Boat Cleaning FAQ, Auckland | Shore Leave"
-  description="Answers on boat valets, fridge restocks, trailer boat cleaning, Pine Harbour access, pricing and what happens if the weather turns. From Shore Leave."
+  description="Answers on boat valets, provisioning, detailing, trailer boat cleaning, Pine Harbour access, pricing and what happens if the weather turns. From Shore Leave."
   crumb="FAQ"
   h1="Questions, answered straight."
   lede={`Can’t find yours? Call or text ${SITE.phoneDisplay}.`}
   faqs={[]}
   links={[
     { href: '/book', label: 'Enquire now' },
-    { href: '/how-it-works', label: 'How it works' },
+    { href: '/about', label: 'How we work' },
     { href: '/pricing', label: 'How quotes work' },
   ]}
 >

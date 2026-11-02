@@ -1,0 +1,29 @@
+---
+// The four services as linked cards. Pass `exclude` on a service page so it only points at the others.
+import { SERVICES } from '../config';
+import Arrow from './Arrow.astro';
+const { exclude, heading, lede, class: cls = '' } = Astro.props;
+const list = SERVICES.filter((s) => s.href !== exclude);
+---
+
+<section class={cls} aria-label={heading ? undefined : 'Our services'}>
+  {
+    heading && (
+      <div class="inset flow">
+        <h2 class="title">{heading}</h2>
+        {lede && <p class="lede">{lede}</p>}
+      </div>
+    )
+  }
+  <div class:list={['mt-10 lg:mt-14 grid gap-4', list.length % 2 ? 'md:grid-cols-3' : 'md:grid-cols-2']}>
+    {
+      list.map((s) => (
+        <article class="card flow">
+          <h3>{s.label}</h3>
+          <p>{s.text}</p>
+          <a href={s.href} class="go">See {s.label} <Arrow /></a>
+        </article>
+      ))
+    }
+  </div>
+</section>

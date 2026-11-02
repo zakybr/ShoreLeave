@@ -1,14 +1,14 @@
 ---
 import ServicePage from '../../layouts/ServicePage.astro';
-import { SITE } from '../../config';
+import { SERVICES, SITE } from '../../config';
 ---
 
 <ServicePage
   title="Book a Boat Reset, Auckland | Shore Leave"
-  description="Book a boat clean or fridge restock in Auckland. Tell us about the boat and we’ll send a quote. Takes under two minutes, and there’s no obligation."
+  description="Book a boat clean, valet, provisioning or detail in Auckland. Tell us about the boat and we’ll send a quote. Takes under two minutes, and there’s no obligation."
   crumb="Enquire"
   h1="Enquire now"
-  lede="Tell us about the boat. You’ll get a quote before anything starts, and your first reset is 50% off."
+  lede="Tell us about the boat. You’ll get a quote before anything starts, and your first Essential Reset is 50% off."
   og="book"
   hideCta
 >
@@ -38,13 +38,11 @@ import { SITE } from '../../config';
       <fieldset class="field">
         <legend>What would you like done?</legend>
         <div class="mt-2 grid gap-3">
-          <label class="check"><input type="checkbox" name="services" value="Post-trip reset" /> Post-trip reset</label>
-          <label class="check"><input type="checkbox" name="services" value="Fresh Beds" /> Fresh Beds (made with your linen on board)</label>
+          {SERVICES.map((s) => <label class="check"><input type="checkbox" name="services" value={s.label} /> <span>{s.label}: {s.line.toLowerCase()}</span></label>)}
           <div id="bed-fields" class="grid sm:grid-cols-[9rem_1fr] gap-4">
-            <div class="field"><label for="beds">How many beds?</label><input id="beds" name="beds" type="number" inputmode="numeric" min="1" max="10" /></div>
+            <div class="field"><label for="beds">How many beds?</label><input id="beds" name="beds" type="number" inputmode="numeric" min="0" max="10" /></div>
             <div class="field"><label for="linen">Where’s the clean linen kept?</label><input id="linen" name="linen" maxlength="150" /></div>
           </div>
-          <label class="check"><input type="checkbox" name="services" value="Fridge and pantry restock" /> Fridge and pantry restock</label>
         </div>
       </fieldset>
 
@@ -61,7 +59,7 @@ import { SITE } from '../../config';
         </div>
       </div>
 
-      <div class="field"><label for="notes">Restock list or notes</label><textarea id="notes" name="notes" maxlength="3000"></textarea></div>
+      <div class="field"><label for="notes">Provisioning list or notes</label><textarea id="notes" name="notes" maxlength="3000"></textarea></div>
 
       <div class="field">
         <label for="heard">How did you hear about us?</label>
@@ -108,7 +106,8 @@ import { SITE } from '../../config';
   #bed-fields {
     display: none;
   }
-  form:has([value='Fresh Beds']:checked) #bed-fields {
+  form:has([value='Valet']:checked) #bed-fields,
+  form:has([value='Charter Ready']:checked) #bed-fields {
     display: grid;
   }
 </style>
@@ -121,19 +120,16 @@ import { SITE } from '../../config';
   (document.getElementById('date') as HTMLInputElement).min = new Date().toISOString().slice(0, 10);
 
   const ticks = [...form.querySelectorAll<HTMLInputElement>('[name=services]')];
-  const [reset, beds] = ticks;
   const bedFields = [document.getElementById('beds'), document.getElementById('linen')] as HTMLInputElement[];
 
-  // The extra fields only count while Fresh Beds is ticked
-  const syncBeds = () => bedFields.forEach((f) => { f.disabled = !beds.checked; f.required = beds.checked; });
+  // The extra fields only count while a service that includes beds is ticked. A trailer boat may have none.
+  const withBeds = () => ticks.some((c) => c.checked && (c.value === 'Valet' || c.value === 'Charter Ready'));
+  const syncBeds = () => bedFields.forEach((f) => { f.disabled = !withBeds(); });
 
   const wanted = new URLSearchParams(location.search).get('service');
   if (wanted) ticks.forEach((c) => { c.checked = c.value === wanted; });
 
-  // Fresh Beds is an add-on, so it brings a reset with it unless something else is ticked
-  const addReset = () => { if (beds.checked && ticks.filter((c) => c.checked).length === 1) reset.checked = true; };
-  beds.addEventListener('change', () => { addReset(); syncBeds(); });
-  addReset();
+  ticks.forEach((c) => c.addEventListener('change', syncBeds));
   syncBeds();
   addEventListener('pageshow', syncBeds);
 

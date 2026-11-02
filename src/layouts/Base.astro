@@ -53,6 +53,7 @@ const bVerify = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     <meta name="theme-color" content="#2b2a28" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preload" href={antonUrl} as="font" type="font/woff2" crossorigin />
     <slot name="head" />
     <meta property="og:type" content="website" />
@@ -72,8 +73,15 @@ const bVerify = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     {bVerify && <meta name="msvalidate.01" content={bVerify} />}
     {schema.map((s) => <script is:inline type="application/ld+json" set:html={JSON.stringify(s)} />)}
     <script is:inline>
-      document.documentElement.classList.add('loading', 'hold', 'bar-hold');
-      if ('IntersectionObserver' in window) document.documentElement.classList.add('js');
+      (function () {
+        // The loader is a first impression, not a toll: once a visit, and never for reduced motion or data saver
+        var d = document.documentElement, first = true, net = navigator.connection;
+        try { first = !sessionStorage.getItem('sl-seen'); sessionStorage.setItem('sl-seen', '1'); } catch (e) {}
+        if ((net && net.saveData) || matchMedia('(prefers-reduced-motion: reduce)').matches) first = false;
+        d.classList.add('bar-hold');
+        if (first) d.classList.add('loading', 'hold');
+        if ('IntersectionObserver' in window) d.classList.add('js');
+      })();
     </script>
   </head>
   <body>
@@ -95,8 +103,11 @@ FIRST VIEWPORT: Full-screen film of a boat on the water, a two-tone caps promise
       (function () {
         if (!document.documentElement.classList.contains('js')) return;
         var io = new IntersectionObserver(function (list) {
-          list.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          // Whatever comes into view together staggers in, so a row of cards ripples rather than pops
+          list.filter(function (e) { return e.isIntersecting; }).forEach(function (e, i) {
+            e.target.style.setProperty('--n', i);
+            e.target.classList.add('in');
+            io.unobserve(e.target);
           });
         }, { rootMargin: '0px 0px -8% 0px' });
         document.querySelectorAll('.flow').forEach(function (el) { io.observe(el); });

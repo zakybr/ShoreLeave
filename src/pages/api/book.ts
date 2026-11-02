@@ -58,7 +58,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   if (text(body.company) || (started && Date.now() - started < MIN_FILL_MS)) return ok();
 
   const services = (Array.isArray(body.services) ? body.services : [body.services]).map((s) => text(s, 60)).filter(Boolean);
-  const freshBeds = services.includes('Fresh Beds');
+  const withBeds = services.includes('Valet') || services.includes('Charter Ready');
 
   const lead: Lead = {
     name: text(body.name, 100),
@@ -68,8 +68,8 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     boatLength: text(body.boat_length, 6),
     location: text(body.location, 150),
     services,
-    beds: freshBeds ? text(body.beds, 2) : '',
-    linen: freshBeds ? text(body.linen, 150) : '',
+    beds: withBeds ? text(body.beds, 2) : '',
+    linen: withBeds ? text(body.linen, 150) : '',
     date: text(body.date, 10),
     timeWindow: text(body.time_window, 30),
     notes: text(body.notes, 3000),
@@ -84,11 +84,9 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   if (full && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return fail(400, 'That email address does not look right.');
   if (!/^[+\d][\d\s()-]{6,}$/.test(lead.mobile)) return fail(400, 'That mobile number does not look right.');
   if (full && !lead.services.length) return fail(400, 'Tick at least one service, so we know what to quote.');
-  if (full && freshBeds) {
+  if (full && lead.beds) {
     const beds = Number(lead.beds);
-    if (!Number.isInteger(beds) || beds < 1 || beds > 10) return fail(400, 'How many beds? Pick a number from 1 to 10.');
-    if (!lead.linen) return fail(400, 'Tell us where the clean linen is kept.');
-    if (services.length < 2) return fail(400, 'Fresh Beds is an add-on. Tick a reset or restock as well.');
+    if (!Number.isInteger(beds) || beds < 0 || beds > 10) return fail(400, 'How many beds? Pick a number from 0 to 10.');
   }
   if (body.consent !== 'yes') return fail(400, 'Please tick the box so we can reply to you.');
 

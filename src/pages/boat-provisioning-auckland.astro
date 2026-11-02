@@ -1,0 +1,37 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { PROVISION_LIST } from '../config';
+import { provisioning } from '../data/qa';
+import photo from '../assets/photos/iced-drink.jpg';
+---
+
+<ServicePage
+  title="Boat Provisioning Auckland | Food, Bait, Ice | Shore Leave"
+  description="Boat provisioning in Auckland. Send a list and we buy the food, drinks, bait and ice, carry it aboard and put it away, ready for the next trip."
+  crumb="Provisioning"
+  h1="Provisioning. Turn up and go."
+  lede="Food, drinks, bait, ice and whatever else you need. Send us a list. We shop it, carry it aboard and put it away."
+  photo={photo}
+  photoAlt="Close up of a cold drink packed with ice"
+  faqs={provisioning}
+  serviceName="Boat provisioning"
+  og="provisioning"
+  ctaHeading="Send the list. We’ll do the shop."
+>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2>Boat provisioning, stowed before you arrive</h2>
+      <p class="lede">No stopping at the supermarket or the bait shop on the way to the boat.</p>
+      <ul class="crosses">{PROVISION_LIST.map((t) => <li>{t}</li>)}</ul>
+    </div>
+  </section>
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2 class="title">What a good list looks like</h2>
+        <p class="lede">“Four adults, two kids, two nights, the usual” is a fine place to start.</p>
+        <p>Add brands if they matter. Add allergies always. Groceries show on your quote as their own line, separate from our time.</p>
+      </div>
+    </div>
+  </section>
+</ServicePage>

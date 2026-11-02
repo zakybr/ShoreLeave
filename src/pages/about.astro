@@ -1,29 +1,100 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
-import { general } from '../data/qa';
+import Arrow from '../components/Arrow.astro';
+import { DONT_DO, PLACES } from '../config';
+import { general, pineHarbour } from '../data/qa';
 import photo from '../assets/photos/ropes.jpg';
 ---
 
 <ServicePage
-  title="About Shore Leave | Zak and Bozzy, Auckland"
-  description="Shore Leave exists because nobody has anything left at the end of a weekend on the water. Meet Zak and Bozzy, and why we started this."
+  title="About Shore Leave | How We Work and Where, Auckland"
+  description="How Shore Leave works and where we work: book, we look after the boat, you come back to it ready. Meet Zak and Bozzy, on the North Shore and at Pine Harbour."
   crumb="About"
   h1="Nobody wants to scrub a deck on Sunday night."
-  lede="We’re Zak and Bozzy. We built Shore Leave around one simple problem."
+  lede="We’re Zak and Bozzy. Here’s how we work, where we work, and why we started."
   photo={photo}
   photoAlt="Heavy rope coiled around a pair of bollards on a boat’s deck"
-  faqs={[general[4]]}
+  faqs={[pineHarbour[1], general[4]]}
   links={[
-    { href: '/book', label: 'Enquire now' },
-    { href: '/how-it-works', label: 'How it works' },
+    { href: '/pricing', label: 'How quotes work' },
+    { href: '/faq', label: 'All the questions' },
+    { href: '/terms', label: 'Terms' },
   ]}
 >
-  <section class="wrap band">
+  <section id="how-we-work" class="wrap band">
     <div class="inset flow">
-      <h2 class="title">Why this exists</h2>
-      <p class="lede">A good day on the water finishes you off. You’ve had the sun, the salt and the kids. You’ve still got to get the boat in and everyone home.</p>
-      <p>By then, nobody has anything left. The deck stays salty and the fridge goes warm. The next trip starts with an hour of cleaning up after the last one.</p>
-      <p>We think that’s backwards. Hotels don’t ask you to change the sheets before you check out. So we built the service we’d want: you get off the boat, and we reset it.</p>
+      <h2 class="title">How we work</h2>
+      <p class="lede">Three steps. Only the first one needs you.</p>
+      <ol class="steps">
+        <li>
+          <b>1</b>
+          <h3>Book</h3>
+          <p>Fill in the form or call. We’ll reply with a quote and agree on access.</p>
+        </li>
+        <li>
+          <b>2</b>
+          <h3>We get to work</h3>
+          <p>We get aboard at the agreed time and work through the list, with photos before and after. If we spot anything you should know about, we’ll tell you.</p>
+        </li>
+        <li>
+          <b>3</b>
+          <h3>You come back</h3>
+          <p>We lock up and send you a short note. The boat’s ready for you.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2 class="title">What we need from you</h2>
+        <ul class="crosses">
+          <li>Your boat’s location: pier and berth, or home address</li>
+          <li>A way aboard, agreed before the first job</li>
+          <li>Fresh water at the berth, or an outside tap at home</li>
+          <li>Your provisioning list, if you want one</li>
+          <li>Where your clean linen is kept, for a Valet or Charter Ready</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="where-we-work" class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">Where we work</h2>
+      <p class="lede">Two sides of the Gulf. On the berth or on the trailer, at both.</p>
+    </div>
+    <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {
+        PLACES.map((p) => (
+          <article class="card flow">
+            <h3>{p.label}</h3>
+            <p>{p.text}</p>
+            <a href={p.href} class="go">See {p.label} <Arrow /></a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="on-beige">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2 class="title">Why we started</h2>
+        <p class="lede">A good day on the water finishes you off. You’ve had the sun, the salt and the kids. You’ve still got to get the boat in and everyone home.</p>
+        <p>By then, nobody has anything left. The deck stays salty and the fridge goes warm. The next trip starts with an hour of cleaning up after the last one.</p>
+        <p>We think that’s backwards. Hotels don’t ask you to change the sheets before you check out. So we built the service we’d want: you get off the boat, and we reset it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="what-we-dont-do" class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">What we don’t do</h2>
+      <p class="lede">We do the deck, the superstructure and the interior, and we do them properly. The rest belongs with a specialist.</p>
+      <ul class="crosses no two">{DONT_DO.map((t) => <li>{t}</li>)}</ul>
+      <p>If we spot something that needs a specialist, we’ll tell you.</p>
     </div>
   </section>
 </ServicePage>

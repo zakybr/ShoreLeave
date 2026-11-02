@@ -1,6 +1,7 @@
 ---
-import { SITE } from '../config';
-const book = Astro.url.pathname.startsWith('/boat-bed-making') ? '/book?service=Fresh%20Beds' : '/book';
+import { bookHref, SERVICES, SITE } from '../config';
+const offered = SERVICES.find((s) => s.href === Astro.url.pathname);
+const book = offered ? bookHref(offered.label) : '/book';
 ---
 
 <div id="mbar" class="lg:hidden fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_auto_auto] bg-ink text-paper pb-[env(safe-area-inset-bottom)]">

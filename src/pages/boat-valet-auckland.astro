@@ -1,46 +1,44 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
 import Arrow from '../components/Arrow.astro';
-import { AFTER_TRIP } from '../config';
+import { BEDS_FACTS, VALET_LIST } from '../config';
 import { valet } from '../data/qa';
-import photo from '../assets/photos/cockpit.jpg';
+import photo from '../assets/photos/cabin.jpg';
 ---
 
 <ServicePage
-  title="Boat Valet Auckland | Post-trip reset | Shore Leave"
-  description="Boat valet in Auckland: deck wash-down, rubbish off, interior vacuumed and fridge cleared. Add Fresh Beds for made beds. Walk off and we’ll reset it."
-  crumb="Boat valet Auckland"
+  title="Boat Valet Auckland | Beds and Full Interior | Shore Leave"
+  description="Boat valet in Auckland: a full interior clean, beds made with your linen and attention to the detail. On the berth or the trailer. Done after you’ve gone."
+  crumb="Valet"
   h1="Boat valet, Auckland. Done after you’ve gone."
-  lede="You walk off the boat. We clean it and clear the fridge. Add Fresh Beds and the beds are made too."
+  lede="More thorough, with an eye for the detail. A full interior clean, beds made, and everything in its place when you come back."
   photo={photo}
-  photoAlt="Cockpit of a motor boat on its berth, seen from above, with tan upholstery and a timber table"
+  photoAlt="Inside a boat cabin, with late sun coming through the companionway"
   faqs={valet}
-  serviceName="Boat valet and post-trip reset"
+  serviceName="Boat valet"
   og="valet"
-  links={[
-    { href: '/book', label: 'Enquire now' },
-    { href: '/pricing', label: 'How quotes work' },
-    { href: '/pine-harbour-boat-cleaning', label: 'Pine Harbour berths' },
-    { href: '/trailer-boat-cleaning', label: 'Trailer boats at home' },
-  ]}
 >
   <section class="wrap band">
     <div class="inset flow">
       <h2 class="title">What gets done</h2>
-      <p class="lede">The same list every time, so you know what you’re coming back to.</p>
-      <ul class="crosses">{AFTER_TRIP.map((t) => <li>{t}</li>)}</ul>
-      <h3 class="sub !mt-10">Add Fresh Beds</h3>
-      <p>We remake the beds with the clean linen on board. You come back to made beds.</p>
-      <a href="/boat-bed-making" class="go">How Fresh Beds works <Arrow /></a>
+      <p class="lede">Everything in the <a class="underline" href="/boat-cleaning-auckland">Essential Reset</a>, then the work that makes a boat feel looked after.</p>
+      <ul class="crosses">{VALET_LIST.map((t) => <li>{t}</li>)}</ul>
     </div>
   </section>
-  <section class="bg-beige-2">
+  <section id="beds" class="bg-beige-2">
     <div class="wrap band">
       <div class="inset flow">
-        <h2>A boat clean up after the trip, not before the next one</h2>
-        <p>Salt, sunscreen and bait shift easier the day after than three weeks later. Most boats sit dirty because nobody has anything left at the end of a weekend. That’s normal. It’s also why we exist.</p>
-        <p>Book it once after a big trip, or set up a regular reset so the boat is always ready.</p>
+        <h2 class="title">Boat bed making, with your linen</h2>
+        <p class="lede">Hotels don’t ask you to change the sheets before you check out. Neither do we.</p>
+        <ul class="crosses">{BEDS_FACTS.map((t) => <li>{t}</li>)}</ul>
       </div>
+    </div>
+  </section>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2>Getting guests aboard, or selling up?</h2>
+      <p>Charter Ready takes the Valet further: seats and upholstery brought back by hand, and the superstructure detailed top to bottom.</p>
+      <a href="/boat-detailing-auckland" class="go">See Charter Ready <Arrow /></a>
     </div>
   </section>
 </ServicePage>

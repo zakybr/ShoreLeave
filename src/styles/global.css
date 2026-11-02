@@ -188,6 +188,35 @@
     padding: clamp(1.75rem, 3.5vw, 2.5rem);
     border-radius: 0.75rem;
     background: var(--color-beige-2);
+    transition:
+      background-color 0.35s var(--ease-tide),
+      transform 0.35s var(--ease-tide);
+  }
+  /* A card with a link is one big tap target. Links inside its copy stay clickable above that. */
+  .card {
+    position: relative;
+  }
+  .card .go::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  .card p a {
+    position: relative;
+    z-index: 1;
+  }
+  .card:has(.go):active {
+    transform: scale(0.99);
+  }
+  @media (hover: hover) {
+    .card:has(.go):hover {
+      background: var(--color-beige);
+      transform: translateY(-0.25rem);
+    }
+    .card:has(.go):hover .go svg {
+      transform: translateX(0.35rem);
+    }
   }
   .card h3 {
     font-family: var(--font-display);
@@ -320,16 +349,13 @@
     transform: translateY(1.5rem);
   }
   /* Only hidden once the script has confirmed it can show them again */
-  html.js .flow {
+  html.js .flow:not(.in) {
     opacity: 0;
-    transform: translateY(1.5rem);
-    transition:
-      opacity 0.9s var(--ease-tide),
-      transform 0.9s var(--ease-tide);
   }
+  /* A keyframe, not a transition, so the stagger never delays a card's hover afterwards */
   html.js .flow.in {
-    opacity: 1;
-    transform: none;
+    animation: tide-in 0.8s var(--ease-tide) backwards;
+    animation-delay: calc(var(--n, 0) * 70ms);
   }
   #mbar {
     transition: transform 0.35s var(--ease-tide);
@@ -403,6 +429,27 @@
   }
 }
 
+@keyframes tide-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+/* Page to page, the content cross-fades and the header holds still */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  #top {
+    view-transition-name: site-header;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.28s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -411,6 +458,8 @@
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
   }
 }

@@ -6,9 +6,10 @@ const LOGO = readFileSync('public/logo.svg', 'utf8').match(/ d="([^"]+)"/)[1];
 
 const CARDS = [
   ['home', 'deck-sunpad', ['Get off the boat.', "We'll reset it."]],
-  ['valet', 'cockpit', ['Boat valet,', 'Auckland.']],
-  ['restock', 'iced-drink', ['Stock my', 'boat fridge.']],
-  ['beds', 'cabin', ['Come back to', 'made beds.']],
+  ['reset', 'cockpit', ['Essential', 'Reset.']],
+  ['valet', 'cabin', ['Boat valet,', 'Auckland.']],
+  ['provisioning', 'iced-drink', ['Food, drinks,', 'bait and ice.']],
+  ['charter', 'deck-sunpad', ['Charter', 'Ready.']],
   ['trailer', 'trailer-home', ['Trailer boats,', 'at your place.']],
   ['north-shore', 'deck-sunpad', ['North Shore,', 'berth or driveway.']],
   ['pine-harbour', 'marina-walkway', ['Pine Harbour,', 'on your berth.']],

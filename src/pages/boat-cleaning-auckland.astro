@@ -1,0 +1,40 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import Arrow from '../components/Arrow.astro';
+import { RESET_LIST } from '../config';
+import { reset } from '../data/qa';
+import photo from '../assets/photos/cockpit.jpg';
+---
+
+<ServicePage
+  title="Boat Cleaning Auckland | Essential Reset | Shore Leave"
+  description="Essential Reset: boat cleaning in Auckland after the trip. Boat washed down, dishes done and rubbish taken off, on the berth or the trailer. Get a quote."
+  crumb="Essential Reset"
+  h1="Essential Reset. The wash-up, done."
+  lede="The basic wash-up and the rubbish, sorted after the trip. Walk off the boat and leave it with us."
+  photo={photo}
+  photoAlt="Cockpit of a motor boat on its berth, seen from above, with tan upholstery and a timber table"
+  faqs={reset}
+  serviceName="Essential Reset boat cleaning"
+  og="reset"
+>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">What gets done</h2>
+      <p class="lede">The same short list every time, so you know what you’re coming back to.</p>
+      <ul class="crosses">{RESET_LIST.map((t) => <li>{t}</li>)}</ul>
+      <h3 class="sub !mt-10">Want the beds and interior done too?</h3>
+      <p>That’s the Valet. A full interior clean and made beds, on top of everything here.</p>
+      <a href="/boat-valet-auckland" class="go">See the Valet <Arrow /></a>
+    </div>
+  </section>
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2>A boat clean up after the trip, not before the next one</h2>
+        <p>Salt, sunscreen and bait shift easier the day after than three weeks later. Most boats sit dirty because nobody has anything left at the end of a weekend. That’s normal. It’s also why we exist.</p>
+        <p>Book it once after a big trip, or set up a regular reset so the boat is always ready.</p>
+      </div>
+    </div>
+  </section>
+</ServicePage>

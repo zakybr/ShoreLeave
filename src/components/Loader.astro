@@ -2,19 +2,17 @@
 // Tracta-style reveal: a beige sheet with the logo cut out of it, so the live page shows through the
 // silhouette, then the cut-out grows until the sheet is gone. Decorative, so hidden from assistive
 // tech. It only exists while html.loading is set, which needs JavaScript, so crawlers and no-JS
-// visitors never see it. It runs on every page load and doubles as the wait for the hero video: it
-// lifts once the page is ready, after a short minimum and before a hard cap.
+// visitors never see it. It runs once per visit, on the first page, and doubles as the wait for the
+// hero video: it lifts once the page is ready, after a short minimum and before a hard cap.
+// The sheet and the logo are one path, cut out with even-odd fill. An SVG <mask> this large gets
+// rasterised to a capped bitmap, which is what pixelated the edge on phones. A plain path stays vector.
 import logo from '../assets/logo.svg?raw';
 const shape = logo.match(/ d="([^"]+)"/)?.[1];
 ---
 
 <div id="loader" aria-hidden="true">
-  <svg viewBox="-583 -848 2400 2400" preserveAspectRatio="xMidYMid meet">
-    <mask id="lm" maskUnits="userSpaceOnUse" x="-30000" y="-30000" width="60000" height="60000">
-      <rect x="-30000" y="-30000" width="60000" height="60000" fill="#fff"></rect>
-      <path id="ls" d={shape} fill="#000"></path>
-    </mask>
-    <rect x="-30000" y="-30000" width="60000" height="60000" fill="#d6c8b0" mask="url(#lm)"></rect>
+  <svg viewBox="-583 -848 2400 2400" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
+    <path id="ls" d={`M-12000 -12000H12000V12000H-12000Z ${shape}`} fill="#d6c8b0" fill-rule="evenodd"></path>
   </svg>
   <div class="hud"><div id="lb"></div></div>
 </div>
@@ -23,7 +21,7 @@ const shape = logo.match(/ d="([^"]+)"/)?.[1];
   #loader { display: none; }
   html.loading #loader {
     display: block; position: fixed; inset: 0; z-index: 100; overflow: hidden; cursor: default;
-    animation: sl-failsafe 0.01s linear 5s forwards;
+    animation: sl-failsafe 0.01s linear 4s forwards;
   }
   @keyframes sl-failsafe { to { visibility: hidden; } }
   #loader svg { display: block; width: 100%; height: 100%; }
@@ -39,7 +37,7 @@ const shape = logo.match(/ d="([^"]+)"/)?.[1];
     var el = document.getElementById('loader');
     if (!d.classList.contains('loading')) { el.remove(); return; }
     var lb = document.getElementById('lb'), ls = document.getElementById('ls');
-    var MIN = 900, CAP = 2600, OUT = 950, start = performance.now(), ready = false, done = false, p = 0;
+    var MIN = 700, CAP = 2200, OUT = 850, start = performance.now(), ready = false, done = false, p = 0;
     // The middle of the hull, the widest solid part of the logo, so the cut-out opens from there
     var CX = 800, CY = 490, GROW = 46;
     window.slReady = function () { ready = true; };

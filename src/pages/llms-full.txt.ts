@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { AFTER_TRIP, BEDS_FACTS, BEFORE_TRIP, DONT_DO, FRESH_BEDS, SITE } from '../config';
-import { beachlands, beds, eastAuckland, general, northShore, pineHarbour, pricing, restock, trailer, valet, type QA } from '../data/qa';
+import { BEDS_FACTS, CHARTER_LIST, DONT_DO, PROVISION_LIST, RESET_LIST, SITE, VALET_LIST } from '../config';
+import { beachlands, charter, eastAuckland, general, northShore, pineHarbour, pricing, provisioning, reset, trailer, valet, type QA } from '../data/qa';
 
 const section = (title: string, items: QA[]) =>
   `## ${title}\n\n${items.map(({ q, a }) => `### ${q}\n\n${a}`).join('\n\n')}`;
@@ -17,17 +17,25 @@ Run by: ${SITE.owners}, Auckland, New Zealand
 Service area: ${SITE.area}.
 Pricing: quoted per boat through the booking form. No published prices.
 
-## After the trip
+## Essential Reset
 
-${AFTER_TRIP.map((t) => `- ${t}`).join('\n')}
+${RESET_LIST.map((t) => `- ${t}`).join('\n')}
 
-## Before the trip
+## Valet
 
-${BEFORE_TRIP.map((t) => `- ${t}`).join('\n')}
+${VALET_LIST.map((t) => `- ${t}`).join('\n')}
 
-## ${FRESH_BEDS.name} (add-on)
+## Beds, in the Valet and Charter Ready
 
 ${BEDS_FACTS.map((t) => `- ${t}`).join('\n')}
+
+## Provisioning
+
+${PROVISION_LIST.map((t) => `- ${t}`).join('\n')}
+
+## Charter Ready
+
+${CHARTER_LIST.map((t) => `- ${t}`).join('\n')}
 
 ## What we don’t do
 
@@ -35,9 +43,10 @@ ${DONT_DO.map((t) => `- ${t}`).join('\n')}
 
 ${[
   section('About', general),
-  section('Post-trip reset', valet),
-  section('Fridge restock and provisioning', restock),
-  section(FRESH_BEDS.name, beds),
+  section('Essential Reset', reset),
+  section('Valet', valet),
+  section('Provisioning', provisioning),
+  section('Charter Ready', charter),
   section('Trailer boats', trailer),
   section('North Shore', northShore),
   section('Pine Harbour Marina', pineHarbour),

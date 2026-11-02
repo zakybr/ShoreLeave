@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { BEDS_PRICE, DONT_DO, FRESH_BEDS, SITE } from '../config';
+import { DONT_DO, SERVICES, SITE } from '../config';
 import { DETAIL_PAGES, SERVICE_PAGES } from '../lib/pages';
 
 export const GET: APIRoute = ({ site }) => {
@@ -9,13 +9,13 @@ export const GET: APIRoute = ({ site }) => {
 
 > ${SITE.summary}
 
-${SITE.name} is a post-trip reset and restock service: hospitality for boat owners. It is run by ${SITE.owners} in Auckland, New Zealand.
+${SITE.name} is hospitality for boat owners. It is run by ${SITE.owners} in Auckland, New Zealand.
 
 - Service area: ${SITE.area}.
 - Phone: ${SITE.phoneDisplay}
 - Pricing: quoted per boat through the booking form. No published prices.
-- Scope: on deck and inside the boat only.
-- ${FRESH_BEDS.name}: an add-on to a reset or restock. Beds remade with the owner’s clean linen on board. ${BEDS_PRICE}.
+- Scope: the deck, the superstructure and inside the boat only.
+${SERVICES.map((s) => `- ${s.label}: ${s.schema}`).join('\n')}
 - What we don’t do: ${DONT_DO.join('; ')}.
 
 ## Services and areas

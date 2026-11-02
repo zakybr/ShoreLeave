@@ -4,8 +4,9 @@ import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import Arrow from '../components/Arrow.astro';
-import { DONT_DO_SHORT } from '../config';
-import { general, restock, valet, pricing } from '../data/qa';
+import ServiceCards from '../components/ServiceCards.astro';
+import { DONT_DO_SHORT, SERVICES } from '../config';
+import { general, provisioning, reset, valet, pricing } from '../data/qa';
 import { business, faqPage, organization, service, website } from '../lib/schema';
 import deck from '../assets/photos/deck-sunpad.jpg';
 import pontoon from '../assets/photos/pontoon.jpg';
@@ -14,14 +15,12 @@ import posterMobile from '../assets/photos/hero-poster-m.jpg';
 import film from '../assets/video/hero.mp4?url';
 import filmMobile from '../assets/video/hero-m.mp4?url';
 
-const faqs = [valet[0], restock[0], pricing[1], valet[1], general[1]];
+const faqs = [reset[2], valet[0], provisioning[0], pricing[1], general[1]];
 const schema = [
   business(),
   website(),
   organization(),
-  service('Post-trip boat reset', 'Deck wash-down, rubbish removed, surfaces wiped, interior vacuumed and fridge cleared.', '/boat-valet-auckland'),
-  service('Boat fridge and pantry restock', 'Fridge and pantry stocked to your list, with drinks, ice, snacks and groceries delivered aboard.', '/boat-fridge-restock'),
-  service('Fresh Beds', 'Boat beds stripped and remade with the clean linen on board, as an add-on to a reset or restock.', '/boat-bed-making'),
+  ...SERVICES.map((s) => service(s.label, s.schema, s.href)),
   faqPage(faqs),
 ];
 
@@ -32,20 +31,11 @@ const fallback = await getImage({ src: poster, format: 'jpg', width: 1280, quali
 // The tall cut only suits tall screens, so a narrow landscape window still gets the wide film
 const PHONE = '(max-aspect-ratio: 4/5)';
 const DESK = '(min-aspect-ratio: 4/5)';
-
-const services = [
-  { title: 'The reset', text: 'You walk off. We wash the deck, clear the rubbish, vacuum inside and empty the fridge.', href: '/boat-valet-auckland' },
-  { title: 'Fresh Beds', text: 'Add it to a reset or restock. We remake the beds with your clean linen on board.', href: '/boat-bed-making' },
-  { title: 'The restock', text: 'Send us a list. Fridge and pantry stocked, drinks and ice aboard, groceries put away.', href: '/boat-fridge-restock' },
-  { title: 'North Shore', text: 'Berth or trailer, Devonport to Long Bay. Tie up or tow home, and we’ll take it from there.', href: '/boat-cleaning-north-shore' },
-  { title: 'Pine Harbour berths', text: 'Tie up and go home. We reset the boat right there on the berth.', href: '/pine-harbour-boat-cleaning' },
-  { title: 'Trailer boats', text: 'Back from the ramp? We come to your driveway on the North Shore, in Whangaparāoa, Beachlands and Maraetai.', href: '/trailer-boat-cleaning' },
-];
 ---
 
 <Base
-  title="Shore Leave | Boat valet and fridge restock, Auckland"
-  description="Get off the boat. We’ll reset it. Boat cleaning, made beds and a stocked fridge in Auckland, on the berth or trailer, from the North Shore to Pine Harbour."
+  title="Shore Leave | Boat Cleaning, Valet and Provisioning, Auckland"
+  description="Get off the boat. We’ll reset it. Boat cleaning, valets, provisioning and detailing in Auckland, on the berth or trailer, from the North Shore to Pine Harbour."
   schema={schema}
 >
   <Fragment slot="head">
@@ -80,41 +70,27 @@ const services = [
       <div class="inset flow">
         <p class="statement">Sunday, five o’clock. Everyone’s wrecked. The deck’s a mess and the fridge is warm.</p>
         <p class="lede text-beige">So the boat sits like that until next time. We take that part off your hands.</p>
-        <a href="/about" class="go tint">Our story <Arrow /></a>
+        <a href="/about" class="go tint">About us <Arrow /></a>
       </div>
     </div>
   </section>
 
   <section id="what-we-do" class="wrap band">
-    <div class="inset flow">
-      <h2 class="title">What we do</h2>
-      <p class="lede">Two moments. We look after both. After the trip, and before the next one.</p>
-    </div>
-    <div class="mt-10 lg:mt-14 grid md:grid-cols-2 gap-4">
-      {
-        services.map((s) => (
-          <article class="card flow">
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-            <a href={s.href} class="go" aria-label={`Learn more about ${s.title.toLowerCase()}`}>Learn more <Arrow /></a>
-          </article>
-        ))
-      }
-    </div>
+    <ServiceCards heading="What we do" lede="Four services. From a quick wash-up to a full detail, and everything for the next trip." />
     <div class="inset flow mt-12 lg:mt-16">
       <h3 class="sub">What we don’t do</h3>
       <ul class="crosses no two">{DONT_DO_SHORT.map((t) => <li>{t}</li>)}</ul>
-      <a href="/how-it-works#what-we-dont-do" class="go">See the full list <Arrow /></a>
+      <a href="/about#what-we-dont-do" class="go">See the full list <Arrow /></a>
     </div>
   </section>
 
   <section class="banner">
     <!-- REPLACE WITH OWN PHOTO: a real reset, made up and ready -->
-    <Picture src={deck} formats={['avif', 'webp']} widths={[640, 1000, 1600]} sizes="100vw" alt="Deck lounge on a modern boat with tan cushions laid out neatly, moored at a marina" quality={55} data-replace="own-photo" />
+    <Picture src={deck} formats={['avif', 'webp']} widths={[640, 1000, 1600]} sizes="100vw" alt="Deck lounge on a modern boat with tan cushions laid out neatly, moored at a marina" quality={55} loading="lazy" decoding="async" data-replace="own-photo" />
     <div class="wrap">
       <div class="inset flow">
         <p class="statement">Hotels don’t ask you to change the sheets before you check out. Neither do we.</p>
-        <a href="/boat-bed-making" class="go tint">Fresh Beds <Arrow /></a>
+        <a href="/boat-valet-auckland#beds" class="go tint">See the Valet <Arrow /></a>
       </div>
     </div>
   </section>
@@ -131,22 +107,22 @@ const services = [
           </li>
           <li>
             <b>2</b>
-            <h3>We reset</h3>
+            <h3>We get to work</h3>
             <p>We get aboard the way we agreed and work through the list. You don’t need to be there.</p>
           </li>
           <li>
             <b>3</b>
             <h3>You come back</h3>
-            <p>Clean decks. Made beds and a cold, stocked fridge if you asked for them.</p>
+            <p>The boat’s clean, and the beds and fridge are sorted if you asked for them.</p>
           </li>
         </ol>
-        <a href="/how-it-works" class="go">Keys, access and what we need from you <Arrow /></a>
+        <a href="/about#how-we-work" class="go">Keys, access and what we need from you <Arrow /></a>
       </div>
     </div>
   </section>
 
   <section class="banner">
-    <Picture src={pontoon} formats={['avif', 'webp']} widths={[640, 1000, 1600]} sizes="100vw" alt="Calm water and a floating pontoon, with moored yachts and a green hillside behind" quality={55} data-replace="own-photo" />
+    <Picture src={pontoon} formats={['avif', 'webp']} widths={[640, 1000, 1600]} sizes="100vw" alt="Calm water and a floating pontoon, with moored yachts and a green hillside behind" quality={55} loading="lazy" decoding="async" data-replace="own-photo" />
     <div class="wrap">
       <div class="inset flow">
         <p class="statement">Every boat’s different, so every quote is too.</p>
@@ -161,7 +137,7 @@ const services = [
       <h2 class="title">Where we work</h2>
       <p class="lede">Two sides of the Gulf. On the berth or on the trailer, at both.</p>
     </div>
-    <div class="mt-10 grid md:grid-cols-2 gap-4">
+    <div class="mt-10 lg:mt-14 grid md:grid-cols-2 gap-4">
       <article class="card flow">
         <h3>North Shore</h3>
         <p>Berths and trailer boats, from Devonport up to Long Bay, plus Whangaparāoa.</p>

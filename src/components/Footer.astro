@@ -1,12 +1,12 @@
 ---
-import { NAV, SITE } from '../config';
+import { NAV, PLACES, SITE } from '../config';
 import Mark from './Mark.astro';
 const year = new Date().getFullYear();
 ---
 
 <footer class="on-ink">
   <div class="wrap py-14 lg:py-20 grid gap-10 lg:grid-cols-12">
-    <div class="lg:col-span-5">
+    <div class="lg:col-span-4">
       <div class="flex items-center gap-2.5">
         <Mark class="text-beige" />
         <span class="font-display text-[1.45rem] uppercase tracking-[0.02em]">{SITE.name}</span>
@@ -21,12 +21,16 @@ const year = new Date().getFullYear();
         {NAV.map((n) => <li><a class="no-underline hover:underline" href={n.href}>{n.label}</a></li>)}
       </ul>
     </nav>
-    <nav class="lg:col-span-4" aria-label="More">
+    <nav class="lg:col-span-3" aria-label="Where we work">
       <ul class="grid gap-2">
-        <li><a class="no-underline hover:underline" href="/boat-cleaning-beachlands">Boat cleaning Beachlands</a></li>
-        <li><a class="no-underline hover:underline" href="/boat-cleaning-east-auckland">Boat cleaning East Auckland</a></li>
+        {PLACES.map((p) => <li><a class="no-underline hover:underline" href={p.href}>{p.label}</a></li>)}
+      </ul>
+    </nav>
+    <nav class="lg:col-span-2" aria-label="More">
+      <ul class="grid gap-2">
+        <li><a class="no-underline hover:underline" href="/book">Enquire</a></li>
+        <li><a class="no-underline hover:underline" href="/pricing">Pricing</a></li>
         <li><a class="no-underline hover:underline" href="/faq">FAQ</a></li>
-        <li><a class="no-underline hover:underline" href="/about">About</a></li>
         <li><a class="no-underline hover:underline" href="/privacy">Privacy</a></li>
         <li><a class="no-underline hover:underline" href="/terms">Terms</a></li>
       </ul>
