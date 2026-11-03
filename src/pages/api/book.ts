@@ -29,7 +29,7 @@ async function send(payload: object) {
 async function read(request: Request): Promise<Record<string, unknown>> {
   if ((request.headers.get('content-type') ?? '').includes('application/json')) return request.json();
   const form = await request.formData();
-  return { ...Object.fromEntries(form), services: form.getAll('services') };
+  return { ...Object.fromEntries(form), services: form.getAll('services'), addons: form.getAll('addons') };
 }
 
 const text = (v: unknown, max = 200) => String(v ?? '').trim().slice(0, max);
@@ -75,13 +75,19 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     notes: text(body.notes, 3000),
     heard: text(body.heard, 60),
     offer: text(body.offer, 60),
+    winter: text(body.form, 20) === 'winter',
+    boat: text(body.boat, 80),
+    plan: text(body.plan, 60),
+    addons: (Array.isArray(body.addons) ? body.addons : [body.addons]).map((s) => text(s, 60)).filter(Boolean),
   };
 
   // The popup is a short form: name, mobile and where the boat is. The rest comes from the follow-up text.
-  const full = !lead.offer;
+  // The winter register form has its own fields: no date or services, but a plan.
+  const full = !lead.offer && !lead.winter;
   if (!lead.name || !lead.mobile || !lead.boatType) return fail(400, 'Please fill in the required fields.');
   if (full && (!lead.location || !lead.date)) return fail(400, 'Please fill in the required fields.');
-  if (full && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return fail(400, 'That email address does not look right.');
+  if (lead.winter && !lead.plan) return fail(400, 'Pick the plan you’re interested in, or “Not sure yet”.');
+  if ((full || lead.winter) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return fail(400, 'That email address does not look right.');
   if (!/^[+\d][\d\s()-]{6,}$/.test(lead.mobile)) return fail(400, 'That mobile number does not look right.');
   if (full && !lead.services.length) return fail(400, 'Tick at least one service, so we know what to quote.');
   if (full && lead.beds) {

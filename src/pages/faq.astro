@@ -3,7 +3,7 @@ import ServicePage from '../layouts/ServicePage.astro';
 import Faq from '../components/Faq.astro';
 import { SITE } from '../config';
 import { faqPage } from '../lib/schema';
-import { beachlands, charter, eastAuckland, general, northShore, pineHarbour, pricing, provisioning, reset, valet } from '../data/qa';
+import { beachlands, charter, eastAuckland, general, northShore, pineHarbour, pricing, provisioning, reset, valet, winter } from '../data/qa';
 
 const groups = [
   { heading: 'About Shore Leave', items: general },
@@ -11,6 +11,7 @@ const groups = [
   { heading: 'Valet', items: valet },
   { heading: 'Provisioning', items: provisioning },
   { heading: 'Charter Ready', items: charter },
+  { heading: 'Winter Boat Sitting', items: winter },
   { heading: 'North Shore', items: northShore },
   { heading: 'Pine Harbour and Beachlands', items: [...pineHarbour, ...beachlands] },
   { heading: 'East Auckland', items: eastAuckland },

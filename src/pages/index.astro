@@ -5,7 +5,7 @@ import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import Arrow from '../components/Arrow.astro';
 import ServiceCards from '../components/ServiceCards.astro';
-import { DONT_DO_SHORT, SERVICES } from '../config';
+import { DONT_DO_SHORT, SERVICES, WINTER } from '../config';
 import { general, provisioning, reset, valet, pricing } from '../data/qa';
 import { business, faqPage, organization, service, website } from '../lib/schema';
 import deck from '../assets/photos/deck-sunpad.jpg';
@@ -20,7 +20,7 @@ const schema = [
   business(),
   website(),
   organization(),
-  ...SERVICES.map((s) => service(s.label, s.schema, s.href)),
+  ...[...SERVICES, WINTER].map((s) => service(s.label, s.schema, s.href)),
   faqPage(faqs),
 ];
 
@@ -81,6 +81,17 @@ const DESK = '(min-aspect-ratio: 4/5)';
       <h3 class="sub">What we don’t do</h3>
       <ul class="crosses no two">{DONT_DO_SHORT.map((t) => <li>{t}</li>)}</ul>
       <a href="/about#what-we-dont-do" class="go">See the full list <Arrow /></a>
+    </div>
+  </section>
+
+  <section class="on-ink">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2 class="title">{WINTER.label}</h2>
+        <p class="statement">Your boat, checked on all winter, without the drive.</p>
+        <p class="lede text-beige">Regular visits, a photo report every time, and anything that needs attention flagged. Register now, and founding members lock in their rate.</p>
+        <a href={WINTER.href} class="go tint">Register for winter <Arrow /></a>
+      </div>
     </div>
   </section>
 

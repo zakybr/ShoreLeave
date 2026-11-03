@@ -1,5 +1,5 @@
 ---
-import { SERVICES, SITE } from '../config';
+import { SERVICES, SITE, WINTER } from '../config';
 import Mark from './Mark.astro';
 import Arrow from './Arrow.astro';
 const here = Astro.url.pathname;
@@ -26,7 +26,7 @@ const here = Astro.url.pathname;
         </a>
         <ul class="menu-list">
           {
-            SERVICES.map((s, i) => (
+            [...SERVICES, WINTER].map((s, i) => (
               <li style={`--i:${i + 1}`}>
                 <a href={s.href} aria-current={here === s.href ? 'page' : undefined}>
                   <span>
@@ -40,7 +40,7 @@ const here = Astro.url.pathname;
           }
         </ul>
       </nav>
-      <div class="menu-side" style={`--i:${SERVICES.length + 1}`}>
+      <div class="menu-side" style={`--i:${SERVICES.length + 2}`}>
         <div class="menu-brand">
           <Mark size={52} />
           <span class="font-display text-[2.1rem] uppercase tracking-[0.02em]">{SITE.name}</span>

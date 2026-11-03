@@ -57,7 +57,37 @@ export const SERVICES = [
   },
 ];
 
-export const NAV = [{ href: '/about', label: 'About' }, ...SERVICES];
+// The off-season offer. It has its own page and register form, so it sits outside SERVICES and the booking form.
+export const WINTER = {
+  href: '/winter-boat-sitting',
+  label: 'Winter Boat Sitting',
+  line: 'Regular checks while the boat sits',
+  schema: 'Regular winter visits to a berthed boat, with a checklist and a photo report to the owner after every visit.',
+};
+
+export const NAV = [{ href: '/about', label: 'About' }, ...SERVICES, WINTER];
+
+export const MARINAS = ['Pine Harbour Marina', 'Bayswater Marina', 'Orakei Marina', 'Westhaven Marina', 'Gulf Harbour Marina'];
+
+export const WINTER_CHECKS = [
+  'Batteries and the shore power connection checked (we check, we don’t repair)',
+  'Bilge checked, and any water flagged',
+  'Mooring lines, fenders and chafe checked',
+  'Covers and clears checked they’re secure and undamaged',
+  'Cabin aired out and checked for mould, damp and smells, with a wipe down where needed',
+  'Fridge checked it’s off or empty, and hatches checked they’re sealed',
+  'A look over the boat after storms',
+  'A photo report to you after every visit, with anything that needs attention flagged',
+];
+
+// Set a price (for example '$90') and it shows on the plan card. Left as null, the card says the founding rate comes on registration.
+export const WINTER_PLANS = [
+  { name: 'Monthly Check', visits: 'One visit a month', price: null as string | null, per: 'a month', text: 'For boats that sit snug on the berth all winter.', pick: false },
+  { name: 'Fortnightly Check', visits: 'Two visits a month', price: null as string | null, per: 'a month', text: 'Closer watch on batteries, bilge and lines through the wettest months.', pick: true },
+  { name: 'Storm Watch', visits: 'Add-on', price: null as string | null, per: 'a visit', text: 'An extra visit after a severe weather warning, once it’s safe to get aboard.', pick: false },
+];
+
+export const WINTER_EXTRAS = ['A light interior clean', 'Summer Ready: the boat brought back up before spring'];
 
 export const PLACES = [
   { href: '/boat-cleaning-north-shore', label: 'North Shore', text: 'Berths at Bayswater Marina, and up the coast at Gulf Harbour.' },

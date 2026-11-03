@@ -3,7 +3,7 @@ import '@fontsource/anton/400.css';
 import '@fontsource-variable/hanken-grotesk/wght.css';
 import '../styles/global.css';
 import antonUrl from '@fontsource/anton/files/anton-latin-400-normal.woff2?url';
-import { GA4_ID, SITE } from '../config';
+import { GA4_ID, SITE, WINTER } from '../config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
@@ -97,7 +97,8 @@ FIRST VIEWPORT: Full-screen film of a boat on the water, a two-tone caps promise
     <main id="main"><slot /></main>
     <Footer />
     <MobileBar />
-    <Offer />
+    {/* The 50% off popup is a summer cleaning offer, so it stays off the winter register page */}
+    {Astro.url.pathname.replace(/\/$/, '') !== WINTER.href && <Offer />}
     <Consent />
     <script is:inline>
       (function () {

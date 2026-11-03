@@ -1,0 +1,265 @@
+---
+import { Picture } from 'astro:assets';
+import ServicePage from '../layouts/ServicePage.astro';
+import Arrow from '../components/Arrow.astro';
+import { MARINAS, SITE, WINTER_CHECKS, WINTER_EXTRAS, WINTER_PLANS } from '../config';
+import { winter } from '../data/qa';
+import photo from '../assets/photos/marina-walkway.jpg';
+// REPLACE WITH OWN PHOTOS: real shots from a winter visit. Swap the imports, keep the alt text honest.
+import reportLines from '../assets/photos/ropes.jpg';
+import reportCabin from '../assets/photos/cabin.jpg';
+import reportDeck from '../assets/photos/cockpit.jpg';
+import reportBerth from '../assets/photos/pontoon.jpg';
+
+const REPORT_PHOTOS = [
+  { src: reportLines, alt: 'Mooring lines on the bollards' },
+  { src: reportCabin, alt: 'Cabin aired out, with daylight down the companionway' },
+  { src: reportDeck, alt: 'Cockpit and covers from above' },
+  { src: reportBerth, alt: 'The berth and pontoon in calm water' },
+];
+
+// Marinas that already have a page of their own link to it
+const MARINA_PAGES: Record<string, string> = {
+  'Pine Harbour Marina': '/pine-harbour-boat-cleaning',
+  'Bayswater Marina': '/boat-cleaning-north-shore',
+  'Gulf Harbour Marina': '/boat-cleaning-north-shore',
+  'Orakei Marina': '/boat-cleaning-east-auckland',
+};
+---
+
+<ServicePage
+  title="Winter Boat Sitting Auckland | Boat Checks | Shore Leave"
+  description="Boat sitting in Auckland: winter boat checks on your berth at Pine Harbour, Bayswater, Orakei, Westhaven and Gulf Harbour, with a photo report every visit."
+  crumb="Winter Boat Sitting"
+  h1="Winter Boat Sitting. Without the drive."
+  lede="Your boat, checked on all winter, without the drive. Register now for winter, and founding members lock in their rate."
+  photo={photo}
+  photoAlt="Pontoon walkway running between berthed boats at a marina"
+  faqs={winter}
+  serviceName="Winter boat sitting"
+  og="winter"
+  book="#register"
+  ctaLabel="Register for winter"
+  closingCta={false}
+>
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">How it works</h2>
+      <p class="lede">For owners who barely use the boat from May to September, and don’t have time to keep driving down to check on it.</p>
+      <ol class="steps">
+        <li>
+          <b>1</b>
+          <h3>Register</h3>
+          <p>Tell us the boat, the marina and the plan you’re keen on. Founding members lock in their rate.</p>
+        </li>
+        <li>
+          <b>2</b>
+          <h3>We visit</h3>
+          <p>Through winter we come down to the berth on your plan and work through the same checklist every time.</p>
+        </li>
+        <li>
+          <b>3</b>
+          <h3>You get a report</h3>
+          <p>Photos and notes after every visit, with anything that needs your attention flagged.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="bg-beige-2">
+    <div class="wrap band">
+      <div class="inset flow">
+        <h2 class="title">Winter boat checks, every visit</h2>
+        <p class="lede">We only work on the boat and inside it. We check, flag and report.</p>
+        <ul class="crosses two">{WINTER_CHECKS.map((t) => <li>{t}</li>)}</ul>
+        <p>No repairs, no hull work and nothing mechanical. If something needs fixing, we’ll tell you and can recommend someone.</p>
+        <a href="/about#what-we-dont-do" class="go">What we don’t do <Arrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans" class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">Plans</h2>
+      <p class="lede">Register now for winter. Founding members lock in their rate.</p>
+    </div>
+    <div class="mt-10 lg:mt-14 grid md:grid-cols-3 gap-4">
+      {
+        WINTER_PLANS.map((p) => (
+          <article class:list={['card flow', p.pick && 'bg-ink text-paper']}>
+            <p class:list={['text-[0.9rem] font-semibold', p.pick ? 'text-beige' : 'text-stone']}>{p.pick ? 'Our pick' : p.visits}</p>
+            <h3>{p.name}</h3>
+            {p.pick && <p class="!mt-0 text-beige">{p.visits}</p>}
+            <p>
+              {p.price ? (
+                <>
+                  <span class="font-display text-[2.25rem] leading-none">{p.price}</span> {p.per}
+                </>
+              ) : (
+                <span class="font-semibold">Founding rate, confirmed when you register</span>
+              )}
+            </p>
+            <p>{p.text}</p>
+            <a href="#register" class:list={['go', p.pick && 'text-beige']} data-plan={p.name}>Register interest <Arrow /></a>
+          </article>
+        ))
+      }
+    </div>
+    <div class="inset flow mt-12">
+      <h3 class="sub">Add-ons</h3>
+      <ul class="crosses">{WINTER_EXTRAS.map((t) => <li>{t}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="on-beige">
+    <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
+      <div class="inset flow lg:col-span-6">
+        <h2 class="title">A photo report after every visit</h2>
+        <p class="lede">You know the boat’s fine without going down to look. If something isn’t, you’ll see it, with a note on what we’d do.</p>
+        <p>Reports come by text or email, whichever suits you.</p>
+      </div>
+      <figure class="card mt-10 lg:mt-0 lg:col-span-5 lg:col-start-8 !gap-4" aria-label="Sample photo report">
+        <div class="flex w-full items-baseline justify-between gap-4">
+          <b>Visit report</b>
+          <span class="text-[0.85rem] text-stone">Sample</span>
+        </div>
+        <p class="!mt-0 text-[0.9rem] text-stone">Pine Harbour Marina, B pier · Winter visit 3</p>
+        <div class="grid w-full grid-cols-2 gap-2">
+          {REPORT_PHOTOS.map((r) => <Picture src={r.src} alt={r.alt} formats={['avif', 'webp']} widths={[240, 480]} sizes="(min-width: 64rem) 13rem, 45vw" quality={50} loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-md object-cover" data-replace="own-photo" />)}
+        </div>
+        <ul class="crosses text-[0.95rem]">
+          <li>Batteries and shore power: fine</li>
+          <li>Bilge: dry</li>
+          <li>Covers and clears: secure</li>
+          <li>Cabin aired out, no damp</li>
+        </ul>
+        <p class="w-full border-t border-ink/20 pt-3 text-[0.95rem]"><b>Flagged:</b> light chafe on the stern line at the fairlead. Worth replacing before spring.</p>
+        <figcaption class="text-[0.85rem] text-stone">Sample only. The photos are placeholders.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap band">
+    <div class="inset flow">
+      <h2 class="title">Boat sitting around Auckland</h2>
+      <p class="lede">Boat care at Pine Harbour, Bayswater, Orakei, Westhaven and Gulf Harbour. Berthed somewhere else? Ask, and we’ll be straight with you.</p>
+      <ul class="crosses two">{MARINAS.map((m) => <li>{MARINA_PAGES[m] ? <a class="underline" href={MARINA_PAGES[m]}>{m}</a> : m}</li>)}</ul>
+    </div>
+  </section>
+
+  <section id="register" class="bg-beige-2">
+    <div class="wrap band lg:grid lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-7 lg:pl-[var(--indent)]">
+        <div class="flow">
+          <h2 class="title">Register for winter</h2>
+          <p class="lede mt-4">No payment now. We’ll be in touch before winter to confirm your plan and your founding rate.</p>
+        </div>
+        <form id="winter" method="post" action="/api/book" class="mt-8 grid gap-6" novalidate>
+          <input type="hidden" name="form" value="winter" />
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div class="field"><label for="w-name">Name</label><input id="w-name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="w-mobile">Phone</label><input id="w-mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required /></div>
+          </div>
+          <div class="field"><label for="w-email">Email</label><input id="w-email" name="email" type="email" autocomplete="email" inputmode="email" required /></div>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div class="field">
+              <label for="w-marina">Marina</label>
+              <select id="w-marina" name="boat_type" required>
+                <option value="">Choose one</option>
+                {MARINAS.map((m) => <option>{m}</option>)}
+                <option>Another marina</option>
+              </select>
+            </div>
+            <div class="field"><label for="w-berth">Berth number</label><input id="w-berth" name="location" maxlength="60" /></div>
+          </div>
+          <div class="field"><label for="w-boat">Boat type and length</label><input id="w-boat" name="boat" maxlength="80" placeholder="For example, 10 m launch" /></div>
+          <div class="field">
+            <label for="w-plan">Plan you’re interested in</label>
+            <select id="w-plan" name="plan" required>
+              <option value="">Choose one</option>
+              {WINTER_PLANS.filter((p) => p.visits !== 'Add-on').map((p) => <option>{p.name}</option>)}
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <fieldset class="field">
+            <legend>Add-ons you might want</legend>
+            <div class="mt-2 grid gap-3">
+              {['Storm Watch', ...WINTER_EXTRAS].map((a) => <label class="check"><input type="checkbox" name="addons" value={a.split(':')[0]} /> <span>{a}</span></label>)}
+            </div>
+          </fieldset>
+          <div class="field"><label for="w-notes">Notes</label><textarea id="w-notes" name="notes" maxlength="3000"></textarea></div>
+
+          <!-- Honeypot: hidden from people, tempting to bots -->
+          <div style="position:absolute;left:-9999px" aria-hidden="true">
+            <label for="w-company">Company</label><input id="w-company" name="company" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="t" id="w-t" />
+
+          <label class="check">
+            <input type="checkbox" name="consent" value="yes" required />
+            <span>I agree to Shore Leave using these details to reply to me, as set out in the <a href="/privacy" class="underline">privacy policy</a>.</span>
+          </label>
+
+          <p id="w-err" role="alert" class="font-semibold empty:hidden"></p>
+          <button type="submit" class="btn btn-ink w-full sm:w-auto" id="w-go">Register for winter</button>
+        </form>
+        <div id="w-done" class="mt-8 flow" hidden tabindex="-1">
+          <h3 class="sub">You’re on the list.</h3>
+          <p>Thanks. Zak or Bozzy will be in touch before winter to confirm your plan and your founding rate.</p>
+        </div>
+      </div>
+      <aside class="lg:col-span-4 lg:col-start-9 mt-12 lg:mt-0">
+        <div class="card">
+          <h2 class="!text-3xl">Rather talk?</h2>
+          <p>Call or text. It’s a real person, usually Zak or Bozzy.</p>
+          <div class="grid gap-1">
+            <a class="underline font-semibold" href={`tel:${SITE.phoneTel}`} data-track="click_call">Call {SITE.phoneDisplay}</a>
+            <a class="underline font-semibold" href={`sms:${SITE.phoneTel}`} data-track="click_sms">Text {SITE.phoneDisplay}</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</ServicePage>
+
+<script>
+  const form = document.getElementById('winter') as HTMLFormElement;
+  const err = document.getElementById('w-err') as HTMLElement;
+  const go = document.getElementById('w-go') as HTMLButtonElement;
+  const plan = document.getElementById('w-plan') as HTMLSelectElement;
+  (document.getElementById('w-t') as HTMLInputElement).value = String(Date.now());
+
+  // A plan card's link picks that plan, or ticks Storm Watch, on the way down to the form
+  document.querySelectorAll<HTMLElement>('[data-plan]').forEach((a) =>
+    a.addEventListener('click', () => {
+      const name = a.dataset.plan as string;
+      const addon = form.querySelector<HTMLInputElement>(`[name=addons][value="${name}"]`);
+      if (addon) addon.checked = true;
+      else plan.value = name;
+    }),
+  );
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    err.textContent = '';
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    go.disabled = true;
+    go.textContent = 'Sending';
+    try {
+      const body = { ...Object.fromEntries(data), addons: data.getAll('addons') };
+      const res = await fetch('/api/book', { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json' }, body: JSON.stringify(body) });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(out.error);
+      form.hidden = true;
+      const done = document.getElementById('w-done') as HTMLElement;
+      done.hidden = false;
+      done.focus();
+      if ((window as any).slTrack) (window as any).slTrack('generate_lead');
+    } catch (x) {
+      err.textContent = (x as Error).message || 'That did not send. Call or text 022 305 3853 and we will sort it out.';
+      go.disabled = false;
+      go.textContent = 'Register for winter';
+    }
+  });
+</script>

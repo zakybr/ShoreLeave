@@ -1,3 +1,5 @@
+import { SITE } from '../config';
+
 export type QA = { q: string; a: string };
 
 // Each answer stands alone in 40 to 60 words, so search and AI engines can lift it as written.
@@ -172,5 +174,34 @@ export const general: QA[] = [
   {
     q: 'Are you a new business?',
     a: "Yes, and we won’t pretend otherwise. There are no reviews on this site because we haven’t earned them yet. Our first boats get Zak or Bozzy on the job, a straight quote and a direct line if anything isn’t right. That’s how we plan to earn them.",
+  },
+];
+
+export const winter: QA[] = [
+  {
+    q: 'What happens if you find a problem with my boat?',
+    a: "We flag it in that visit’s photo report, with photos and a plain note on what we found. If it looks urgent, like water building up in the bilge, we’ll call or text you as well. You decide what happens next. We don’t carry out repairs ourselves.",
+  },
+  {
+    q: 'Do you do repairs?',
+    a: "No. Winter Boat Sitting is checks, not repairs. We look, we flag and we report. We don’t fix batteries, shore power, pumps, engines or anything below the waterline. If something needs work, we’ll tell you what we found and can recommend someone local we’d trust with it.",
+  },
+  {
+    q: 'How do you get access to my boat?',
+    a: "You choose. Some owners meet us at the marina the first time. Others leave a key in a lockbox aboard or hand one over for the season. We agree this before the first visit, and your key is never labelled with your boat or berth.",
+  },
+  {
+    q: 'Can I cancel?',
+    a: "Yes. Tell us before your next visit and we won’t book any more. When we confirm your plan before winter, we’ll set out the notice we need and how billing works, so there are no surprises.",
+  },
+  {
+    q: 'Are you insured?',
+    a: SITE.INSURED
+      ? "Yes. We carry [INSURANCE DETAILS]. Ask us for a copy when you register and we’ll send it through before your first visit."
+      : "Not yet, and we won’t say otherwise. If cover matters to you, ask when you register and we’ll give you a straight answer on where it stands before your first winter visit.",
+  },
+  {
+    q: 'When does the winter season run?',
+    a: "Roughly May to September, when most Auckland boats sit on the berth. Laid up for longer? We can start earlier or run later. Register now and we’ll be in touch before winter to confirm your plan and your founding rate.",
   },
 ];

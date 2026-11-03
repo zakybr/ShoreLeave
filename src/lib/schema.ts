@@ -1,4 +1,4 @@
-import { AREAS, SERVICES, SITE } from '../config';
+import { AREAS, SERVICES, SITE, WINTER } from '../config';
 import type { QA } from '../data/qa';
 
 const abs = (path: string) => new URL(path, SITE.url).href.replace(/\/$/, '');
@@ -22,7 +22,7 @@ export const business = () => ({
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Boat services',
-    itemListElement: SERVICES.map((s) => ({
+    itemListElement: [...SERVICES, WINTER].map((s) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name: s.label, description: s.schema, url: abs(s.href) },
     })),

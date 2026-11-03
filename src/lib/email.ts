@@ -13,6 +13,10 @@ export type Lead = {
   notes: string;
   heard: string;
   offer: string;
+  winter?: boolean;
+  boat?: string;
+  plan?: string;
+  addons?: string[];
 };
 
 const INK = '#2b2a28';
@@ -40,6 +44,9 @@ export function leadEmail(l: Lead) {
       ['Marina', l.boatType],
       ['Length', l.boatLength && `${l.boatLength} ft`],
       ['Pier and berth', l.location],
+      ['Boat', l.boat ?? ''],
+      ['Plan', l.plan ?? ''],
+      ['Add-ons', (l.addons ?? []).join(', ')],
       ['Services', l.services.join(', ')],
       ['Beds', l.beds],
       ['Clean linen kept', l.linen],
@@ -56,9 +63,14 @@ export function leadEmail(l: Lead) {
     )
     .join('');
   const next = l.email ? `Hit reply to answer ${esc(l.name)} directly.` : `Text ${esc(l.name)} a quote with the 50% off.`;
+  const subject = l.winter
+    ? `Winter Boat Sitting: ${l.name} – ${l.boatType} – ${l.plan}`
+    : l.offer
+      ? `50% off claim: ${l.name} – ${l.boatType}`
+      : `New booking: ${l.name} – ${l.boatType} – ${l.date}`;
   return {
-    subject: oneLine(l.offer ? `50% off claim: ${l.name} – ${l.boatType}` : `New booking: ${l.name} – ${l.boatType} – ${l.date}`),
-    html: shell(l.offer ? '50% off claim' : 'New booking request', `<table role="presentation" style="width:100%;border-collapse:collapse">${table}</table><p style="font-size:14px;margin:16px 0 0">${next}</p>`),
+    subject: oneLine(subject),
+    html: shell(l.winter ? 'Winter Boat Sitting registration' : l.offer ? '50% off claim' : 'New booking request', `<table role="presentation" style="width:100%;border-collapse:collapse">${table}</table><p style="font-size:14px;margin:16px 0 0">${next}</p>`),
   };
 }
 
@@ -69,7 +81,11 @@ export function confirmationEmail(l: Lead) {
     html: shell(
       "Got it. Here’s what happens next.",
       `<p style="font-size:16px;line-height:1.5">Thanks ${first}. Your request is with us.</p>
-<ol style="font-size:16px;line-height:1.6;padding-left:20px"><li>Zak or Bozzy reads it.</li><li>We reply with a quote and any questions.</li><li>We agree on access, and the boat gets reset.</li></ol>
+<ol style="font-size:16px;line-height:1.6;padding-left:20px">${
+        l.winter
+          ? '<li>Zak or Bozzy reads it.</li><li>Before winter, we confirm your plan and your founding rate.</li><li>We agree on access, and the visits begin.</li>'
+          : '<li>Zak or Bozzy reads it.</li><li>We reply with a quote and any questions.</li><li>We agree on access, and the boat gets reset.</li>'
+      }</ol>
 <p style="font-size:16px;line-height:1.5">In a hurry? Call or text 022 305 3853.</p>`,
     ),
   };
