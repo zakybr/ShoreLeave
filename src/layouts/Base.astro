@@ -10,6 +10,7 @@ import MobileBar from '../components/MobileBar.astro';
 import Loader from '../components/Loader.astro';
 import Consent from '../components/Consent.astro';
 import Offer from '../components/Offer.astro';
+import WaitlistCover from '../components/WaitlistCover.astro';
 
 interface Props {
   title: string;
@@ -91,6 +92,7 @@ OWN-WORLD: Beige, dark grey and white, taken from the owner's brief and modelled
 STORY: Owners see their worst Sunday named, believe the boat can be left as it is, and enquire from the pontoon.
 FIRST VIEWPORT: Full-screen film of a boat on the water, a two-tone caps promise set in from the left, two arrow links under it.
 -->`} />
+    <WaitlistCover />
     <Loader />
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-ink focus:text-paper focus:p-3">Skip to content</a>
     <Header />

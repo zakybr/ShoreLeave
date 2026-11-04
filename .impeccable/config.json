@@ -71,6 +71,12 @@
         ],
         "createdAt": "2026-10-31T23:58:24.565Z",
         "reason": "Claude triage: HTML email template; clients only support inline styles and system fonts, so the web type ramp cannot apply"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "helvetica",
+        "createdAt": "2026-11-04T23:31:37.462Z",
+        "reason": "Claude: email HTML can't load web fonts; src/lib/email.ts already uses the same Helvetica stack"
       }
     ]
   }

@@ -1,0 +1,424 @@
+---
+// TEMPORARY pre-launch waitlist cover. A full-screen layer over the untouched site, not a redesign.
+//
+// On only while PUBLIC_WAITLIST_UNTIL (an ISO date, e.g. 2026-11-12T23:59:00+13:00) is set and still in
+// the future. Checked at build time (no markup at all once it's unset or past) and again in the browser,
+// so it switches itself off at that moment without a redeploy.
+//   ?preview=site  hides it on this browser (remembered), so the owner can see the real site
+//   ?preview=off   clears that and brings it back
+// To remove for good: delete PUBLIC_WAITLIST_UNTIL and redeploy. To delete the code: this file,
+// src/pages/api/waitlist.ts, and the one <WaitlistCover /> line in src/layouts/Base.astro.
+//
+// The page underneath keeps its own title, meta and HTML, so it stays indexable. Without JavaScript the
+// cover never shows, so crawlers that don't render and no-JS visitors get the normal site.
+import { getImage } from 'astro:assets';
+import { SITE } from '../config';
+import Mark from './Mark.astro';
+import Arrow from './Arrow.astro';
+import poster from '../assets/photos/hero-poster.jpg';
+import posterMobile from '../assets/photos/hero-poster-m.jpg';
+import film from '../assets/video/hero.mp4?url';
+import filmMobile from '../assets/video/hero-m.mp4?url';
+
+const until = import.meta.env.PUBLIC_WAITLIST_UNTIL ?? '';
+const ends = Date.parse(until);
+const on = Boolean(until) && !Number.isNaN(ends) && Date.now() < ends;
+
+// Same posters, sizes and media queries as the home hero, so these resolve to the files it already uses
+const wide = on ? await getImage({ src: poster, format: 'avif', width: 1440, quality: 50 }) : null;
+const tall = on ? await getImage({ src: posterMobile, format: 'avif', width: 540, quality: 50 }) : null;
+const fallback = on ? await getImage({ src: poster, format: 'jpg', width: 1280, quality: 60 }) : null;
+const PHONE = '(max-aspect-ratio: 4/5)';
+const DESK = '(min-aspect-ratio: 4/5)';
+
+const MARINAS = ['Westhaven', 'Bayswater', 'Gulf Harbour', 'Orakei', 'Pine Harbour', 'Another marina'];
+const LENGTHS = ['Under 8m', '8–12m', '12–16m', '16m+'];
+const SERVICES = ['Essential Reset', 'Valet', 'Provisioning', 'Charter Ready'];
+const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
+---
+
+{
+  on && (
+    <div id="wl" role="dialog" aria-modal="true" aria-labelledby="wl-h" data-until={until}>
+      <picture class="wl-bg">
+        <source media={PHONE} srcset={tall!.src} type="image/avif" />
+        <source media={DESK} srcset={wide!.src} type="image/avif" />
+        <img src={fallback!.src} alt="" />
+      </picture>
+      <video class="wl-bg" muted loop playsinline preload="auto" aria-hidden="true">
+        <source media={PHONE} src={filmMobile} type="video/mp4" />
+        <source src={film} type="video/mp4" />
+      </video>
+
+      <div class="wl-top wrap">
+        <span class="wl-brand" aria-label={SITE.name}>
+          <Mark />
+          <span class="font-display text-[1.45rem] uppercase tracking-[0.02em]">{SITE.name}</span>
+        </span>
+      </div>
+
+      <div class="wl-body wrap">
+        <div class="wl-inset">
+          <section id="wl-ask">
+            <p class="wl-eyebrow wl-rise" style="--i:0">Launching this summer</p>
+            <h1 id="wl-h" class="wl-h1 wl-rise" style="--i:1" tabindex="-1">
+              Get off the boat.<br /><span class="tint">We’ll reset it.</span>
+            </h1>
+            <p class="wl-sub wl-rise" style="--i:2">
+              Boat cleaning, valets and provisioning on your berth, Westhaven to Pine Harbour. Join the list and your first Essential Reset is 50% off.
+            </p>
+            <form id="wl-form" class="wl-form wl-rise" style="--i:3" novalidate>
+              <div class="wl-row">
+                <div class="wl-field">
+                  <label for="wl-name">Name</label>
+                  <input id="wl-name" name="name" autocomplete="name" required maxlength="100" />
+                </div>
+                <div class="wl-field">
+                  <label for="wl-mobile">Mobile</label>
+                  <input id="wl-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="021 123 4567" required pattern="^\s*(\+?64|0)\s*2[\d\s-]{7,12}$" />
+                </div>
+              </div>
+              <div class="wl-field">
+                <label for="wl-marina">Marina</label>
+                <select id="wl-marina" name="marina" required>
+                  <option value="">Choose one</option>
+                  {MARINAS.map((m) => <option>{m}</option>)}
+                </select>
+              </div>
+              <div style="position:absolute;left:-9999px" aria-hidden="true">
+                <label for="wl-company">Company</label>
+                <input id="wl-company" name="company" tabindex="-1" autocomplete="off" />
+              </div>
+              <input type="hidden" name="t" id="wl-t" />
+              <p id="wl-err" class="wl-err" role="alert"></p>
+              <button type="submit" id="wl-go" class="wl-btn">Join the waitlist <Arrow /></button>
+              <p class="wl-small">
+                We’ll only text you about Shore Leave. <a href="/privacy" target="_blank" rel="noopener">Privacy</a>.
+              </p>
+            </form>
+          </section>
+
+          <section id="wl-more" hidden aria-labelledby="wl-more-h">
+            <p class="wl-eyebrow wl-rise" style="--i:0">You’re in. Three quick ones</p>
+            <h2 id="wl-more-h" class="wl-h2 wl-rise" style="--i:1" tabindex="-1">Tell us about your boat</h2>
+            <p class="wl-sub wl-rise" style="--i:2">All optional. It helps us plan where to start.</p>
+            <div class="wl-groups wl-rise" style="--i:3">
+              <fieldset class="wl-group" data-group="length">
+                <legend>Boat length</legend>
+                <div class="wl-pills">{LENGTHS.map((v) => <button type="button" class="wl-pill" aria-pressed="false" data-value={v}>{v}</button>)}</div>
+              </fieldset>
+              <fieldset class="wl-group" data-group="services" data-multi>
+                <legend>What would you use?</legend>
+                <div class="wl-pills">{SERVICES.map((v) => <button type="button" class="wl-pill" aria-pressed="false" data-value={v}>{v}</button>)}</div>
+              </fieldset>
+              <fieldset class="wl-group" data-group="timing">
+                <legend>When do you want your first one?</legend>
+                <div class="wl-pills">{TIMINGS.map((v) => <button type="button" class="wl-pill" aria-pressed="false" data-value={v}>{v}</button>)}</div>
+              </fieldset>
+              <div class="wl-actions">
+                <button type="button" id="wl-save" class="wl-btn">Save <Arrow /></button>
+                <button type="button" id="wl-skip" class="wl-link">Skip</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="wl-done" hidden>
+            <h2 class="wl-h1 wl-rise" style="--i:0" tabindex="-1">You’re on the list.</h2>
+            <p class="wl-sub wl-rise" style="--i:1">We’ll text you before we launch. Whichever marina fills up first, we start there.</p>
+            <div class="wl-rise" style="--i:2">
+              <button type="button" id="wl-share" class="wl-ghost">Share with your boat mates</button>
+              <p id="wl-copied" class="wl-small" role="status"></p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  on && (
+    <style is:inline>
+      #wl { display: none; }
+      html.wl-on { overflow: hidden; }
+      html.wl-on #wl {
+        display: flex; flex-direction: column;
+        position: fixed; inset: 0; z-index: 90;
+        overflow-y: auto; overscroll-behavior: contain;
+        background: #2b2a28; color: #fff; isolation: isolate;
+        font-family: var(--font-sans);
+      }
+      #wl .wl-bg, #wl .wl-bg img { position: fixed; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+      #wl video.wl-bg { opacity: 0; transition: opacity .6s linear; }
+      #wl video.wl-bg.on { opacity: 1; }
+      #wl::after { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        background: linear-gradient(180deg, rgba(43,42,40,.35), rgba(43,42,40,.85)); }
+
+      #wl .wl-top { flex: none; display: flex; align-items: center; height: var(--header); }
+      #wl .wl-brand { display: flex; align-items: center; gap: .625rem; }
+      #wl .wl-body { flex: 1; display: flex; align-items: flex-end; padding-bottom: calc(2rem + env(safe-area-inset-bottom)); }
+      @media (min-width: 48rem) { #wl .wl-body { align-items: center; padding-block: 2rem 3rem; } }
+      #wl .wl-inset { width: 100%; padding-left: var(--indent); }
+      #wl section > * + * { margin-top: 1.25rem; }
+      #wl .wl-eyebrow { font-weight: 700; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: #d6c8b0; }
+      #wl .wl-eyebrow + * { margin-top: .75rem; }
+      #wl .wl-h1 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; letter-spacing: .005em; font-size: clamp(2rem, 11.6vw, 6.5rem); line-height: .96; color: #fff; outline: none; }
+      #wl .wl-h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 400; font-size: clamp(2rem, 7vw, 3.5rem); line-height: .98; outline: none; }
+      #wl .tint { color: #d6c8b0; }
+      #wl .wl-sub, #wl .wl-form, #wl .wl-groups { max-width: 34rem; }
+      #wl .wl-sub { font-weight: 300; font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.35; color: #faf8f3; }
+
+      #wl .wl-form, #wl .wl-groups { display: grid; gap: .85rem; }
+      #wl .wl-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+      #wl .wl-field { display: grid; gap: .35rem; min-width: 0; }
+      #wl .wl-field label { font-weight: 600; font-size: .85rem; color: #faf8f3; }
+      #wl .wl-field input, #wl .wl-field select {
+        width: 100%; min-height: 3.1rem; padding: .7rem .85rem; font-size: 1rem; color: #faf8f3;
+        background: rgba(43,42,40,.55); border: 1px solid rgba(250,248,243,.18); border-radius: 9px;
+        -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      }
+      #wl .wl-field select { appearance: none; padding-right: 2.5rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23faf8f3' stroke-width='1.6'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right .95rem center; }
+      #wl .wl-field select option { color: #2b2a28; background: #faf8f3; }
+      #wl .wl-field input::placeholder { color: rgba(250,248,243,.45); }
+      #wl .wl-field input:focus, #wl .wl-field select:focus { outline: 2px solid #faf8f3; outline-offset: 1px; border-color: transparent; }
+      #wl .wl-field [aria-invalid="true"] { border-color: #e9b4a0; }
+      #wl .wl-err { font-weight: 600; color: #f3cdbf; }
+      #wl .wl-err:empty { display: none; }
+
+      #wl .wl-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: .6rem; width: 100%;
+        min-height: 3.25rem; padding: .75rem 1.6rem; border-radius: 9px; font-weight: 700;
+        background: #faf8f3; color: #2b2a28; cursor: pointer; transition: background-color .25s var(--ease-tide), transform .25s var(--ease-tide);
+      }
+      #wl .wl-btn:hover { background: #d6c8b0; }
+      #wl .wl-btn:active { transform: translateY(1px); }
+      #wl .wl-btn:disabled { opacity: .6; }
+      #wl .wl-btn svg { transition: transform .35s var(--ease-tide); }
+      #wl .wl-btn:hover svg { transform: translateX(.35rem); }
+      #wl .wl-small { font-size: .8rem; color: rgba(250,248,243,.75); margin-top: .1rem; }
+      #wl .wl-small a { color: #faf8f3; text-decoration: underline; }
+
+      #wl .wl-group { border: 0; padding: 0; margin: 0; min-width: 0; }
+      #wl .wl-group legend { font-weight: 600; font-size: .85rem; color: #faf8f3; margin-bottom: .5rem; padding: 0; }
+      #wl .wl-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+      #wl .wl-pill {
+        min-height: 2.75rem; padding: .5rem 1rem; border-radius: 999px; font-size: .95rem; cursor: pointer;
+        color: #faf8f3; background: rgba(43,42,40,.55); border: 1px solid rgba(250,248,243,.18);
+        transition: background-color .2s var(--ease-tide), color .2s var(--ease-tide), border-color .2s var(--ease-tide);
+      }
+      #wl .wl-pill:hover { border-color: rgba(250,248,243,.5); }
+      #wl .wl-pill[aria-pressed="true"] { background: #d6c8b0; color: #2b2a28; border-color: #d6c8b0; font-weight: 600; }
+      #wl .wl-actions { display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: center; margin-top: .4rem; }
+      #wl .wl-link { min-height: 3.25rem; padding: 0 1rem; color: #faf8f3; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; }
+      #wl .wl-ghost {
+        display: inline-flex; align-items: center; min-height: 3rem; padding: .6rem 1.25rem; border-radius: 9px; cursor: pointer;
+        color: #faf8f3; border: 1px solid rgba(250,248,243,.4); font-weight: 600;
+      }
+      #wl .wl-ghost:hover { background: rgba(250,248,243,.1); }
+      #wl :focus-visible { outline: 2px solid #faf8f3; outline-offset: 3px; }
+
+      /* Entry: each block fades and rises 24px, staggered. Waits for the site loader to lift. */
+      #wl .wl-rise { opacity: 0; transform: translateY(24px); }
+      #wl.go .wl-rise { animation: wl-rise .6s ease-out both; animation-delay: calc(var(--i, 0) * 90ms); }
+      @keyframes wl-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        #wl .wl-rise, #wl.go .wl-rise { opacity: 1; transform: none; animation: none; }
+        #wl video.wl-bg { display: none; }
+        #wl .wl-btn, #wl .wl-pill, #wl .wl-btn svg { transition: none; }
+      }
+      @media (max-width: 22rem) { #wl .wl-row { grid-template-columns: 1fr; } }
+      /* Step 2 has the most to show, so it packs tighter on phones to keep Save in view */
+      @media (max-width: 47.99rem) {
+        #wl #wl-more > * + * { margin-top: .9rem; }
+        #wl #wl-more .wl-groups { gap: .7rem; }
+        #wl #wl-more .wl-pills { gap: .4rem; }
+        #wl #wl-more .wl-pill { min-height: 2.6rem; padding: .4rem .9rem; }
+        #wl #wl-more .wl-group legend { margin-bottom: .4rem; }
+      }
+    </style>
+  )
+}
+
+{
+  on && (
+    <script is:inline>
+      // Runs where it sits, before the page paints, so the site never flashes up first
+      (function () {
+        var d = document.documentElement, el = document.getElementById('wl');
+        var PREVIEW = 'sl-preview', MUTED = 'sl-wl-offer', OFFER = 'sl-offer-2';
+        var ls = {
+          get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+          set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+          del: function (k) { try { localStorage.removeItem(k); } catch (e) {} },
+        };
+        var ss = {
+          get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+          set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} },
+          del: function (k) { try { sessionStorage.removeItem(k); } catch (e) {} },
+        };
+        var q = new URLSearchParams(location.search).get('preview');
+        if (q === 'site') ls.set(PREVIEW, 'site');
+        if (q === 'off') ls.del(PREVIEW);
+        var ends = Date.parse(el.dataset.until);
+        var active = Date.now() < ends && ls.get(PREVIEW) !== 'site';
+
+        if (!active) {
+          // Hand the 50% popup back exactly as it was, if the cover had quietened it earlier this visit
+          if (ss.get(MUTED)) { ss.del(MUTED); ss.del(OFFER); }
+          el.remove();
+          return;
+        }
+
+        d.classList.add('wl-on');
+        // The 50% popup checks this flag and stays shut for the visit. Marked so it can be undone.
+        if (!ss.get(OFFER)) { ss.set(OFFER, '1'); ss.set(MUTED, '1'); }
+
+        var track = function (name, params) {
+          params = params || {};
+          if (window.gtag) gtag('event', name, params);
+          if (window.va) window.va('event', { name: name, data: params });
+        };
+        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function takeOver() {
+          // Everything else on the page is unreachable while the cover is up
+          Array.prototype.forEach.call(document.body.children, function (c) {
+            if (c !== el && c.id !== 'loader' && c.tagName !== 'SCRIPT' && c.tagName !== 'STYLE') c.inert = true;
+          });
+          // Belt and braces: the popup opens in the browser's top layer, above any z-index, so shut it
+          // if anything (like ?offer) opens it, without recording a dismissal
+          var box = document.getElementById('offer');
+          var shut = function () {
+            if (!box.open) return;
+            var kept = ls.get(OFFER);
+            box.close();
+            if (kept === null) ls.del(OFFER); else ls.set(OFFER, kept);
+          };
+          if (box) {
+            new MutationObserver(shut).observe(box, { attributes: true, attributeFilter: ['open'] });
+            shut();
+          }
+          // The page underneath has its own film; no need for two playing
+          var hero = document.querySelector('[data-hero-video]');
+          if (hero) { hero.removeAttribute('autoplay'); hero.pause(); hero.addEventListener('play', function () { hero.pause(); }); }
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', takeOver); else takeOver();
+
+        // Switches itself off at the deadline if the page is left open
+        var left = ends - Date.now();
+        if (left < 864e5) setTimeout(function () { location.reload(); }, left + 1000);
+
+        // Film: same sources and selection as the hero. Reduced motion keeps the still poster.
+        var v = el.querySelector('video');
+        if (reduce) v.remove();
+        else {
+          var play = function () { v.muted = true; var p = v.play(); if (p) p.catch(function () {}); };
+          v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true });
+          v.addEventListener('canplay', play);
+          ['pointerdown', 'touchstart', 'keydown'].forEach(function (e) {
+            addEventListener(e, function () { if (v.paused) play(); }, { once: true, passive: true });
+          });
+          document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
+          play();
+        }
+
+        function start() {
+          el.classList.add('go');
+          track('waitlist_view');
+        }
+        if (d.classList.contains('loading')) addEventListener('sl-loaded', start, { once: true });
+        else start();
+
+        function show(id) {
+          ['wl-ask', 'wl-more', 'wl-done'].forEach(function (s) { document.getElementById(s).hidden = s !== id; });
+          el.scrollTop = 0;
+          var h = document.getElementById(id).querySelector('[tabindex="-1"]');
+          if (h) h.focus({ preventScroll: true });
+        }
+        function post(body) {
+          return fetch('/api/waitlist', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json', accept: 'application/json' },
+            body: JSON.stringify(body),
+          }).then(function (res) {
+            return res.json().catch(function () { return {}; }).then(function (out) {
+              if (!res.ok) throw new Error(out.error);
+              return out;
+            });
+          });
+        }
+
+        // Step 1
+        var form = document.getElementById('wl-form'), err = document.getElementById('wl-err'), go = document.getElementById('wl-go');
+        var token = '';
+        document.getElementById('wl-t').value = Date.now();
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          err.textContent = '';
+          var bad = null;
+          Array.prototype.forEach.call(form.querySelectorAll('input[required], select[required]'), function (f) {
+            var ok = f.checkValidity();
+            f.setAttribute('aria-invalid', ok ? 'false' : 'true');
+            if (!ok && !bad) bad = f;
+          });
+          if (bad) {
+            err.textContent = bad.id === 'wl-mobile' && bad.value ? 'That doesn’t look like an NZ mobile. Try 021 123 4567.' : 'Please fill in your name, mobile and marina.';
+            bad.focus();
+            return;
+          }
+          var data = Object.fromEntries(new FormData(form));
+          var label = go.innerHTML;
+          go.disabled = true;
+          go.textContent = 'Joining…';
+          post(data).then(function (out) {
+            token = out.token || '';
+            track('waitlist_step1', { marina: data.marina });
+            show('wl-more');
+          }).catch(function (x) {
+            err.textContent = x.message || 'That did not send. Text 022 305 3853 and we’ll add you.';
+            go.disabled = false;
+            go.innerHTML = label;
+          });
+        });
+
+        // Step 2: tap-to-select pills
+        el.querySelectorAll('.wl-group').forEach(function (g) {
+          g.addEventListener('click', function (e) {
+            var b = e.target.closest('.wl-pill');
+            if (!b) return;
+            var on = b.getAttribute('aria-pressed') !== 'true';
+            if (!g.hasAttribute('data-multi')) g.querySelectorAll('.wl-pill').forEach(function (p) { p.setAttribute('aria-pressed', 'false'); });
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+        });
+        function picked(name) {
+          return Array.prototype.map.call(el.querySelectorAll('[data-group="' + name + '"] [aria-pressed="true"]'), function (b) { return b.dataset.value; });
+        }
+        function finish(skip) {
+          var length = picked('length')[0] || '', services = picked('services'), timing = picked('timing')[0] || '';
+          document.getElementById('wl-save').disabled = true;
+          post({ step: 2, token: token, skip: skip, length: length, services: services, timing: timing }).catch(function () {});
+          if (!skip) track('waitlist_step2', { length: length, services: services.join(', '), timing: timing });
+          show('wl-done');
+        }
+        document.getElementById('wl-save').addEventListener('click', function () { finish(false); });
+        document.getElementById('wl-skip').addEventListener('click', function () { finish(true); });
+
+        // Share
+        var copied = document.getElementById('wl-copied');
+        document.getElementById('wl-share').addEventListener('click', function () {
+          var url = location.origin + '/';
+          var share = { title: 'Shore Leave', text: 'Boat cleaning, valets and provisioning on your berth. First Essential Reset 50% off if you join the list.', url: url };
+          track('waitlist_share');
+          if (navigator.share) return navigator.share(share).catch(function () {});
+          var done = function () { copied.textContent = 'Link copied. Paste it into the group chat.'; };
+          var show = function () { copied.textContent = 'Copy this link: ' + url; };
+          if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, show);
+          else show();
+        });
+      })();
+    </script>
+  )
+}
