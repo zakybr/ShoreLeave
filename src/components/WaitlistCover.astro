@@ -45,7 +45,7 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
         <source media={DESK} srcset={wide!.src} type="image/avif" />
         <img src={fallback!.src} alt="" />
       </picture>
-      <video class="wl-bg" muted loop playsinline preload="auto" aria-hidden="true">
+      <video class="wl-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
         <source media={PHONE} src={filmMobile} type="video/mp4" />
         <source src={film} type="video/mp4" />
       </video>
@@ -65,7 +65,7 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
               Get off the boat.<br /><span class="tint">We’ll reset it.</span>
             </h1>
             <p class="wl-sub wl-rise" style="--i:2">
-              Boat cleaning, valets and provisioning on your berth, Westhaven to Pine Harbour. Join the list and your first Essential Reset is 50% off.
+              Boat cleaning, valets and provisioning on your berth. Auckland marinas only. Join the list and your first Essential Reset is 50% off.
             </p>
             <form id="wl-form" class="wl-form wl-rise" style="--i:3" novalidate>
               <div class="wl-row">
@@ -152,7 +152,13 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
       #wl video.wl-bg { opacity: 0; transition: opacity .6s linear; }
       #wl video.wl-bg.on { opacity: 1; }
       #wl::after { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-        background: linear-gradient(180deg, rgba(43,42,40,.35), rgba(43,42,40,.85)); }
+        background: linear-gradient(180deg, rgba(43,42,40,.5), rgba(43,42,40,.55) 35%, rgba(43,42,40,.92)); }
+      @media (min-width: 48rem) {
+        #wl::after { background:
+          linear-gradient(90deg, rgba(43,42,40,.78), rgba(43,42,40,.45) 55%, rgba(43,42,40,.2)),
+          linear-gradient(180deg, rgba(43,42,40,.35), rgba(43,42,40,.85)); }
+      }
+      #wl .wl-eyebrow, #wl .wl-h1, #wl .wl-h2, #wl .wl-sub, #wl .wl-group legend, #wl .wl-field label, #wl .wl-small, #wl .wl-brand { text-shadow: 0 1px 14px rgba(20,19,18,.55); }
 
       #wl .wl-top { flex: none; display: flex; align-items: center; height: var(--header); }
       #wl .wl-brand { display: flex; align-items: center; gap: .625rem; }
@@ -166,7 +172,7 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
       #wl .wl-h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 400; font-size: clamp(2rem, 7vw, 3.5rem); line-height: .98; outline: none; }
       #wl .tint { color: #d6c8b0; }
       #wl .wl-sub, #wl .wl-form, #wl .wl-groups { max-width: 34rem; }
-      #wl .wl-sub { font-weight: 300; font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.35; color: #faf8f3; }
+      #wl .wl-sub { font-weight: 360; font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.35; color: #faf8f3; }
 
       #wl .wl-form, #wl .wl-groups { display: grid; gap: .85rem; }
       #wl .wl-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
@@ -174,14 +180,14 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
       #wl .wl-field label { font-weight: 600; font-size: .85rem; color: #faf8f3; }
       #wl .wl-field input, #wl .wl-field select {
         width: 100%; min-height: 3.1rem; padding: .7rem .85rem; font-size: 1rem; color: #faf8f3;
-        background: rgba(43,42,40,.55); border: 1px solid rgba(250,248,243,.18); border-radius: 9px;
+        background: rgba(43,42,40,.7); border: 1px solid rgba(250,248,243,.18); border-radius: 9px;
         -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
       }
       #wl .wl-field select { appearance: none; padding-right: 2.5rem;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23faf8f3' stroke-width='1.6'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
         background-repeat: no-repeat; background-position: right .95rem center; }
       #wl .wl-field select option { color: #2b2a28; background: #faf8f3; }
-      #wl .wl-field input::placeholder { color: rgba(250,248,243,.45); }
+      #wl .wl-field input::placeholder { color: rgba(250,248,243,.55); }
       #wl .wl-field input:focus, #wl .wl-field select:focus { outline: 2px solid #faf8f3; outline-offset: 1px; border-color: transparent; }
       #wl .wl-field [aria-invalid="true"] { border-color: #e9b4a0; }
       #wl .wl-err { font-weight: 600; color: #f3cdbf; }
@@ -197,7 +203,7 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
       #wl .wl-btn:disabled { opacity: .6; }
       #wl .wl-btn svg { transition: transform .35s var(--ease-tide); }
       #wl .wl-btn:hover svg { transform: translateX(.35rem); }
-      #wl .wl-small { font-size: .8rem; color: rgba(250,248,243,.75); margin-top: .1rem; }
+      #wl .wl-small { font-size: .85rem; color: rgba(250,248,243,.9); margin-top: .1rem; }
       #wl .wl-small a { color: #faf8f3; text-decoration: underline; }
 
       #wl .wl-group { border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -205,7 +211,7 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
       #wl .wl-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
       #wl .wl-pill {
         min-height: 2.75rem; padding: .5rem 1rem; border-radius: 999px; font-size: .95rem; cursor: pointer;
-        color: #faf8f3; background: rgba(43,42,40,.55); border: 1px solid rgba(250,248,243,.18);
+        color: #faf8f3; background: rgba(43,42,40,.7); border: 1px solid rgba(250,248,243,.18);
         transition: background-color .2s var(--ease-tide), color .2s var(--ease-tide), border-color .2s var(--ease-tide);
       }
       #wl .wl-pill:hover { border-color: rgba(250,248,243,.5); }
@@ -225,7 +231,6 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
       @keyframes wl-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
       @media (prefers-reduced-motion: reduce) {
         #wl .wl-rise, #wl.go .wl-rise { opacity: 1; transform: none; animation: none; }
-        #wl video.wl-bg { display: none; }
         #wl .wl-btn, #wl .wl-pill, #wl .wl-btn svg { transition: none; }
       }
       @media (max-width: 22rem) { #wl .wl-row { grid-template-columns: 1fr; } }
@@ -280,7 +285,6 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
           if (window.gtag) gtag('event', name, params);
           if (window.va) window.va('event', { name: name, data: params });
         };
-        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         function takeOver() {
           // Everything else on the page is unreachable while the cover is up
@@ -310,19 +314,18 @@ const TIMINGS = ['Before Christmas', 'Over summer', 'Just curious'];
         var left = ends - Date.now();
         if (left < 864e5) setTimeout(function () { location.reload(); }, left + 1000);
 
-        // Film: same sources and selection as the hero. Reduced motion keeps the still poster.
+        // Film: same sources and selection as the hero, and like the hero it plays for everyone (it's a slow,
+        // ambient shot). Reduced motion only drops the text animation. If a phone blocks autoplay (low power
+        // mode) the poster holds until the first touch.
         var v = el.querySelector('video');
-        if (reduce) v.remove();
-        else {
-          var play = function () { v.muted = true; var p = v.play(); if (p) p.catch(function () {}); };
-          v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true });
-          v.addEventListener('canplay', play);
-          ['pointerdown', 'touchstart', 'keydown'].forEach(function (e) {
-            addEventListener(e, function () { if (v.paused) play(); }, { once: true, passive: true });
-          });
-          document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
-          play();
-        }
+        var play = function () { v.muted = true; var p = v.play(); if (p) p.catch(function () {}); };
+        v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true });
+        v.addEventListener('canplay', play);
+        ['pointerdown', 'touchstart', 'keydown'].forEach(function (e) {
+          addEventListener(e, function () { if (v.paused) play(); }, { once: true, passive: true });
+        });
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
+        play();
 
         function start() {
           el.classList.add('go');
